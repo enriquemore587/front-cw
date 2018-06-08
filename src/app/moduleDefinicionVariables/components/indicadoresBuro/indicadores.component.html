@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="card border-secondary mb-3" style="position: relative;">
+        <div class="card-header"> {{ title }} </div>
+        <div class="card-body text-secondary">
+
+            <mat-selection-list #indicadores>
+                <div *ngFor="let item of indicadoresList">
+                    <mat-list-option *ngIf="item.id != 1" selected="{{item.status}}" (click)="setCheck(item)">
+
+                        {{item.name}}
+                    </mat-list-option>
+                </div>
+            </mat-selection-list>
+            <p>
+                Indicadores seleccionados: {{ indicadores.selectedOptions.selected.length }}
+            </p>
+
+            <button mat-raised-button class="verde" routerLink="/definicion-variables/criterios-cliente" style="left: 35%; position: absolute; bottom: 5px;">
+                <i class="fas fa-arrow-alt-circle-left"></i>
+            </button>
+            <button mat-raised-button class="verde" style="right: 5%; position: absolute; bottom: 5px;" routerLink="/definicion-variables/criterios-indicadores">
+                <i class="fas fa-arrow-alt-circle-right"></i>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div *ngIf="!auth">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to {{ title }}</h1>
+        <!--p class="lead">Description about of this panel
+        </p-->
+        <hr class="my-4">
+        <!--p>Some help</p-->
+        <button mat-raised-button color="primary" routerLink="/login-panel">Log-in</button>
+    </div>
+</div>
+
+
+<div *ngIf="auth" class="card border-dark mb-3">
+    <div class="card-header">Menu</div>
+    <div class="card-body text-dark">
+        <div class=" container">
+            <div *ngFor="let item of buttons" style="float: left; margin-left: 5% !important;">
+                <button type="button" class="btn btn-outline-dark" style="border-radius: 50%; height: 250px; width: 250px;" routerLink="/{{item.link}}">{{item.menu}}</button>
+            </div>
+        </div>
+    </div>
+</div>

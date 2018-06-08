@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="card border-secondary mb-3" style="position: relative;">
+        <div class="card-header"> {{ title }} </div>
+        <div class="card-body text-secondary">
+            <div class="row" *ngFor="let item of indicadoresPerfil">
+                <!--edad-->
+                <div *ngIf="item.status && item.id == 7" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.edadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.edadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--ingresos declarados-->
+                <div *ngIf="item.status && item.id == 10" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.ingresoMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.ingresoMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--CAPACIDAD DE PAGO-->
+                <div *ngIf="item.status && item.id == 11" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.capacidadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.capacidadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="item.status && item.id == 14" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Porcentaje" type="number" [(ngModel)]="ranges.Porcentaje_pago" (blur)="saveChange(item.id,false)"
+                                    (keyup.enter)="saveChange(item.id,false)">
+                                <mat-icon matSuffix>%</mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--Minimo requerido pago minimo-->
+                <div *ngIf="false">
+                    <!--item.status && item.id == 12" class="card border-light mb-3" style="width: 100%;"-->
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.min_req_pag_min_Min" (blur)="saveChange(item.id,false)"
+                                    (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.min_req_pag_min_Max" (blur)="saveChange(item.id,false)"
+                                    (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--Minimo pago minimo-->
+                <div *ngIf="false">
+                    <!--item.status && item.id == 13" class="card border-light mb-3" style="width: 100%;"-->
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.min_pag_min_Min" (blur)="saveChange(item.id,false)"
+                                    (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.min_pag_min_Max" (blur)="saveChange(item.id,false)"
+                                    (keyup.enter)="saveChange(item.id,false)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--nacionalidad-->
+                <div *ngIf="item.status && item.id == 9" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <!--div class="example-container col">
+                                    {{item.name}}
+                                </div-->
+                        <div class="example-container col">
+                            <mat-selection-list>
+                                <mat-list-option *ngFor="let item of nacionalidades" selected="{{item.status}}" (click)="setNacionalidad(item)">
+                                    {{item.name}}
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </div>
+                    </div>
+                </div>
+                <!--ocupation-->
+                <div *ngIf="item.status && item.id == 8" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-selection-list>
+                                <mat-list-option *ngFor="let item of profesiones" selected="{{item.status}}" (click)="setCheck(item)">
+                                    {{item.name}}
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button mat-raised-button class="verde" routerLink="/definicion-variables/activacion-variables-cliente" style="left: 35%; position: absolute; bottom: 5px;">
+            <i class="fas fa-arrow-alt-circle-left"></i>
+        </button>
+
+        <button mat-raised-button class="verde" routerLink="/definicion-variables/activacion-variables-indicadores" style="right: 5%; position: absolute; bottom: 5px;">
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="card bg-light mb-3" style="height: 80vh !important;">
+        <div class="card-header" style="position: relative;">
+            {{title}}
+            <button mat-raised-button class="verde" style="position: absolute !important; right: 5px !important; top: 2px;  " (click)="runTEST()">RunTest</button>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card bg-light mb-3" style="height: 70vh !important;">
+                        <!--div class="card-header" style="position: relative;">TEST PARA CLIENTE</div-->
+                        <div class="card-body" style="overflow: auto;">
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Variables</th>
+                                        <th scope="col" style="text-align: center;">Valores</th>
+                                        <th scope="col" style="text-align: center;">Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="list_validated.length > 0">
+                                    <tr *ngFor="let item of list_validated; let i = index">
+                                        <th scope="row">
+                                            {{item.name}}
+                                        </th>
+                                        <th scope="row" style="text-align: center;">
+                                            <label>{{item.value}}</label>
+                                            <br>
+
+                                            <mat-hint *ngIf="item.salida == 1">MENSUALIDAD</mat-hint>
+                                            <mat-hint *ngIf="item.salida == 2">PLAZO</mat-hint>
+                                            <mat-hint *ngIf="item.salida == 3">LÍNEA FINAL</mat-hint>
+                                            <mat-hint *ngIf="item.salida == 4">TASA</mat-hint>
+                                        </th>
+                                        <th scope="row" style="text-align: center;">
+                                            <div class="alert alert-success center" role="alert">
+                                                <i class="fas fa-check-circle"></i>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="list_invalidated.length > 0">
+                                    <tr *ngFor="let item of list_invalidated; let i = index">
+                                        <th scope="row">
+                                            <label>{{item.name}}</label>
+                                        </th>
+                                        <th scope="row" style="text-align: center;">
+                                            <label>{{item.value}}</label>
+                                        </th>
+                                        <th *ngIf="i == get_lastIndex()" scope="row" style="text-align: center;">
+                                            <div class="alert alert-danger center" role="alert">
+                                                <i class="fas fa-times-circle"></i>
+                                            </div>
+                                        </th>
+                                        <th *ngIf="i != get_lastIndex()" scope="row" style="text-align: center;">
+                                            <div class="alert alert-info" role="alert">
+                                                <i class="fas fa-ellipsis-h"></i>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

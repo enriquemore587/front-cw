@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="card border-secondary mb-3" style="position: relative;">
+        <div class="card-header"> {{ title }} </div>
+        <div class="card-body text-secondary">
+
+            <mat-selection-list #perfiles>
+                <div *ngFor="let item of perfilList">
+                    <mat-list-option selected="{{item.status}}" (click)="setCheck(item)" *ngIf="item.id != 12 && item.id != 13">
+                        {{item.name}}
+                    </mat-list-option>
+                </div>
+            </mat-selection-list>
+            <p>
+                Perfiles seleccionados: {{ perfiles.selectedOptions.selected.length }}
+            </p>
+        </div>
+
+        <button mat-raised-button class="verde" routerLink="/" style="left: 35%; position: absolute; bottom: 5px;">
+            <i class="fas fa-arrow-alt-circle-left"></i>
+        </button>
+
+        <button mat-raised-button class="verde" style="right: 5%; position: absolute; bottom: 5px;" routerLink="/definicion-variables/criterios-cliente">
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </button>
+    </div>
+</div>

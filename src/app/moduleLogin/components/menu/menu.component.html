@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <!--button mat-button [matMenuTriggerFor]="sub">Menu Definicion de Variables</button-->
+    <button mat-button [matMenuTriggerFor]="sub"><i class="fas fa-bars"></i></button>
+</nav>
+
+<mat-menu #sub="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="activVariables">Activar variables</button>
+    <button mat-menu-item [matMenuTriggerFor]="criterios">Criterios minimos</button>
+    <button mat-menu-item [matMenuTriggerFor]="formulas">Fórmulas</button>
+    <!--button mat-menu-item [matMenuTriggerFor]="pruebas">Pruebas</button-->
+    <button mat-menu-item [matMenuTriggerFor]="validacion">Validación</button>
+</mat-menu>
+
+<mat-menu #activVariables="matMenu">
+    <button mat-menu-item routerLink="/definicion-variables/activacion-variables-indicadores">Indicadores de buró</button>
+    <button mat-menu-item  routerLink="/definicion-variables/activacion-variables-cliente">Perfil de cliente</button>
+</mat-menu>
+
+<mat-menu #criterios="matMenu">
+    <button mat-menu-item routerLink="/definicion-variables/criterios-indicadores">Indicadores de buró</button>
+    <button mat-menu-item routerLink="/definicion-variables/criterios-cliente">Perfil de cliente</button>
+</mat-menu>
+
+<mat-menu #formulas="matMenu">
+    <button mat-menu-item routerLink="/definicion-variables/scoring">Scoring</button>
+    <button mat-menu-item routerLink="/definicion-variables/arbol">Árbol</button>
+</mat-menu>
+<mat-menu #pruebas="matMenu">
+    <button mat-menu-item routerLink="/pruebas/definicion-casos">Definición de Casos</button>
+    <button mat-menu-item>Cargar bases de datos</button>
+</mat-menu>
+<mat-menu #validacion="matMenu">
+    <button mat-menu-item routerLink="/pruebas">Valida formulas</button>
+</mat-menu>
