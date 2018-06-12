@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { log } from 'util';
 
@@ -19,7 +19,8 @@ import { variable } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./arbol.component.css'],
   providers: [DefinicionVariablesService]
 })
-export class ArbolComponent implements OnInit, DoCheck {
+export class ArbolComponent implements OnInit {
+
   public title = 'ÁRBOL';
 
   constructor(
@@ -29,7 +30,7 @@ export class ArbolComponent implements OnInit, DoCheck {
   ) {
 
   }
-
+  
   // start Metodo Messages
   showMessage(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -41,6 +42,7 @@ export class ArbolComponent implements OnInit, DoCheck {
   public listVariables: any = [];
   public listVariables2: any = [];
   public orderList: any = [];
+
   public salidas: any = {
     mensualidad: { checked: false, id: 1, index: -1 },
     plazo: { checked: false, id: 2, index: -1 },
@@ -55,6 +57,7 @@ export class ArbolComponent implements OnInit, DoCheck {
   getbuttonsPermitions(sort) {
     return sort > 11;
   }
+
   cambio(type) {
     if (type == 1) {
       this.orderList[this.salidas.mensualidad.index].salida = 0;
@@ -76,6 +79,7 @@ export class ArbolComponent implements OnInit, DoCheck {
     }
 
   }
+
   doSomething(event, index) {
     if (event.value == 1) {
       this.salidas.mensualidad.checked = true;
@@ -118,6 +122,9 @@ export class ArbolComponent implements OnInit, DoCheck {
             }
           });
         }
+      },
+      error => {
+        this.showMessage('Ocurrio un error en el orden de las variables', 'Entendido');
       }
     );
   }
@@ -131,6 +138,9 @@ export class ArbolComponent implements OnInit, DoCheck {
             this.listVariables2.push(element);
           });
         }
+      },
+      error => {
+        this.showMessage('Ocurrio un error en el listado de variables', 'Entendido');
       }
     );
   }
@@ -138,7 +148,6 @@ export class ArbolComponent implements OnInit, DoCheck {
   clearTree() {
     this._DefinicionVariablesService.clear_tree().subscribe(
       resp => {
-
         if (resp.status != 0 || resp.message != 'successful') return this.showMessage('Ocurrio un problema al limpiar', 'Ok');
         this.loadVariables();
       },
@@ -149,19 +158,15 @@ export class ArbolComponent implements OnInit, DoCheck {
   }
 
   saveChange() {
-
-    if (this.salidas.mensualidad.index == -1) {
-      return this.showMessage('Falta establecer - "salida de Mensualidad"', 'ENTENDIDO');
-    } else
-      if (this.salidas.plazo.index == -1) {
-        return this.showMessage('Falta establecer - "salida de Plazo"', 'ENTENDIDO');
-      } else
-        if (this.salidas.linea_credito.index == -1) {
-          return this.showMessage('Falta establecer - "salida de Linea Final"', 'ENTENDIDO');
-        } else
-          if (this.salidas.tasa.index == -1) {
-            return this.showMessage('Falta establecer - "salida de Tasa"', 'ENTENDIDO');
-          }
+    if (this.salidas.mensualidad.index == -1)
+      return this.showMessage('Falta - "salida de Mensualidad"', 'ENTENDIDO');
+    else if (this.salidas.plazo.index == -1)
+      return this.showMessage('Falta - "salida de Plazo"', 'ENTENDIDO');
+   else if (this.salidas.linea_credito.index == -1)
+      return this.showMessage('Falta - "salida de Linea Final"', 'ENTENDIDO');
+   else if (this.salidas.tasa.index == -1)
+      return this.showMessage('Falta - "salida de Tasa"', 'ENTENDIDO');
+          
     let ids: any = {
       id_mensualidad: this.orderList[this.salidas.mensualidad.index].id,
       id_plazo: this.orderList[this.salidas.plazo.index].id,
@@ -190,7 +195,6 @@ export class ArbolComponent implements OnInit, DoCheck {
           },
           err => {
             this.showMessage('Ocurrio un problema', 'Ok');
-
           }
         );
       },
@@ -198,9 +202,6 @@ export class ArbolComponent implements OnInit, DoCheck {
         this.showMessage('Ha ocurrido un problema', 'Ok');
       }
     );
-
-
-
   }
 
   addVariable(item: any) {
@@ -217,10 +218,6 @@ export class ArbolComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.loadVariables();
     this.loadVariables2();
-  }
-
-  ngDoCheck() {
-
   }
 
 }

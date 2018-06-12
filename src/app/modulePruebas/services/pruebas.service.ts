@@ -16,9 +16,6 @@ export class PruebasService {
   private url : string = environment.url;
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('auth') });
 
-  private httpHeaders2 = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': GLOBAL.tokenTEST });
-
-
 
   public auth: string;
 
@@ -50,13 +47,13 @@ export class PruebasService {
   }
 
   get_user_for_test(): Observable<any> {
-    return this._http.get<any>(this.url + "users/get-user-for-test", { headers: this.httpHeaders2 });
+    return this._http.get<any>(this.url + "users/get-user-for-test", { headers: this.httpHeaders });
   }
 
   runValidation(obj: any): any {
-
+    let  httpHeaders2 = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': obj.token });
     let params = JSON.stringify(obj);
-    return this._http.post<any>(this.url + 'users/user_request_credit', params, { headers: this.httpHeaders2 });
+    return this._http.post<any>(this.url + 'users/user_request_credit', params, { headers: httpHeaders2 });
 
   }
 

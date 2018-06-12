@@ -12,7 +12,14 @@
                     </mat-form-field>
                 </div>
                 <div class="col">
-                    <h2>{{numero}}</h2>
+                    <div class="row">
+                        <div class="col">
+                            <h2>{{numero}}</h2>
+                        </div>
+                        <div class="col">
+                            <button mat-raised-button (click)="addNumber()" [disabled]="this.numero == ''">ADD</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     <button *ngIf="editando" (click)="crearNueva()" mat-raised-button>Crear nueva</button>
@@ -30,8 +37,8 @@
                     </mat-chip-list>
                 </mat-form-field>
             </div>
-            <div class="row" style="max-height: 500px;">
-                <div class="col-sm-12 col-md-5 col-lg-4" style="overflow: auto; max-height: 500px;">
+            <div class="row" style="max-height: 550px;">
+                <div class="col-sm-12 col-md-5 col-lg-4" style="overflow: auto; max-height: 550px;">
                     <div class="alert verde" *ngFor="let item of listVariables" style="font-size: 12px; position: relative !important; height: 60px;"
                         role="alert">
                         <button type="button" class="btn btn-link" style="color: #fff;" (click)="addItem(item, true)">{{item.name}}</button>
@@ -131,13 +138,36 @@
                                     </button>
                                 </th>
                                 <th scope="col">
-                                    <button mat-fab color="primary" (click)="addNumber()" [disabled]="this.numero == ''">ADD</button>
-
+                                    <button mat-fab color="primary" (click)="sii()">SI</button>
                                 </th>
                                 <th scope="col">
-                                    <button mat-fab color="primary" (click)="create()" [disabled]="!nombreVariable">
+                                    <button *ngIf="if_station==1" mat-fab color="primary" (click)="then()">
+                                        THEN
+                                    </button>
+                                    <button *ngIf="if_station==2" mat-fab color="primary" (click)="_else()">
+                                        ELSE
+                                    </button>
+                                    <button *ngIf="if_station!=1&&if_station!=2" mat-fab color="primary" (click)="create()" [disabled]="!nombreVariable">
                                         <i class="fas fa-save"></i>
                                     </button>
+                                </th>
+                            </tr>
+                            <tr *ngIf="if_station==1">
+                                <th scope="col">
+                                    <button mat-fab color="primary" (click)="addOperator('>')">></button>
+                                </th>
+                                <th scope="col">
+                                    <button mat-fab color="primary" (click)="addOperator('<')">
+                                        <</button>
+                                </th>
+                                <th scope="col">
+                                    <button mat-fab color="primary" (click)="addOperator('==')">==</button>
+                                </th>
+                                <th scope="col">
+                                    <button mat-fab color="primary" (click)="addOperator('!=')">!=</button>
+                                </th>
+                                <th scope="col">
+                                    <!--button mat-fab color="primary" (click)="minimo()">MIN</button-->
                                 </th>
                             </tr>
                         </tbody>

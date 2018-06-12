@@ -9,6 +9,7 @@ import { routing, appToutingProviders } from './app.routing';
 import { ModuloLogin } from './moduleLogin/moduleLogin.module';
 import { ModuloDefinicionVariables } from './moduleDefinicionVariables/moduleDefinicionVariables.module';
 import { ModuloPruebas } from './modulePruebas/modulePruebas.module';
+import { ModuleTrackingModule } from './module-tracking/module-tracking.module';
 
 import { AppComponent } from './app.component';
 
@@ -34,7 +35,8 @@ import { SourceMaterialModule } from './material/app.material';
     ModuloLogin,
     routing,
     ModuloDefinicionVariables,
-    ModuloPruebas
+    ModuloPruebas,
+    ModuleTrackingModule
   ],
   exports: [SourceMaterialModule],
   entryComponents: [],  /** LINE OF MATERIAL.ANGULAR.JS */

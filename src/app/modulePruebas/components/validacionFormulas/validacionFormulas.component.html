@@ -24,9 +24,10 @@
                                             {{item.name}}
                                         </th>
                                         <th scope="row" style="text-align: center;">
-                                            <label>{{item.value}}</label>
+                                            <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
+                                            <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
+                                            <label *ngIf="item.var_fix_id!=9 && item.var_fix_id != 8">{{item.value}}</label>
                                             <br>
-
                                             <mat-hint *ngIf="item.salida == 1">MENSUALIDAD</mat-hint>
                                             <mat-hint *ngIf="item.salida == 2">PLAZO</mat-hint>
                                             <mat-hint *ngIf="item.salida == 3">LÍNEA FINAL</mat-hint>
@@ -38,6 +39,7 @@
                                             </div>
                                         </th>
                                     </tr>
+                                    <!-- var_fix_id -->
                                 </tbody>
                                 <tbody *ngIf="list_invalidated.length > 0">
                                     <tr *ngFor="let item of list_invalidated; let i = index">
@@ -45,7 +47,9 @@
                                             <label>{{item.name}}</label>
                                         </th>
                                         <th scope="row" style="text-align: center;">
-                                            <label>{{item.value}}</label>
+                                            <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
+                                            <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
+                                            <label *ngIf="item.var_fix_id!=9 && item.var_fix_id != 8">{{item.value}}</label>
                                         </th>
                                         <th *ngIf="i == get_lastIndex()" scope="row" style="text-align: center;">
                                             <div class="alert alert-danger center" role="alert">

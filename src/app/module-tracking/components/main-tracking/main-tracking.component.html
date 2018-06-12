@@ -1,0 +1,60 @@
+<!-- <div class="container"> -->
+
+
+  <div class="card bg-light mt-3 mb-3" style="height: 90vh !important;">
+
+  <div class="card-header" style="position: relative;">
+    <div class="float-left"> {{title}}</div>
+    <div class="float-right">
+      <button mat-raised-button class="verde" style="position: absolute !important; right: 5px !important; top: 2px;  " (click)="InitConsult(false)" [hidden]="!showButton">Consult</button>
+      <button  mat-raised-button class="red" style="position: absolute !important; right: 5px !important; top: 2px; " (click)="InitConsult(true)" [hidden]="showButton" >Stop</button>
+    </div>
+  </div>
+
+
+  <div class="card-body">
+
+    <table class="table table-hover">
+      <thead class="">
+        <tr>
+          <!-- <th scope="col">Client</th> -->
+          <th scope="col">Name</th>
+          <th scope="col" style="text-align: center;">Process</th>
+          <th scope="col" style="text-align: center;">Result</th>
+          <th scope="col" style="text-align: center;">Message</th>
+          <th scope="col" style="text-align: center;">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of processRequest; let i = index">
+          <!-- <td >
+                        {{item.num_client}}
+                    </td> -->
+          <td style="text-align: center;">
+            {{item.name_user}}
+          </td>
+          <td style="text-align: center;">
+            {{item.request_type}}
+          </td>
+          <td style="text-align: center;">
+            <!-- {{item.success}} -->
+            <!-- <button mat-button> -->
+              <i *ngIf='item.success' class="material-icons  greenCheck">check_circle</i>
+            <!-- </button> -->
+            <!-- <button mat-button> -->
+              <i *ngIf='!item.success' class="material-icons  redError">cancel</i>
+            <!-- </button> -->
+          </td>
+          <td style="text-align: center;">
+            {{item.error}}
+          </td>
+          <td style="text-align: center;">
+            {{item.date_reg | date : 'short'}}
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+<!-- </div> -->

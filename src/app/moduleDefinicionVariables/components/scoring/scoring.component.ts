@@ -22,6 +22,7 @@ import { elementAt } from 'rxjs/operators';
 // begin message
 import { MatSnackBar } from '@angular/material';
 import { variable } from '@angular/compiler/src/output/output_ast';
+import { all } from 'q';
 // end message
 
 
@@ -208,6 +209,30 @@ export class ScoringComponent implements OnInit {
     this.action = this.blockOperators() ? 'ARITMÉTICA' : 'PROMEDIO';
   }
 
+  public if_station = 0;
+  sii() {
+    this.exp = [];
+    this.action = this.action == 'IF' ? 'ARITMÉTICA' : 'IF';
+    this.if_station = 0;
+    if (this.action == 'ARITMÉTICA') return;
+    this.if_station = 1;
+    this.exp.push({ value: 'IF', id: -1000, name: 'IF' });
+  }
+
+  then() {
+    if (this.exp.length == 1 && this.exp[0].value == 'IF') {
+      this.exp.push({ value: true, id: -1000, name: 'TRUE' });
+    }
+    this.exp.push({ value: 'THEN', id: -1000, name: 'THEN' });
+    this.if_station = 2;
+  }
+
+  _else() {
+    if (this.exp[0] == 'IF' && this.exp[this.exp.length - 1] == 'THEN') {
+      this.exp.push({ value: 'ELSE', id: -1000, name: 'ELSE' });
+    }
+  }
+
   blockOperators(): boolean {
     return this.numero != '' || this.action == 'MÍNIMO' || this.action == 'PROMEDIO' || this.action == 'MÁXIMO';
   }
@@ -232,6 +257,10 @@ export class ScoringComponent implements OnInit {
   clean() {
     this.exp = [];
     this.numero = '';
+    if (this.action == 'IF') {
+      this.if_station = 1;
+      this.exp.push({ value: 'IF', id: -1000, name: 'IF' });
+    }
   }
 
   addItem(value: any, default_variable: boolean) {
@@ -357,29 +386,103 @@ export class ScoringComponent implements OnInit {
     return expression;
   }
 
+  resolveExpretion() {
+    let allExp: string = '';
+    this.exp.forEach((element, index) => {
+      // guarda variables
+      if (element.id > 0) {  // variable
+        allExp += index == 0 ? element.id2 : '||' + element.id2;
+        //allExp += element.id2; antes
+      } else if (element.id == 0) { // number
+        allExp += index == 0 ? element.name : '||' + element.name;
+        // allExp += element.value; antes
+      } else if (element.id == -1000) {  //operator
+        allExp += index == 0 ? element.name : '||' + element.name;
+        //  allExp += element.value; antes
+      }
+      else if (element.id < 0 && element.id > -1000) {  // YOUNG VARIABLE
+        allExp += index == 0 ? element.id2 : '||' + element.id2;
+        //  allExp += element.value; antes
+      }
+    });
+    return allExp;
+  }
+
+  resolveMinimo() {
+    let correcto = true;
+    let allExp: string = this.action + '!';
+    this.exp.forEach((element, index) => {
+      if (element.id == -1000) {  // operator
+        correcto = false;
+      } else if (element.id > 0) {  // variable
+        allExp += element.id2 + '_';
+      } else if (element.id == 0) { // number
+        allExp += element.name + '_';
+      } else if (element.id < 0 && element.id > -1000) {  //operator
+        allExp += index == 0 ? element.id2 : '_' + element.id2;
+      }
+    });
+    return allExp;
+  }
+  resolveMaximo() {
+    let correcto = true;
+    let allExp: string = this.action + '!';
+    this.exp.forEach((element, index) => {
+      if (element.id == -1000) {  // operator
+        correcto = false;
+      } else if (element.id > 0) {  // variable
+        allExp += element.id2 + '_';
+      } else if (element.id == 0) { // number
+        allExp += element.name + '_';
+      }
+      else if (element.id < 0 && element.id > -1000) {  //operator
+        allExp += index == 0 ? element.id2 : '_' + element.id2;
+      }
+
+    });
+    return allExp;
+  }
+
+  resolvePromedio() {
+    let correcto = true;
+    let allExp: string = this.action + '!';
+    this.exp.forEach((element, index) => {
+      if (element.id == -1000) {  // operator
+        correcto = false;
+      } else if (element.id > 0) {  // variable
+        allExp += element.id2 + '_';
+      } else if (element.id == 0) { // number
+        allExp += element.name + '_';
+      } else if (element.id < 0 && element.id > -1000) {  // YOUNG
+        allExp += index == 0 ? element.id2 : '_' + element.id2;
+      }
+    });
+    return allExp;
+  }
   create() {
     if (this.exp.length == 0) return;
     if (this.action == 'ARITMÉTICA') {
-      let allExp: string = '';
-      this.exp.forEach((element, index) => {
-        // guarda variables
-        if (element.id > 0) {  // variable
-          allExp += index == 0 ? element.id2 : '||' + element.id2;
-          //allExp += element.id2; antes
-        } else if (element.id == 0) { // number
-          allExp += index == 0 ? element.name : '||' + element.name;
-          // allExp += element.value; antes
-        } else if (element.id == -1000) {  //operator
-          allExp += index == 0 ? element.name : '||' + element.name;
-          //  allExp += element.value; antes
-        }
-        else if (element.id < 0 && element.id > -1000) {  //operator
-          allExp += index == 0 ? element.id2 : '||' + element.id2;
-          //  allExp += element.value; antes
-        }
-      });
-
-      allExp = this.valdiateSintaxExpression(allExp);
+      /*
+            let allExp: string = '';
+            this.exp.forEach((element, index) => {
+              // guarda variables
+              if (element.id > 0) {  // variable
+                allExp += index == 0 ? element.id2 : '||' + element.id2;
+                //allExp += element.id2; antes
+              } else if (element.id == 0) { // number
+                allExp += index == 0 ? element.name : '||' + element.name;
+                // allExp += element.value; antes
+              } else if (element.id == -1000) {  //operator
+                allExp += index == 0 ? element.name : '||' + element.name;
+                //  allExp += element.value; antes
+              }
+              else if (element.id < 0 && element.id > -1000) {  // YOUNG VARIABLE
+                allExp += index == 0 ? element.id2 : '||' + element.id2;
+                //  allExp += element.value; antes
+              }
+            });
+      */
+      let allExp = this.valdiateSintaxExpression(this.resolveExpretion());
       if (allExp == 'Bad expression') {
         this.showMessage(allExp, 'OK');
         return;
@@ -402,22 +505,8 @@ export class ScoringComponent implements OnInit {
       );
     }
     else if (this.action == 'MÁXIMO') {
-      let correcto = true;
-      let allExp: string = this.action + '!';
-      this.exp.forEach((element, index) => {
-        if (element.id == -1000) {  // operator
-          correcto = false;
-        } else if (element.id > 0) {  // variable
-          allExp += element.id2 + '_';
-        } else if (element.id == 0) { // number
-          allExp += element.name + '_';
-        }
-        else if (element.id < 0 && element.id > -1000) {  //operator
-          allExp += index == 0 ? element.id2 : '_' + element.id2;
-        }
 
-      });
-      let varToExp: VarToExp = new VarToExp(allExp, this.id_variable, this.nombreVariable);
+      let varToExp: VarToExp = new VarToExp(this.resolveMaximo(), this.id_variable, this.nombreVariable);
       this._DefinicionVariablesService.setABankCustomVariable(varToExp).subscribe(
         resp => {
           if (resp.status == 0 && resp.message == 'successful') {
@@ -433,21 +522,22 @@ export class ScoringComponent implements OnInit {
       );
     }
     else if (this.action == 'MÍNIMO') {
-      let correcto = true;
-      let allExp: string = this.action + '!';
-      this.exp.forEach((element, index) => {
-        if (element.id == -1000) {  // operator
-          correcto = false;
-        } else if (element.id > 0) {  // variable
-          allExp += element.id2 + '_';
-        } else if (element.id == 0) { // number
-          allExp += element.name + '_';
-        } else if (element.id < 0 && element.id > -1000) {  //operator
-          allExp += index == 0 ? element.id2 : '_' + element.id2;
-        }
-      });
-
-      let varToExp: VarToExp = new VarToExp(allExp, this.id_variable, this.nombreVariable);
+      /*
+            let correcto = true;
+            let allExp: string = this.action + '!';
+            this.exp.forEach((element, index) => {
+              if (element.id == -1000) {  // operator
+                correcto = false;
+              } else if (element.id > 0) {  // variable
+                allExp += element.id2 + '_';
+              } else if (element.id == 0) { // number
+                allExp += element.name + '_';
+              } else if (element.id < 0 && element.id > -1000) {  //operator
+                allExp += index == 0 ? element.id2 : '_' + element.id2;
+              }
+            });
+      */
+      let varToExp: VarToExp = new VarToExp(this.resolveMinimo(), this.id_variable, this.nombreVariable);
       this._DefinicionVariablesService.setABankCustomVariable(varToExp).subscribe(
         resp => {
           if (resp.status == 0 && resp.message == 'successful') {
@@ -462,20 +552,7 @@ export class ScoringComponent implements OnInit {
       );
     }
     else if (this.action == 'PROMEDIO') {
-      let correcto = true;
-      let allExp: string = this.action + '!';
-      this.exp.forEach((element, index) => {
-        if (element.id == -1000) {  // operator
-          correcto = false;
-        } else if (element.id > 0) {  // variable
-          allExp += element.id2 + '_';
-        } else if (element.id == 0) { // number
-          allExp += element.name + '_';
-        } else if (element.id < 0 && element.id > -1000) {  //operator
-          allExp += index == 0 ? element.id2 : '_' + element.id2;
-        }
-      });
-      let varToExp: VarToExp = new VarToExp(allExp, this.id_variable, this.nombreVariable);
+      let varToExp: VarToExp = new VarToExp(this.resolvePromedio(), this.id_variable, this.nombreVariable);
       this._DefinicionVariablesService.setABankCustomVariable(varToExp).subscribe(
         resp => {
           if (resp.status == 0 && resp.message == 'successful') {
@@ -489,6 +566,13 @@ export class ScoringComponent implements OnInit {
           console.log("error", err);
         }
       );
+    }
+    else if (this.action == 'IF') {
+      console.log(this.exp);
+
+      this.exp.forEach(element => {
+
+      });
     }
 
   }

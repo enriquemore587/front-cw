@@ -1,7 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { log } from 'util';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 import { DefinicionVariablesService } from '../../services/definicionVariables.service';
 import { ResponseVI } from '../../models/responseVI';
@@ -13,7 +13,7 @@ import { Select } from '../../models/selects';
 
 import { MatSnackBar } from '@angular/material';
 import { variable } from '@angular/compiler/src/output/output_ast';
-
+import { ErrorForms } from '../../../material/ErrorsStateMatcher';
 @Component({
     selector: 'criterios-perfil',
     templateUrl: './criteriosPerfilCliente.component.html',
@@ -30,7 +30,10 @@ export class CriteriosPerfilClienteComponent implements OnInit {
     public nacionalidades: Select[] = [];
     public nacionalidadSelected: Select;
 
-
+    edadMax = new FormControl('', [
+        Validators.required
+    ]);
+    matcher = new ErrorForms();
     constructor(
         private _router: Router,
         private _DefinicionVariablesService: DefinicionVariablesService,

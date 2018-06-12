@@ -6,8 +6,8 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="user.email" name="email" [errorStateMatcher]="matcher">
                     <button mat-button *ngIf="user.email" matSuffix mat-icon-button aria-label="Clear" (click)="user.email=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
+                        <mat-icon>close</mat-icon>
+                    </button>
                     <mat-hint>Enter your email</mat-hint>
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                         Please enter a valid email address

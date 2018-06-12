@@ -29,7 +29,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.auth = this._UserLoginService.getAuth();
-    if (this.auth) 
+    if (this.auth)
       this.getMenu();
   }
 
@@ -48,6 +48,8 @@ export class WelcomeComponent implements OnInit {
         element.link = "definicion-variables";
       } else if (element.menu == 'TEST') {
         element.link = "pruebas";
+      }else if (element.menu == 'TRACKING') {
+        element.link = "tracking/consult";
       }
     })
   }

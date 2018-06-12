@@ -6,6 +6,10 @@ import { log } from 'util';
 // models
 import { ReqValidateRange } from '../../models/reqValidateRange';
 import { ReqValidateList } from '../../models/reqValidateList';
+// begin message
+import { MatSnackBar } from '@angular/material';
+import { variable } from '@angular/compiler/src/output/output_ast';
+// end message
 
 @Component({
     selector: "validacion-formulas",
@@ -26,7 +30,13 @@ export class ValidacionFormulasComponent implements OnInit {
         { value: true, viewValue: 'SI' },
         { value: false, viewValue: 'NO' }
     ];
-
+    // start Metodo Messages
+    showMessage(message: string, action: string) {
+        this.snackBar.open(message, action, {
+            duration: 4000,
+        });
+    }
+    // end Metodo Messages
     public ocupations: any[] = [];
 
     public user: any = {};
@@ -45,7 +55,8 @@ export class ValidacionFormulasComponent implements OnInit {
 
 
     constructor(
-        private _PruebasService: PruebasService
+        private _PruebasService: PruebasService,
+        public snackBar: MatSnackBar  // messages
     ) { }
 
     ngOnInit() {
@@ -96,11 +107,15 @@ export class ValidacionFormulasComponent implements OnInit {
     get_lastIndex() {
         return this.list_invalidated.length - 1;
     }
+
     public list_invalidated: any[] = [];
     public list_validated: any[] = [];
+
     runTEST() {
         this._PruebasService.get_user_for_test().subscribe(
             resp => {
+                if (resp.status == 0 && resp.message == 'no information')
+                    return this.showMessage('No se encontro usuario para realizar test', "Entendido");
                 this.list_invalidated = [];
                 this.list_validated = [];
                 resp.data.test = true;
@@ -116,6 +131,10 @@ export class ValidacionFormulasComponent implements OnInit {
                         console.log(err);
                     }
                 );
+            },
+            error => {
+                console.log(1111, "error  => " + error);
+
             }
         );
     }
