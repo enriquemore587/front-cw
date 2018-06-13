@@ -138,7 +138,7 @@
                                     </button>
                                 </th>
                                 <th scope="col">
-                                    <button mat-fab color="primary" (click)="sii()">SI</button>
+                                    <button mat-fab color="primary" (click)="sii()">IF</button>
                                 </th>
                                 <th scope="col">
                                     <button *ngIf="if_station==1" mat-fab color="primary" (click)="then()">
@@ -147,7 +147,10 @@
                                     <button *ngIf="if_station==2" mat-fab color="primary" (click)="_else()">
                                         ELSE
                                     </button>
-                                    <button *ngIf="if_station!=1&&if_station!=2" mat-fab color="primary" (click)="create()" [disabled]="!nombreVariable">
+                                    <button *ngIf="if_station==3" mat-fab color="primary" (click)="endIf()">
+                                        END IF
+                                    </button>
+                                    <button *ngIf="if_station!=1&&if_station!=2&&if_station!=3" mat-fab color="primary" (click)="create()" [disabled]="!nombreVariable">
                                         <i class="fas fa-save"></i>
                                     </button>
                                 </th>
@@ -167,8 +170,18 @@
                                     <button mat-fab color="primary" (click)="addOperator('!=')">!=</button>
                                 </th>
                                 <th scope="col">
-                                    <!--button mat-fab color="primary" (click)="minimo()">MIN</button-->
+                                    <button mat-fab color="primary" (click)="addOperator('>=')">>=</button>
                                 </th>
+                            </tr>
+                            <tr *ngIf="if_station==1">
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col">
+                                    <button mat-fab color="primary" (click)="addOperator('<=')">
+                                        <=</button>
+                                </th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </tbody>
                     </table>

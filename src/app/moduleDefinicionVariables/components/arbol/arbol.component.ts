@@ -150,6 +150,7 @@ export class ArbolComponent implements OnInit {
       resp => {
         if (resp.status != 0 || resp.message != 'successful') return this.showMessage('Ocurrio un problema al limpiar', 'Ok');
         this.loadVariables();
+        this.loadVariables2();
       },
       err => {
         this.showMessage('Ocurrio un problema', 'Ok');

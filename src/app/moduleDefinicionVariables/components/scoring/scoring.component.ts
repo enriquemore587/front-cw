@@ -21,7 +21,7 @@ import { elementAt } from 'rxjs/operators';
 
 // begin message
 import { MatSnackBar } from '@angular/material';
-import { variable } from '@angular/compiler/src/output/output_ast';
+import { variable, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { all } from 'q';
 // end message
 
@@ -67,32 +67,29 @@ export class ScoringComponent implements OnInit {
 
   }
   public editando = false;
-  crearNueva() {
+  public crearNueva() {
     this.editando = !this.editando;
     this.action = 'ARITMÉTICA';
     this.nombreVariable = '';
     this.exp = [];
     this.id_variable = 0;
+    this.if_station = 0;
   }
 
   // start Metodo Messages
-  showMessage(message: string, action: string) {
+  private showMessage(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 4000,
     });
   }
   // end Metodo Messages
 
-  setCheck(obj: any) {
-
-  }
-
   ngOnInit() {
     this.loadVariables();
     this.loadVariables2();
   }
 
-  add_young_vars() {
+  private add_young_vars() {
     this.listVariables.push({
       active: true,
       id: -3,
@@ -125,7 +122,7 @@ export class ScoringComponent implements OnInit {
 
   }
 
-  loadVariables() {
+  private loadVariables() {
     this.listVariables = [];
     this._DefinicionVariablesService.getAllVarsBanco().subscribe(
       resp => {
@@ -138,7 +135,7 @@ export class ScoringComponent implements OnInit {
     );
   }
 
-  loadVariables2() {
+  private loadVariables2() {
     this.listVariables2 = [];
     this._DefinicionVariablesService.getAllCustomVarsBanco().subscribe(
       resp => {
@@ -155,7 +152,7 @@ export class ScoringComponent implements OnInit {
   }
 
   //start
-  add(event: MatChipInputEvent): void {
+  public add(event: MatChipInputEvent): void {
     let input = event.input;
     let value = event.value;
 
@@ -183,9 +180,12 @@ export class ScoringComponent implements OnInit {
     }
   }
 
-  remove(fruit: any): void {
-    let index = this.exp.indexOf(fruit);
-
+  public remove(item: any): void {
+    if (item.name == 'IF' && item.id == -1000) return;
+    if (item.name == 'THEN' && item.id == -1000) this.if_station = 1;
+    if (item.name == 'ELSE' && item.id == -1000) this.if_station = 2;
+    if (item.name == 'END IF' && item.id == -1000) this.if_station = 3;
+    let index = this.exp.indexOf(item);
     if (index >= 0) {
       this.exp.splice(index, 1);
     }
@@ -194,23 +194,23 @@ export class ScoringComponent implements OnInit {
 
 
 
-  minimo() {
+  public minimo() {
     this.exp = [];
     this.action = this.blockOperators() ? 'ARITMÉTICA' : 'MÍNIMO';
   }
 
-  maximo() {
+  public maximo() {
     this.exp = [];
     this.action = this.blockOperators() ? 'ARITMÉTICA' : 'MÁXIMO';
   }
 
-  promedio() {
+  public promedio() {
     this.exp = [];
     this.action = this.blockOperators() ? 'ARITMÉTICA' : 'PROMEDIO';
   }
 
   public if_station = 0;
-  sii() {
+  public sii() {
     this.exp = [];
     this.action = this.action == 'IF' ? 'ARITMÉTICA' : 'IF';
     this.if_station = 0;
@@ -219,7 +219,7 @@ export class ScoringComponent implements OnInit {
     this.exp.push({ value: 'IF', id: -1000, name: 'IF' });
   }
 
-  then() {
+  public then() {
     if (this.exp.length == 1 && this.exp[0].value == 'IF') {
       this.exp.push({ value: true, id: -1000, name: 'TRUE' });
     }
@@ -227,17 +227,20 @@ export class ScoringComponent implements OnInit {
     this.if_station = 2;
   }
 
-  _else() {
-    if (this.exp[0] == 'IF' && this.exp[this.exp.length - 1] == 'THEN') {
-      this.exp.push({ value: 'ELSE', id: -1000, name: 'ELSE' });
-    }
+  public _else() {
+    this.exp.push({ value: 'ELSE', id: -1000, name: 'ELSE' });
+    this.if_station = 3;
+  }
+  public endIf() {
+    this.exp.push({ value: 'END IF', id: -1000, name: 'END IF' });
+    this.if_station = 0;
   }
 
-  blockOperators(): boolean {
+  public blockOperators(): boolean {
     return this.numero != '' || this.action == 'MÍNIMO' || this.action == 'PROMEDIO' || this.action == 'MÁXIMO';
   }
 
-  addOperator(operator: any) {
+  public addOperator(operator: any) {
     if (operator == false) return this.exp = [];
     this.exp.push({ value: operator, id: -1000, name: operator });
     if (String(operator) == 'sqrt' || String(operator) == '^')
@@ -245,16 +248,16 @@ export class ScoringComponent implements OnInit {
   }
 
   public numero: string = '';
-  addDigint(num: string) {
+  public addDigint(num: string) {
     this.numero += num;
   }
 
-  addNumber() {
+  public addNumber() {
     this.exp.push({ value: this.numero, id: 0, name: this.numero });
     this.numero = '';
   }
 
-  clean() {
+  public clean() {
     this.exp = [];
     this.numero = '';
     if (this.action == 'IF') {
@@ -263,34 +266,40 @@ export class ScoringComponent implements OnInit {
     }
   }
 
-  addItem(value: any, default_variable: boolean) {
+  public addItem(value: any, default_variable: boolean) {
     value.id2 = default_variable ? 'd' + value.id : 'c' + value.id;
     this.exp.push(value);
   }
 
-  editVariable = variableToEdit => {
-
-    this.editando = !this.editando;
+  public editVariable = variableToEdit => {
+    this.editando = this.editando ? this.editando : !this.editando;
 
     this.id_variable = variableToEdit.id;
     this.nombreVariable = variableToEdit.name;
     let maximo = new RegExp(/MÁXIMO!/i),
       promedio = new RegExp(/promedio!/i),
-      minimo = new RegExp(/MÍNIMO!/i);
+      minimo = new RegExp(/MÍNIMO!/i),
+      _if = new RegExp(/^IF/);
 
     let first_list = [], endList = [];
     this.clean();
     if (maximo.test(String(variableToEdit.expresion))) {
       first_list = String(variableToEdit.expresion).replace(maximo, '').replace(/_$/, '').split('_');
-      this.maximo();
+      this.action = 'MÁXIMO';
     }
     else if (minimo.test(String(variableToEdit.expresion))) {
       first_list = String(variableToEdit.expresion).replace(minimo, '').replace(/_$/, '').split('_');
-      this.minimo();
+      this.action = 'MÍNIMO';
     }
     else if (promedio.test(String(variableToEdit.expresion))) {
       first_list = String(variableToEdit.expresion).replace(promedio, '').replace(/_$/, '').split('_');
-      this.promedio();
+      this.action = 'PROMEDIO';
+    }
+    else if (_if.test(String(variableToEdit.expresion))) {
+      this.action = 'IF';
+      this.if_station = 0;
+      this.exp = [];
+      first_list = variableToEdit.expresion.split('||');
     }
     else {
       this.action = 'ARITMÉTICA';
@@ -340,7 +349,7 @@ export class ScoringComponent implements OnInit {
     this.exp = endList;
   }
 
-  deleteVariable = itemToDelete => {
+  public deleteVariable = itemToDelete => {
     for (let index = 0; index < this.listVariables2.length; index++) {
       const variable = this.listVariables2[index];
       if (variable.expresion.includes('c' + itemToDelete.id)) {
@@ -359,7 +368,7 @@ export class ScoringComponent implements OnInit {
     );
   }
 
-  valdiateSintaxExpression = (expression: string) => {
+  private valdiateSintaxExpression = (expression: string) => {
     let rule1 = new RegExp(/^[\+\-\X\/\^]/),  // se válida que no comience de manera equivocada
       rule2 = new RegExp(/\(/g),  // se detectan paréntesis izq.
       rule3 = new RegExp(/\)/g),  // se detectan paréntesis der.
@@ -386,7 +395,7 @@ export class ScoringComponent implements OnInit {
     return expression;
   }
 
-  resolveExpretion() {
+  private resolveExpretion() {
     let allExp: string = '';
     this.exp.forEach((element, index) => {
       // guarda variables
@@ -408,7 +417,7 @@ export class ScoringComponent implements OnInit {
     return allExp;
   }
 
-  resolveMinimo() {
+  private resolveMinimo() {
     let correcto = true;
     let allExp: string = this.action + '!';
     this.exp.forEach((element, index) => {
@@ -424,7 +433,8 @@ export class ScoringComponent implements OnInit {
     });
     return allExp;
   }
-  resolveMaximo() {
+
+  private resolveMaximo() {
     let correcto = true;
     let allExp: string = this.action + '!';
     this.exp.forEach((element, index) => {
@@ -443,7 +453,7 @@ export class ScoringComponent implements OnInit {
     return allExp;
   }
 
-  resolvePromedio() {
+  private resolvePromedio() {
     let correcto = true;
     let allExp: string = this.action + '!';
     this.exp.forEach((element, index) => {
@@ -459,48 +469,40 @@ export class ScoringComponent implements OnInit {
     });
     return allExp;
   }
-  create() {
+
+  private resolveIF() {
+    let allExp: string = '', expTemp: string = '';
+    let operadorLogico = new RegExp(/((\<)|(\>)|(\={2})|(\!\=))/);
+    allExp = this.resolveExpretion();
+
+    return allExp;
+  }
+
+
+  public create() {
     if (this.exp.length == 0) return;
     if (this.action == 'ARITMÉTICA') {
-      /*
-            let allExp: string = '';
-            this.exp.forEach((element, index) => {
-              // guarda variables
-              if (element.id > 0) {  // variable
-                allExp += index == 0 ? element.id2 : '||' + element.id2;
-                //allExp += element.id2; antes
-              } else if (element.id == 0) { // number
-                allExp += index == 0 ? element.name : '||' + element.name;
-                // allExp += element.value; antes
-              } else if (element.id == -1000) {  //operator
-                allExp += index == 0 ? element.name : '||' + element.name;
-                //  allExp += element.value; antes
-              }
-              else if (element.id < 0 && element.id > -1000) {  // YOUNG VARIABLE
-                allExp += index == 0 ? element.id2 : '||' + element.id2;
-                //  allExp += element.value; antes
-              }
-            });
-      */
       let allExp = this.valdiateSintaxExpression(this.resolveExpretion());
       if (allExp == 'Bad expression') {
-        this.showMessage(allExp, 'OK');
+        this.showMessage(allExp, 'Ocultar mensaje');
         return;
       }
-
       let varToExp: VarToExp = new VarToExp(allExp, this.id_variable, this.nombreVariable);
-
       this._DefinicionVariablesService.setABankCustomVariable(varToExp).subscribe(
         resp => {
           if (resp.status == 0 && resp.message == 'successful') {
             this.nombreVariable = '';
             this.exp = [];
             this.loadVariables2();
-          } else console.log("somethink bad");
+          }
+
+          else this.showMessage('Ocurrió un problema al salvar aritmética', 'Ocultar mensaje');
+
           this.id_variable = 0;
+
         },
         err => {
-          console.log("error", err);
+          this.showMessage('Ocurrió un problema al salvar aritmética, verificar conexión', 'Ocultar mensaje');
         }
       );
     }
@@ -513,30 +515,15 @@ export class ScoringComponent implements OnInit {
             this.nombreVariable = '';
             this.exp = [];
             this.loadVariables2();
-          } else console.log("somethink bad");
-
+          }
+          else this.showMessage('Ocurrió un problema al salvar MÁXIMO', 'Ocultar mensaje');
         },
         err => {
-          console.log("error", err);
+          this.showMessage('Ocurrió un problema al salvar MÁXIMO, verificar conexión', 'Ocultar mensaje');
         }
       );
     }
     else if (this.action == 'MÍNIMO') {
-      /*
-            let correcto = true;
-            let allExp: string = this.action + '!';
-            this.exp.forEach((element, index) => {
-              if (element.id == -1000) {  // operator
-                correcto = false;
-              } else if (element.id > 0) {  // variable
-                allExp += element.id2 + '_';
-              } else if (element.id == 0) { // number
-                allExp += element.name + '_';
-              } else if (element.id < 0 && element.id > -1000) {  //operator
-                allExp += index == 0 ? element.id2 : '_' + element.id2;
-              }
-            });
-      */
       let varToExp: VarToExp = new VarToExp(this.resolveMinimo(), this.id_variable, this.nombreVariable);
       this._DefinicionVariablesService.setABankCustomVariable(varToExp).subscribe(
         resp => {
@@ -544,10 +531,11 @@ export class ScoringComponent implements OnInit {
             this.nombreVariable = '';
             this.exp = [];
             this.loadVariables2();
-          } else console.log("something bad", resp);
+          }
+          else this.showMessage('Ocurrió un problema al salvar MÍNIMO', 'Ocultar mensaje');
         },
         err => {
-          console.log("error", err);
+          this.showMessage('Ocurrió un problema al salvar MÍNIMO, verificar conexión', 'Ocultar mensaje');
         }
       );
     }
@@ -560,19 +548,38 @@ export class ScoringComponent implements OnInit {
             this.exp = [];
             this.loadVariables2();
           }
-          else console.log("somethink bad");
+
+          else this.showMessage('Ocurrió un problema al salvar PROMEDIO', 'Ocultar mensaje');
+
         },
         err => {
-          console.log("error", err);
+          this.showMessage('Ocurrió un problema al salvar PROMEDIO, verificar conexión', 'Ocultar mensaje');
         }
       );
     }
     else if (this.action == 'IF') {
-      console.log(this.exp);
+      let allExp: string = '', expTemp: string = '';
+      let correctIF = new RegExp(/^IF.{3,}((\>)|(\<)|(\={2})|(\!\=)).{3,}(THEN).{3,}(ELSE).{3,}(END\sIF)$/);
+      let expresion = this.resolveExpretion();
+      if (!correctIF.test(expresion))
+        return this.showMessage('Sintaxis incorrecta', 'Ocultar mensaje');
+      let varToExp: VarToExp = new VarToExp(expresion, this.id_variable, this.nombreVariable);
+      this._DefinicionVariablesService.setABankCustomVariable(varToExp).subscribe(
+        resp => {
+          if (resp.status == 0 && resp.message == 'successful') {
+            this.nombreVariable = '';
+            this.exp = [];
+            this.loadVariables2();
+          }
 
-      this.exp.forEach(element => {
+          else this.showMessage('Ocurrió un problema al salvar aritmética', 'Ocultar mensaje');
 
-      });
+          this.id_variable = 0;
+        },
+        err => {
+          this.showMessage('Ocurrió un problema al salvar aritmética, verificar conexión', 'Ocultar mensaje');
+        }
+      );
     }
 
   }

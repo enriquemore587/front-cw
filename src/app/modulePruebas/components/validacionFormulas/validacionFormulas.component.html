@@ -47,9 +47,9 @@
                                             <label>{{item.name}}</label>
                                         </th>
                                         <th scope="row" style="text-align: center;">
-                                            <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
-                                            <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
-                                            <label *ngIf="item.var_fix_id!=9 && item.var_fix_id != 8">{{item.value}}</label>
+                                            <p *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</p>
+                                            <p *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</p>
+                                            <p *ngIf="item.var_fix_id!=9 && item.var_fix_id != 8">{{item.value | currency}}</p>
                                         </th>
                                         <th *ngIf="i == get_lastIndex()" scope="row" style="text-align: center;">
                                             <div class="alert alert-danger center" role="alert">
