@@ -108,6 +108,11 @@ export class ValidacionFormulasComponent implements OnInit {
         return this.list_invalidated.length - 1;
     }
 
+    get_pesos(item: any) {
+        if (item.salida == 1 || item.salida == 3) return true;
+        return item.var_fix_id > 0 && item.var_fix_id != 1 && item.var_fix_id != 4 && item.var_fix_id != 5 && item.var_fix_id != 7 && item.var_fix_id != 8 && item.var_fix_id != 9 && item.var_fix_id != 3 && item.var_fix_id != 2 && item.var_fix_id != 14;
+    }
+
     public list_invalidated: any[] = [];
     public list_validated: any[] = [];
 
@@ -123,6 +128,8 @@ export class ValidacionFormulasComponent implements OnInit {
                     respuesta => {
                         if (respuesta.status == 1200) {
                             this.list_invalidated = respuesta.data;
+                            console.log(this.list_invalidated);
+
                         } else if (respuesta.status == 0) {
                             this.list_validated = respuesta.data;
                         }
@@ -134,7 +141,6 @@ export class ValidacionFormulasComponent implements OnInit {
             },
             error => {
                 console.log(1111, "error  => " + error);
-
             }
         );
     }

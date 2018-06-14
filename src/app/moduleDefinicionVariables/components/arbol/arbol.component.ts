@@ -130,6 +130,7 @@ export class ArbolComponent implements OnInit {
   }
 
   loadVariables2() {
+    this.listVariables2 = [];
     this._DefinicionVariablesService.getAllCustomVarsBanco().subscribe(
       resp => {
         if (resp.status == 0 && resp.message == 'successful') {
@@ -148,7 +149,14 @@ export class ArbolComponent implements OnInit {
   clearTree() {
     this._DefinicionVariablesService.clear_tree().subscribe(
       resp => {
-        if (resp.status != 0 || resp.message != 'successful') return this.showMessage('Ocurrio un problema al limpiar', 'Ok');
+        if (resp.status != 0 || resp.message != 'successful') return this.showMessage('Ocurrio un problema al limpiar', 'Ocultar mensaje');
+        this.showMessage('Árbol limpio', 'Ocultar mensaje');
+        this.salidas = {
+          mensualidad: { checked: false, id: 1, index: -1 },
+          plazo: { checked: false, id: 2, index: -1 },
+          linea_credito: { checked: false, id: 3, index: -1 },
+          tasa: { checked: false, id: 4, index: -1 }
+        };
         this.loadVariables();
         this.loadVariables2();
       },
