@@ -109,7 +109,7 @@ export class ValidacionFormulasComponent implements OnInit {
     }
 
     get_pesos(item: any) {
-        if (item.salida == 1 || item.salida == 3) return true;
+        // if (item.salida == 1 || item.salida == 3) return true;
         return item.var_fix_id > 0 && item.var_fix_id != 1 && item.var_fix_id != 4 && item.var_fix_id != 5 && item.var_fix_id != 7 && item.var_fix_id != 8 && item.var_fix_id != 9 && item.var_fix_id != 3 && item.var_fix_id != 2 && item.var_fix_id != 14;
     }
 

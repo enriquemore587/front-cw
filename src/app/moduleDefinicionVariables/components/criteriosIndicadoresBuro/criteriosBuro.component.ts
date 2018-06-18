@@ -7,6 +7,9 @@ import { IndicadorBuro } from '../../models/indicadorBuro';
 import { Score } from '../../models/Score';
 import { log } from 'util';
 
+import { FormControl, Validators } from '@angular/forms';
+import { ErrorForms } from '../../../material/ErrorsStateMatcher';
+
 @Component({
     selector: 'criterios-buro',
     templateUrl: './criteriosBuro.component.html',
@@ -21,8 +24,13 @@ export class CriteriosBuro implements OnInit {
     public ranges: any = {};
     public scoreList: Score[] = [];
     public changeScore: number = 0;
-    
+
     labelPosition;
+    tasaFormControl = new FormControl('', [
+        Validators.required,
+        Validators.min(1)
+    ]);
+    matcher = new ErrorForms();
 
     constructor(
         private _router: Router,
@@ -60,7 +68,7 @@ export class CriteriosBuro implements OnInit {
                         }
                         else if (element.id == 4 && element.status) {
                             this.labelPosition = 'false';
-                        }else if (element.id == 1) {
+                        } else if (element.id == 1) {
                             this.ranges.tasa = element.range.split('-')[0];
                         }
                     });
@@ -72,44 +80,44 @@ export class CriteriosBuro implements OnInit {
         );
     }
 
-    noo(value){
+    noo(value) {
     }
 
-    saveChange(id, value){
-        let saveObj : any = {
+    saveChange(id, value) {
+        let saveObj: any = {
             "id_var_fix": id,
             "range": null,
             "is_ok": null,
-            "ver_array" : null
+            "ver_array": null
         };
         if (id == 1) {
-            saveObj.range = this.ranges.tasa+"-0";
-        }else
-        if (id == 2) {
-            saveObj.range = this.ranges.BC_Score+"-1000";
-        }else if (id == 3) {
-            saveObj.range = this.ranges.icc+"-9";
-        }else if(id == 4){
-            saveObj.is_ok = value;
-        }
-        else if(id == 5){
-            saveObj.range = this.ranges.MOP_mayor_min+"-"+this.ranges.MOP_mayor_max;
-        }
-        else if(id == 6){
-            saveObj.range = this.ranges.Saldo_Vencido+"-"+this.ranges.Saldo_Vencido_max;
-        }
+            saveObj.range = this.ranges.tasa + "-0";
+        } else
+            if (id == 2) {
+                saveObj.range = this.ranges.BC_Score + "-1000";
+            } else if (id == 3) {
+                saveObj.range = this.ranges.icc + "-9";
+            } else if (id == 4) {
+                saveObj.is_ok = value;
+            }
+            else if (id == 5) {
+                saveObj.range = this.ranges.MOP_mayor_min + "-" + this.ranges.MOP_mayor_max;
+            }
+            else if (id == 6) {
+                saveObj.range = this.ranges.Saldo_Vencido + "-" + this.ranges.Saldo_Vencido_max;
+            }
         this._DefinicionVariablesService.setBankVariable(saveObj).subscribe(
             resp => {
-              if (resp.status != 0 && resp.message != 'successful') console.log("something bad");
+                if (resp.status != 0 && resp.message != 'successful') console.log("something bad");
             },
             err => {
-              console.log("error", err);
+                console.log("error", err);
             }
-          );
+        );
     }
 
 
-  
+
 
     getIccBank() {
         this._DefinicionVariablesService.getIccBank(this.ranges.icc).subscribe(
@@ -127,28 +135,28 @@ export class CriteriosBuro implements OnInit {
             }
         );
     }
-    
+
 
     changeStore(value: Score) {
         this._DefinicionVariablesService.setAScoreBank(value).subscribe(
             resp => {
-              if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
+                if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
             },
             err => {
-              console.log("error", err);
+                console.log("error", err);
             }
-          );
+        );
     }
 
-    getScoreBank(){
+    getScoreBank() {
         this._DefinicionVariablesService.getScoreBank().subscribe(
             resp => {
                 if (resp.status == 0) {
                     resp.data.forEach(element => {
                         this.scoreList.push(new Score(
-                            element.id, 
+                            element.id,
                             element.rango.split("-")[0],
-                            element.rango.split("-")[1], 
+                            element.rango.split("-")[1],
                             element.plazo));
                     });
                 }
@@ -164,7 +172,7 @@ export class CriteriosBuro implements OnInit {
                 if (resp.status == 0) {
                     this.newScore = <Score>resp.data;
 
-                    if (this.scoreList.length == 0) 
+                    if (this.scoreList.length == 0)
                         this.scoreList.push(this.newScore);
                     else this.scoreList[this.scoreList.length - 1] = this.newScore;
                 }
@@ -173,29 +181,29 @@ export class CriteriosBuro implements OnInit {
         );
     }
 
-    change_a_ICC(item){
+    change_a_ICC(item) {
         let obj = {
             "icc": item.icc,
-	        "value": item.free
+            "value": item.free
         }
         this._DefinicionVariablesService.change_a_ICC(obj).subscribe(
             resp => {
-              if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
+                if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
             },
             err => {
-              console.log("error", err);
+                console.log("error", err);
             }
-          );
+        );
     }
 
-    changeICC(id:any) {
+    changeICC(id: any) {
         if (!this.ranges.icc || this.ranges.icc == '') return;
         if (this.ranges.icc > 9) this.ranges.icc = 9;
         if (this.ranges.icc < 4) this.ranges.icc = 4;
         this.getIccBank();
-        this.saveChange(id,false);
+        this.saveChange(id, false);
     }
-    
+
 
     setCheck(item: any) {
         console.log(item);

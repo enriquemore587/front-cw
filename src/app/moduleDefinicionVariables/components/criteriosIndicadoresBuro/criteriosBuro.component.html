@@ -8,9 +8,30 @@
                     <div class="card-body row">
                         <div class="example-container col-6">
                             <mat-form-field>
-                                <input matInput placeholder="Tasa" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                                    [(ngModel)]="ranges.tasa">
+                                <input [formControl]="tasaFormControl" matInput placeholder="Tasa" required type="number" (blur)="saveChange(item.id,false)"
+                                    (keyup.enter)="saveChange(item.id,false)" [(ngModel)]="ranges.tasa" [errorStateMatcher]="matcher">
+                                <mat-icon matSuffix>%</mat-icon>
+                                <!-- <mat-hint>Entrar tasa</mat-hint> -->
+                                <mat-error *ngIf="tasaFormControl.hasError('min') && !tasaFormControl.hasError('required')">
+                                    Tasa inválida
+                                </mat-error>
+                                <mat-error *ngIf="tasaFormControl.hasError('required')">
+                                    Tasa es
+                                    <strong>requerida</strong>
+                                </mat-error>
                             </mat-form-field>
+                            <!-- <mat-form-field>
+                                <input id="tasa" name="tasa" matInput placeholder="Tasa" required type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                                    [(ngModel)]="ranges.tasa" #tasa="ngModel">
+                                <div *ngIf="ranges.tasa<1" class="alert alert-danger">
+                                    Tasa must be at least 1.
+                                </div>
+                                <div *ngIf="tasa.invalid && (tasa.dirty || tasa.touched)" class="alert alert-danger">
+                                    <mat-error *ngIf="tasa.errors.required">
+                                        Tasa is required.
+                                    </mat-error>
+                                </div>
+                            </mat-form-field> -->
                         </div>
                     </div>
                 </div>
@@ -66,12 +87,36 @@
                     </div>
                 </div>
                 <!--ICC-->
-                <div *ngIf="item.status && item.id == 3" class="card border-light mb-3" style="width: 100%;">
+                <!-- <div *ngIf="item.status && item.id == 3" class="card border-light mb-3" style="width: 100%;">
                     <div class="card-header">{{ item.name }}</div>
                     <div class="card-body row">
                         <div class="example-container col">
                             <mat-form-field>
                                 <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc" (keyup)="changeICC(item.id)" type="number">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" value="9" disabled>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> -->
+                <div *ngIf="item.status && item.id == 3" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input id="icc" name="icc" required min="4" matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc" (keyup)="changeICC(item.id)"
+                                    type="number" #icc="ngModel">
+                                <div *ngIf="icc.invalid && (icc.dirty || icc.touched)" class="alert alert-danger">
+                                    <mat-error *ngIf="icc.errors.required">
+                                        icc is required.
+                                    </mat-error>
+                                    <mat-error *ngIf="icc.errors.min">
+                                        icc must be at least 4.
+                                    </mat-error>
+                                </div>
                             </mat-form-field>
                         </div>
                         <div class="example-container col">

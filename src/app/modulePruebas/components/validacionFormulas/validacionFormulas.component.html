@@ -49,7 +49,7 @@
                                             <!-- PLAZO DISPONIBLE -->
                                             <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
                                             <!-- SALIDA tasa -->
-                                            <label *ngIf="item.salida == 4">{{item.value | percent}}</label>
+                                            <label *ngIf="item.salida == 4">{{item.value}}</label>
                                             <!-- pesitos -->
                                             <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
                                             <!-- custom -->
@@ -100,7 +100,7 @@
                                             <!-- PLAZO DISPONIBLE -->
                                             <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
                                             <!-- SALIDA tasa -->
-                                            <label *ngIf="item.salida == 4">{{item.value | percent}}</label>
+                                            <label *ngIf="item.salida == 4">{{item.value}}</label>
                                             <!-- pesitos -->
                                             <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
                                             <!-- custom -->
