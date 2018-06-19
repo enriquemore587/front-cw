@@ -1,3 +1,13 @@
-.card{
-    /* margin-top: 5%; */
+.demo-list-two {
+    width: 300px;
+}
+
+.centrado{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.centrado .azul {
+    bottom: 5px; width: 359px; margin-left: 50%; right: 179px;
 }

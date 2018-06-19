@@ -1,0 +1,264 @@
+<div class="container">
+    <div class="card border-secondary mb-3" style="position: relative;">
+        <div class="card-header"> {{ title }} </div>
+        <div class="card-body text-secondary">
+            <div class="" *ngFor="let item of indicadoresBuro">
+                <div *ngIf="item.id == 1" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col-6">
+                            <mat-form-field>
+                                <input [formControl]="tasaFormControl" matInput placeholder="Tasa" required type="number" (blur)="saveChange(item.id,false)"
+                                    (keyup.enter)="saveChange(item.id,false)" [(ngModel)]="ranges.tasa" [errorStateMatcher]="matcher">
+                                <mat-icon matSuffix>%</mat-icon>
+                                <!-- <mat-hint>Entrar tasa</mat-hint> -->
+                                <mat-error *ngIf="tasaFormControl.hasError('min') && !tasaFormControl.hasError('required')">
+                                    Tasa inválida
+                                </mat-error>
+                                <mat-error *ngIf="tasaFormControl.hasError('required')">
+                                    Tasa es
+                                    <strong>requerida</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- <mat-form-field>
+                                <input id="tasa" name="tasa" matInput placeholder="Tasa" required type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                                    [(ngModel)]="ranges.tasa" #tasa="ngModel">
+                                <div *ngIf="ranges.tasa<1" class="alert alert-danger">
+                                    Tasa must be at least 1.
+                                </div>
+                                <div *ngIf="tasa.invalid && (tasa.dirty || tasa.touched)" class="alert alert-danger">
+                                    <mat-error *ngIf="tasa.errors.required">
+                                        Tasa is required.
+                                    </mat-error>
+                                </div>
+                            </mat-form-field> -->
+                        </div>
+                    </div>
+                </div>
+                <!--BC Score-->
+                <div *ngIf="item.status && item.id == 2" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="example-container col">
+                                <mat-form-field>
+                                    <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                                        [(ngModel)]="ranges.BC_Score">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card border-light mb-3" style="width: 100%;">
+                                <div class="card-header">Tabla de score</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card border-light mb-3" style="width: 100%;">
+                                                <div class="card-body">
+                                                    <form class="example-form">
+                                                        <div class="row" *ngFor="let item of scoreList">
+                                                            <div class="col">
+                                                                <mat-form-field class="example-full-width">
+                                                                    <input matInput placeholder="DESDE" value="{{item.desde}}" [(ngModel)]="item.desde" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                                                        [ngModelOptions]="{standalone: true}">
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col">
+                                                                <mat-form-field class="example-full-width">
+                                                                    <input matInput placeholder="HASTA" value="{{item.range}}" [(ngModel)]="item.range" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                                                        [ngModelOptions]="{standalone: true}">
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col">
+                                                                <mat-form-field class="example-full-width">
+                                                                    <input matInput placeholder="PLAZO" value="{{item.plazo}}" [(ngModel)]="item.plazo" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                                                        [ngModelOptions]="{standalone: true}">
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--ICC-->
+                <!-- <div *ngIf="item.status && item.id == 3" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc" (keyup)="changeICC(item.id)" type="number">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" value="9" disabled>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> -->
+                <div *ngIf="item.status && item.id == 3" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input id="icc" name="icc" required min="4" matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc" (keyup)="changeICC(item.id)"
+                                    type="number" #icc="ngModel">
+                                <div *ngIf="icc.invalid && (icc.dirty || icc.touched)" class="alert alert-danger">
+                                    <mat-error *ngIf="icc.errors.required">
+                                        icc is required.
+                                    </mat-error>
+                                    <mat-error *ngIf="icc.errors.min">
+                                        icc must be at least 4.
+                                    </mat-error>
+                                </div>
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" value="9" disabled>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--Alertas Hawk-->
+                <div *ngIf="item.status && item.id == 4" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body">
+                        <div class="example-container">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" [(ngModel)]="item.is_ok" (change)="saveChange(item.id,item.is_ok)" [ngModelOptions]="{standalone: true}">
+                                    {{ item.is_ok ? 'SI' : 'NO'}}
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <!--MOP mayor-->
+                <div *ngIf="item.status && item.id == 5" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                                    [(ngModel)]="ranges.MOP_mayor_min">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                                    [(ngModel)]="ranges.MOP_mayor_max">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--Saldo Vencido-->
+                <div *ngIf="item.status && item.id == 6" class="card border-light mb-3" style="width: 100%;">
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body row">
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Mínimo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
+                                    [(ngModel)]="ranges.Saldo_Vencido">
+                            </mat-form-field>
+                        </div>
+                        <div class="example-container col">
+                            <mat-form-field>
+                                <input matInput placeholder="Máximo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
+                                    [(ngModel)]="ranges.Saldo_Vencido_max">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="this.ranges.icc" class="card border-light mb-3" style="width: 100%;">
+                <div class="card-header">Tipo de ICC</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card border-light mb-3" style="width: 100%;">
+                                <div class="card-header">Gasto ICC banco</div>
+                                <div class="card-body">
+                                    <form class="example-form">
+                                        <div class="row" *ngFor="let item of responseIccBank">
+                                            <div class="col">{{item.icc}}</div>
+                                            <div class="col">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="GASTO" value="{{item.free}}" [(ngModel)]="item.free" (keyup.enter)="change_a_ICC(item)" (blur)="change_a_ICC(item)"
+                                                        type="number" [ngModelOptions]="{standalone: true}">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card border-light mb-3" style="width: 100%;">
+                                <div class="card-header">Gasto ICC Buró</div>
+                                <div class="card-body">
+                                    <div class="row" *ngFor="let item of responseIccBuro">
+                                        <div class="col">{{item.icc}}</div>
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="GASTO" value="{{item.free}}" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--div class="card border-light mb-3" style="width: 100%;">
+                        <div class="card-header">Tabla de score</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card border-light mb-3" style="width: 100%;">
+                                        <div class="card-body">
+                                            <form class="example-form">
+                                                <div class="row" *ngFor="let item of scoreList">
+                                                    <div class="col">
+                                                        <mat-form-field class="example-full-width">
+                                                            <input matInput placeholder="DESDE" value="{{item.desde}}" [(ngModel)]="item.desde" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col">
+                                                        <mat-form-field class="example-full-width">
+                                                            <input matInput placeholder="HASTA" value="{{item.range}}" [(ngModel)]="item.range" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col">
+                                                        <mat-form-field class="example-full-width">
+                                                            <input matInput placeholder="PLAZO" value="{{item.plazo}}" [(ngModel)]="item.plazo" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div-->
+        </div>
+
+        <button mat-raised-button class="verde" routerLink="/definicion-variables/activacion-variables-indicadores" style="left: 5%; position: absolute; bottom: 5px;">
+            <i class="fas fa-arrow-alt-circle-left"></i>
+        </button>
+
+        <button mat-raised-button class="verde" style="right: 5%; position: absolute; bottom: 5px;" routerLink="/definicion-variables/scoring">
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </button>
+    </div>
+</div>

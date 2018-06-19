@@ -1,0 +1,45 @@
+<nav *ngIf="auth" class="navbar navbar-expand-lg navbar-light text-light verde">
+    <menu-component *ngIf="auth"></menu-component>
+    <a class="navbar-brand text-light" routerLink="/">CREDIWHERE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <!--li class="nav-item active">
+                <a class="nav-link text-light" routerLink="/">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li-->
+            <!--li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li-->
+        </ul>
+        <ul class="navbar-nav justify-content-end" *ngIf="!auth">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link text-light" routerLink="/login-panel">ENTRAR
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </a>
+            </li>
+        </ul>
+        <!--ul class="navbar-nav justify-content-end" *ngIf="!auth">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link text-light" routerLink="/registro">REGISTRAR</a>
+            </li>
+        </ul-->
+        <ul class="navbar-nav justify-content-end" *ngIf="auth">
+            <li class="nav-item">
+                <a style="color: lavender">{{email}}</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav justify-content-end" *ngIf="auth">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link text-light" (click)="logOut()" routerLink="/" href>Salir</a>
+            </li>
+        </ul>
+    </div>
+</nav>

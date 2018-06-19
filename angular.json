@@ -23,13 +23,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "bower_components/material-design-lite/material.min.css",
+              "bower_components/components-font-awesome/css/fontawesome-all.css",
+              "src/styles.css"
             ],
             "scripts": [
-
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "bower_components/material-design-lite/material.min.js"
             ]
           },
           "configurations": {

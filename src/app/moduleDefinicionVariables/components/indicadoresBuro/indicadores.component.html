@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="card border-secondary mb-3" style="position: relative;">
         <div class="card-header"> {{ title }} </div>
         <div class="card-body text-secondary">
@@ -23,4 +23,32 @@
             </button>
         </div>
     </div>
+</div> -->
+
+<div class="myContainer centrado">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+    <div class="mdl-grid" style="align-content: center;">
+        
+            <ul class="demo-list-two mdl-list">
+                <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of indicadoresList">
+                    <span class="mdl-list__item-primary-content" *ngIf="item.id != 1">
+                        <span>{{item.name}}</span>
+                    </span>
+                    <span class="mdl-list__item-secondary-content" *ngIf="item.id != 1">
+                        <mat-slide-toggle checked="{{item.status}}" (click)="setCheck(item)"></mat-slide-toggle>
+                    </span>
+                </li>
+            </ul>
+            
+    </div>
+    <button mat-raised-button class="verde" routerLink="/definicion-variables/criterios-cliente" style="left: 5%; position: absolute; bottom: 5px;">
+        Criterios perfil
+    </button>
+    <button mat-raised-button class="verde" style="right: 5%; position: absolute; bottom: 5px;" routerLink="/definicion-variables/criterios-indicadores">
+        Criterios buró de crédito
+    </button>
 </div>

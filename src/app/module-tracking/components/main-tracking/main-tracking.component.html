@@ -1,13 +1,15 @@
 <!-- <div class="container"> -->
 
 
-  <div class="card bg-light mt-3 mb-3" style="height: 90vh !important;">
+<div class="card bg-light mt-3 mb-3" style="height: 90vh !important;">
 
   <div class="card-header" style="position: relative;">
     <div class="float-left"> {{title}}</div>
     <div class="float-right">
-      <button mat-raised-button class="verde" style="position: absolute !important; right: 5px !important; top: 2px;  " (click)="InitConsult(false)" [hidden]="!showButton">Consult</button>
-      <button  mat-raised-button class="red" style="position: absolute !important; right: 5px !important; top: 2px; " (click)="InitConsult(true)" [hidden]="showButton" >Stop</button>
+      <button mat-raised-button class="verde" style="position: absolute !important; right: 5px !important; top: 2px;  " (click)="InitConsult(false)"
+        [hidden]="!showButton">Consult</button>
+      <button mat-raised-button class="red" style="position: absolute !important; right: 5px !important; top: 2px; " (click)="InitConsult(true)"
+        [hidden]="showButton">Stop</button>
     </div>
   </div>
 
@@ -39,10 +41,10 @@
           <td style="text-align: center;">
             <!-- {{item.success}} -->
             <!-- <button mat-button> -->
-              <i *ngIf='item.success' class="material-icons  greenCheck">check_circle</i>
+            <i *ngIf='item.success' class="material-icons  greenCheck">check_circle</i>
             <!-- </button> -->
             <!-- <button mat-button> -->
-              <i *ngIf='!item.success' class="material-icons  redError">cancel</i>
+            <i *ngIf='!item.success' class="material-icons  redError">cancel</i>
             <!-- </button> -->
           </td>
           <td style="text-align: center;">

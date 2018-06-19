@@ -21,7 +21,7 @@ import { ErrorForms } from '../../../material/ErrorsStateMatcher';
     providers: [DefinicionVariablesService]
 })
 export class CriteriosPerfilClienteComponent implements OnInit {
-    title = 'CRITERIOS PERFIL CLIENTE';
+    title = 'Criterios perfil de cliente';
 
     public indicadoresPerfil: IndicadorBuro[];
     public ranges: any = {};

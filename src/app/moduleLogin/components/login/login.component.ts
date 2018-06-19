@@ -21,7 +21,7 @@ import { variable } from '@angular/compiler/src/output/output_ast';
   providers: [ UserLoginService ]
 })
 export class LoginComponent implements OnInit {
-  public title : string = 'INICIO SESION';
+  public title : string = 'INICIO SESIÓN';
   public user : User;
   
 
@@ -64,13 +64,13 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('auth', resp.data.token);
           localStorage.setItem('email', this.user.email);
           localStorage.setItem('menu', JSON.stringify(resp.data.menu));
-          this._router.navigate(['/definicion-variables']);
+          this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
         }else{
-          this.showMessage('Usuario/contraseña incorrectos', 'Entendido');
+          this.showMessage('Usuario/contraseña incorrectos', 'Ocultar mensaje');
         }
       },
       err => {
-        this.showMessage('Ocurrio un problema al iniciar sesión', 'Entendido');
+        this.showMessage('Ocurrió un problema al iniciar sesión', 'Ocultar mensaje');
       }
     );
   }

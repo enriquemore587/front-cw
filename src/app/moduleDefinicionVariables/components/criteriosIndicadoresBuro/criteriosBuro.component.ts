@@ -17,7 +17,7 @@ import { ErrorForms } from '../../../material/ErrorsStateMatcher';
     providers: [DefinicionVariablesService]
 })
 export class CriteriosBuro implements OnInit {
-    public title: string = 'CRITERIOS MÍNIMOS';
+    public title: string = 'Criterios buró';
     public indicadoresBuro: IndicadorBuro[];
     public responseIccBank: ResponseIccBank[];
     public responseIccBuro: ResponseIccBank[];

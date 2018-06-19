@@ -124,7 +124,7 @@ export class ArbolComponent implements OnInit {
         }
       },
       error => {
-        this.showMessage('Ocurrio un error en el orden de las variables', 'Entendido');
+        this.showMessage('Ocurrió un error en el orden de las variables', 'Entendido');
       }
     );
   }
@@ -141,7 +141,7 @@ export class ArbolComponent implements OnInit {
         }
       },
       error => {
-        this.showMessage('Ocurrio un error en el listado de variables', 'Entendido');
+        this.showMessage('Ocurrió un error en el listado de variables', 'Entendido');
       }
     );
   }
@@ -149,7 +149,7 @@ export class ArbolComponent implements OnInit {
   clearTree() {
     this._DefinicionVariablesService.clear_tree().subscribe(
       resp => {
-        if (resp.status != 0 || resp.message != 'successful') return this.showMessage('Ocurrio un problema al limpiar', 'Ocultar mensaje');
+        if (resp.status != 0 || resp.message != 'successful') return this.showMessage('Ocurrió un problema al limpiar', 'Ocultar mensaje');
         this.showMessage('Árbol limpio', 'Ocultar mensaje');
         this.salidas = {
           mensualidad: { checked: false, id: 1, index: -1 },
@@ -161,7 +161,7 @@ export class ArbolComponent implements OnInit {
         this.loadVariables2();
       },
       err => {
-        this.showMessage('Ocurrio un problema', 'Ok');
+        this.showMessage('Ocurrió un problema', 'Ok');
       }
     );
   }
@@ -203,7 +203,7 @@ export class ArbolComponent implements OnInit {
 
           },
           err => {
-            this.showMessage('Ocurrio un problema', 'Ok');
+            this.showMessage('Ocurrió un problema', 'Ok');
           }
         );
       },

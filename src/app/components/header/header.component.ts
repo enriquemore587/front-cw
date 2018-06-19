@@ -9,7 +9,7 @@ import { UserLoginService } from '../../moduleLogin/services/user-login.service'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, DoCheck{
-  public title: string = 'Bancos';
+  public title: string = 'CREDIWHERE';
   public auth;
   public email;
   
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit, DoCheck{
   }
 
   logOut() {
-    this._router.navigate(['/']);
+    this._router.navigate(['/login-panel']);
     localStorage.clear();
   }
 }

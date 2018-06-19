@@ -1,14 +1,24 @@
-<div *ngIf="!auth">
-    <div class="jumbotron">
-        <h1 class="display-4">Welcome to {{ title }}</h1>
-        <!--p class="lead">Description about of this panel
-        </p-->
-        <hr class="my-4">
-        <!--p>Some help</p-->
-        <button mat-raised-button color="primary" routerLink="/login-panel">Log-in</button>
+<div class="myContainer centrado">
+    <div class="mdl-grid" style="margin-top: 15%;">
+        <div *ngIf="!auth">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title" style="text-align: center;">
+                    <h2 class="mdl-card__title-text">{{title}}</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    Para iniciar sesión en crediwhere haz click en el link de abajo.
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" routerLink="/login-panel">
+                        Iniciar sesión
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- BEGIN MENU -->
+    <!-- END MENU -->
 </div>
-
 
 <div *ngIf="auth" class="card border-dark mb-3">
     <div class="card-header">Menu</div>

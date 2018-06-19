@@ -29,9 +29,9 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.auth = this._UserLoginService.getAuth();
-    if (this.auth)
-      this.getMenu();
+    if (this.auth) this.getMenu();
   }
+
 
   // start Metodo Messages
   showMessage(message: string, action: string) {

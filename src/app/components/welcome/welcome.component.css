@@ -1,10 +1,7 @@
-.jumbotron{
-    margin: 5%;
-    padding: 40px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 1px #ccc;
-    background-color: #fafafa;
-  }
-.card{
-  margin: 5%;
+.centrado{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
 }

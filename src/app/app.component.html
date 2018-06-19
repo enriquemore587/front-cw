@@ -1,3 +1,31 @@
-<app-header></app-header>
-<div style="height: 50px !important;"></div>
-<router-outlet></router-outlet> 
+<div class="demo-layout-waterfall mdl-layout mdl-js-layout">
+    <header *ngIf="auth" class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">CREDIWHERE</span>
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href routerLink="/definicion-variables/activacion-variables-cliente" class="mdl-layout__tab" routerLinkActive="is-active">Definición de variables</a>
+            <a href routerLink="/pruebas" class="mdl-layout__tab" routerLinkActive="is-active">Test</a>
+            <a href routerLink="/tracking" class="mdl-layout__tab" routerLinkActive="is-active">Tracking</a>
+            <div class="mdl-layout-spacer"></div>
+            <a class="mdl-navigation__link" (click)="logOut()" style="color: white; right: 50px;" routerLink="/login-panel" href>
+                <i class="fas fa-sign-out-alt"></i> Salir</a>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">{{email}}</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" routerLink="/definicion-variables/activacion-variables-cliente" href>Definición de variables</a>
+            <a class="mdl-navigation__link" routerLink="/pruebas" href>Test</a>
+            <a class="mdl-navigation__link" routerLink="/tracking" href>Tracking</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <!-- Your content goes here -->
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</div>

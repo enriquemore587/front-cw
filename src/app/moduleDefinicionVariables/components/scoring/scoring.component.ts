@@ -47,7 +47,7 @@ export class ScoringComponent implements OnInit {
 
   //end
 
-  public title = 'SCORING';
+  public title = 'Scoring de aritmética';
   public action: string = 'ARITMÉTICA';
   public nombreVariable: string = '';
 
@@ -118,6 +118,16 @@ export class ScoringComponent implements OnInit {
       rango: "0-0",
       var_array: null,
       var_fix_id: -8
+    });
+
+    this.listVariables.push({
+      active: true,
+      id: -9,
+      is_ok: null,
+      name: "Monto solicitado",
+      rango: "0-0",
+      var_array: null,
+      var_fix_id: -9
     });
 
   }
