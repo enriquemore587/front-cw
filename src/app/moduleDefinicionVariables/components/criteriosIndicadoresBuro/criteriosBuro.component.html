@@ -1,222 +1,196 @@
-<div style="position: relative;">
-    <div class="myContainer">
-        <div class="card border-secondary mb-3" style="position: relative;">
-            <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
-                    <h1>{{title}}</h1>
-                </div>
-            </div>
-            <div class="card-body text-secondary">
+<div class="myContainer" style="position: relative;">
+    <div class="mdl-grid center">
+        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
 
-                <div class="mdl-grid" *ngFor="let item of indicadoresBuro">
+    <div class="mdl-grid centrado">
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let item of indicadoresBuro">
 
-                    <mat-card *ngIf="item.id == 1" style="width: 100%;">
-                        <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-content>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--12-col">
-                                    <mat-form-field>
-                                        <input [formControl]="tasaFormControl" matInput placeholder="Tasa" required type="number" (blur)="saveChange(item.id,false)"
-                                            (keyup.enter)="saveChange(item.id,false)" [(ngModel)]="ranges.tasa" [errorStateMatcher]="matcher">
-                                        <mat-icon matSuffix>%</mat-icon>
-                                        <mat-error *ngIf="tasaFormControl.hasError('min') && !tasaFormControl.hasError('required')">
-                                            Tasa inválida
-                                        </mat-error>
-                                        <mat-error *ngIf="tasaFormControl.hasError('required')">
-                                            Tasa es
-                                            <strong>requerida</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-
-
-
-                    <!--BC Score-->
-
-
-                    <mat-card *ngIf="item.status && item.id == 2" style="width: 100%;">
-                        <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-content>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--12-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                                            [(ngModel)]="ranges.BC_Score">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="mdl-grid" *ngFor="let item of scoreList">
-                                <div class="mdl-cell mdl-cell--4-col">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="DESDE" value="{{item.desde}}" [(ngModel)]="item.desde" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
-                                            [ngModelOptions]="{standalone: true}">
-                                    </mat-form-field>
-                                </div>
-                                <div class="mdl-cell mdl-cell--4-col">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="HASTA" value="{{item.range}}" [(ngModel)]="item.range" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
-                                            [ngModelOptions]="{standalone: true}">
-                                    </mat-form-field>
-                                </div>
-                                <div class="mdl-cell mdl-cell--4-col">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="PLAZO" value="{{item.plazo}}" [(ngModel)]="item.plazo" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
-                                            [ngModelOptions]="{standalone: true}">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-
-
-
-
-                    <mat-card *ngIf="item.status && item.id == 3" style="width: 100%;">
-                        <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-content>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input id="icc" name="icc" required min="4" matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc" (keyup)="changeICC(item.id)"
-                                            type="number" #icc="ngModel">
-                                        <div *ngIf="icc.invalid && (icc.dirty || icc.touched)" class="alert alert-danger">
-                                            <mat-error *ngIf="icc.errors.required">
-                                                icc is required.
-                                            </mat-error>
-                                            <mat-error *ngIf="icc.errors.min">
-                                                icc must be at least 4.
-                                            </mat-error>
-                                        </div>
-                                    </mat-form-field>
-                                </div>
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Máximo" type="number" value="9" disabled>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-
-
-
-                    <!--Alertas Hawk-->
-
-
-                    <mat-card *ngIf="item.status && item.id == 4" style="width: 100%;">
-                        <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-content>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--12-col">
-                                    <section class="example-section">
-                                        <mat-checkbox class="example-margin" [(ngModel)]="item.is_ok" (change)="saveChange(item.id,item.is_ok)" [ngModelOptions]="{standalone: true}">
-                                            {{ item.is_ok ? 'SI' : 'NO'}}
-                                        </mat-checkbox>
-                                    </section>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-
-
-
-
-                    <!--MOP mayor-->
-
-
-                    <mat-card *ngIf="item.status && item.id == 5" style="width: 100%;">
-                        <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-content>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                                            [(ngModel)]="ranges.MOP_mayor_min">
-                                    </mat-form-field>
-                                </div>
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Máximo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                                            [(ngModel)]="ranges.MOP_mayor_max">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-
-
-
-                    <!--Saldo Vencido-->
-
-
-                    <mat-card *ngIf="item.status && item.id == 6" style="width: 100%;">
-                        <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-content>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Mínimo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
-                                            [(ngModel)]="ranges.Saldo_Vencido">
-                                    </mat-form-field>
-                                </div>
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Máximo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
-                                            [(ngModel)]="ranges.Saldo_Vencido_max">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-
-
-                </div>
-
-                <!-- Tipo de ICC -->
-                <mat-card *ngIf="this.ranges.icc" style="width: 95%;">
-                    <mat-card-title>Tipo de ICC</mat-card-title>
-                    <mat-card-content>
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--6-col">
-                                <div class="mdl-grid" *ngFor="let item of responseIccBuro">
-                                    <div class="mdl-cell mdl-cell--6-col">{{item.icc}}</div>
-                                    <div class="mdl-cell mdl-cell--6-col">
-                                        <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="GASTO" value="{{item.free}}" disabled>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="mdl-cell mdl-cell--6-col">
-                                <div class="mdl-grid" *ngFor="let item of responseIccBank">
-                                    <div class="mdl-cell mdl-cell--6-col">{{item.icc}}</div>
-                                    <div class="mdl-cell mdl-cell--6-col">
-                                        <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="GASTO" value="{{item.free}}" [(ngModel)]="item.free" (keyup.enter)="change_a_ICC(item)" (blur)="change_a_ICC(item)"
-                                                type="number" [ngModelOptions]="{standalone: true}">
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-
+            <div style="text-align: center" *ngIf="item.id == 1">
+                <p>{{item.name}}%</p>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="Tasa" required type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                        [(ngModel)]="ranges.tasa">
+                </mat-form-field>
             </div>
 
+            <!--BC Score-->
+            <div style="text-align: center" *ngIf="item.status && item.id == 2">
+                <p> {{item.name}}</p>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                        [(ngModel)]="ranges.BC_Score">
+                </mat-form-field>
+            </div>
+
+            <div style="text-align: center;" *ngIf="item.status && item.id == 2" class="centrado">
+                <p>Configuración de scores</p>
+                <div class="mdl-grid" *ngFor="let item of scoreList">
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="DESDE" value="{{item.desde}}" [(ngModel)]="item.desde" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                [ngModelOptions]="{standalone: true}">
+                            <mat-hint>DESDE</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="HASTA" value="{{item.range}}" [(ngModel)]="item.range" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                [ngModelOptions]="{standalone: true}">
+                            <mat-hint>HASTA</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="PLAZO" value="{{item.plazo}}" [(ngModel)]="item.plazo" (blur)="changeStore(item)" (keyup.enter)="changeStore(item)"
+                                [ngModelOptions]="{standalone: true}">
+                            <mat-hint>PLAZO</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- <div class="mdl-grid" style="display: block;">
+                    <button mat-raised-button class="azul" routerLink="/definicion-variables/activacion-variables-indicadores">
+                        Indicadores de buró
+                    </button>
+                </div> -->
+            </div>
+            <div class="mdl-grid myContainer" *ngIf="item.status && item.id == 2">
+                <div class="mdl-cell mdl-cell--12-col" style="background-color: aqua">
+                    <button mat-raised-button routerLink="/definicion-variables/activacion-variables-indicadores" style="width: 100%;">
+                        Agregar Configuración
+                    </button>
+                </div>
+                
+            </div>
+
+
+            <!-- ICC -->
+            <div style="text-align: center" *ngIf="item.status && item.id == 3" class="centrado">
+                <p>{{item.name}}</p>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field appearance="outline">
+                            <input id="icc" name="icc" required min="4" matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc" (keyup)="changeICC(item.id)"
+                                type="number" #icc="ngModel">
+                            <div *ngIf="icc.invalid && (icc.dirty || icc.touched)" class="alert alert-danger">
+                                <mat-error *ngIf="icc.errors.required">
+                                    icc is required.
+                                </mat-error>
+                                <mat-error *ngIf="icc.errors.min">
+                                    icc must be at least 4.
+                                </mat-error>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Máximo" type="number" value="9" disabled>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <!--Alertas Hawk-->
+            <div style="text-align: center" *ngIf="item.status && item.id == 4">
+                <p>{{item.name}}</p>
+                NO
+                <mat-slide-toggle [(ngModel)]="item.is_ok" checked="{{item.is_ok}}" (change)="saveChange(item.id,item.is_ok)"></mat-slide-toggle>
+                SI
+            </div>
+
+            <!--MOP mayor-->
+            <div style="text-align: center" *ngIf="item.status && item.id == 5" class="centrado">
+                <p>{{item.name}}</p>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                                [(ngModel)]="ranges.MOP_mayor_min">
+                        </mat-form-field>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Máximo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                                [(ngModel)]="ranges.MOP_mayor_max">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Saldo Vencido-->
+
+            <div style="text-align: center" *ngIf="item.status && item.id == 6" class="centrado">
+                <p>{{item.name}}</p>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Mínimo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
+                                [(ngModel)]="ranges.Saldo_Vencido">
+                        </mat-form-field>
+                    </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Máximo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
+                                [(ngModel)]="ranges.Saldo_Vencido_max">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
-    <button mat-raised-button class="verde" routerLink="/definicion-variables/activacion-variables-indicadores" style="left: 5%; position: absolute; bottom: 5px;">
-        Indicadores de buró
-    </button>
 
-    <button mat-raised-button class="verde" style="right: 5%; position: absolute; bottom: 5px;" routerLink="/definicion-variables/scoring">
-        Calculadora
-    </button>
+
+    <!-- Tipo de ICC -->
+    <div class="mdl-grid" *ngIf="this.ranges.icc" style="width: 70%;">
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--6-col" style="text-align: center;">INDICADOR</div>
+                <div class="mdl-cell mdl-cell--6-col" style="text-align: center;">GASTO</div>
+            </div>
+            <div class="mdl-grid" *ngFor="let item of responseIccBuro" style="height: 72px;">
+                <div class="mdl-cell mdl-cell--6-col" style="margin-top: 25px !important;">
+                    <p style="text-align: center;">{{item.icc}}</p>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col" style="margin-top: 25px !important;">
+                    <p style="text-align: center;">{{item.free}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--6-col" style="text-align: center;">INDICADOR</div>
+                <div class="mdl-cell mdl-cell--6-col" style="text-align: center;">GASTO</div>
+            </div>
+            <div class="mdl-grid" *ngFor="let item of responseIccBank" style="height: 72px;">
+                <div class="mdl-cell mdl-cell--6-col">
+
+                    <p style="text-align: center;">{{item.icc}}</p>
+
+
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                        <input matInput placeholder="GASTO" value="{{item.free}}" [(ngModel)]="item.free" (keyup.enter)="change_a_ICC(item)" (blur)="change_a_ICC(item)"
+                            type="number" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-grid myContainer">
+        <div class="mdl-cell mdl-cell--6-col" style="background-color: aqua">
+            <button mat-raised-button class="azul" routerLink="/definicion-variables/activacion-variables-indicadores" style="width: 100%;">
+                Ir a indicadores de buró
+            </button>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col" style="background-color: aqua">
+            <button mat-raised-button class="azul" routerLink="/definicion-variables/scoring" style="width: 100%;">
+                Ir a calculadora
+            </button>
+        </div>
+    </div>
 </div>

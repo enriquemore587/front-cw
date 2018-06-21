@@ -47,7 +47,7 @@ export class ScoringComponent implements OnInit {
 
   //end
 
-  public title = 'Scoring de aritmética';
+  public title = 'Aritmética';
   public action: string = 'ARITMÉTICA';
   public nombreVariable: string = '';
 
@@ -74,6 +74,7 @@ export class ScoringComponent implements OnInit {
     this.exp = [];
     this.id_variable = 0;
     this.if_station = 0;
+    this.editando = false;
   }
 
   // start Metodo Messages
@@ -247,7 +248,7 @@ export class ScoringComponent implements OnInit {
   }
 
   public blockOperators(): boolean {
-    return this.numero != '' || this.action == 'MÍNIMO' || this.action == 'PROMEDIO' || this.action == 'MÁXIMO';
+    return this.action == 'MÍNIMO' || this.action == 'PROMEDIO' || this.action == 'MÁXIMO';
   }
 
   public addOperator(operator: any) {
@@ -257,19 +258,25 @@ export class ScoringComponent implements OnInit {
       this.exp.push({ value: '(', id: -1000, name: '(' });
   }
 
-  public numero: string = '';
+
   public addDigint(num: string) {
-    this.numero += num;
+    if (this.exp.length == 0) {
+      this.exp.push({ value: num, id: 0, name: num });
+      return;
+    }
+    let last_number = this.exp[this.exp.length - 1].value;
+    if (isNaN(Number(last_number))) {
+      this.exp.push({ value: num, id: 0, name: num });
+      return;
+    }
+    this.exp.splice(this.exp.length - 1, 1);
+    this.exp.push({ value: last_number + num, id: 0, name: last_number + num });
   }
 
-  public addNumber() {
-    this.exp.push({ value: this.numero, id: 0, name: this.numero });
-    this.numero = '';
-  }
+
 
   public clean() {
     this.exp = [];
-    this.numero = '';
     if (this.action == 'IF') {
       this.if_station = 1;
       this.exp.push({ value: 'IF', id: -1000, name: 'IF' });
@@ -281,9 +288,10 @@ export class ScoringComponent implements OnInit {
     this.exp.push(value);
   }
 
+  public variable_editing: any;
   public editVariable = variableToEdit => {
     this.editando = this.editando ? this.editando : !this.editando;
-
+    this.variable_editing = variableToEdit;
     this.id_variable = variableToEdit.id;
     this.nombreVariable = variableToEdit.name;
     let maximo = new RegExp(/MÁXIMO!/i),
@@ -359,17 +367,19 @@ export class ScoringComponent implements OnInit {
     this.exp = endList;
   }
 
-  public deleteVariable = itemToDelete => {
+  public deleteVariable = () => {
+
     for (let index = 0; index < this.listVariables2.length; index++) {
       const variable = this.listVariables2[index];
-      if (variable.expresion.includes('c' + itemToDelete.id)) {
+      if (variable.expresion.includes('c' + this.variable_editing.id)) {
         this.showMessage('Fórmula necesaria para otro cálculo', 'ENTENDIDO');
         return;
       }
     }
-    this._DefinicionVariablesService.delete_a_custom_variable(itemToDelete.id).subscribe(
+    this._DefinicionVariablesService.delete_a_custom_variable(this.variable_editing.id).subscribe(
       resp => {
         this.loadVariables2();
+        this.crearNueva()
         if (resp.status == 5000) this.showMessage('Fórmula necesaria en el árbol !', 'ENTENDIDO');
       },
       error => {

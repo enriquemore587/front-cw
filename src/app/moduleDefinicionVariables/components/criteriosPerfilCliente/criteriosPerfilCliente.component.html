@@ -1,50 +1,46 @@
-<div style="position: relative;">
-    <div class="myContainer">
-        <div class="card border-secondary mb-3" style="position: relative;">
-            <div class="card-header">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
-                        <h1>{{title}}</h1>
-                    </div>
-                </div>
+<div class="myContainer centrado" style="position: relative;">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+
+    <div class="mdl-grid" *ngFor="let item of indicadoresPerfil">
+        <!--edad-->
+        <div class="mdl-grid" *ngIf="item.status && item.id == 7">
+            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+                {{item.name}}
             </div>
-            <div class="card-body text-secondary">
-                <div class="mdl-grid" *ngFor="let item of indicadoresPerfil">
-                    <!--edad-->
-                    <div class="mdl-grid" *ngIf="item.status && item.id == 7">
-                        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
-                            {{item.name}}
-                        </div>
-                        <div class="mdl-cell mdl-cell--6-col">
-                            <mat-form-field appearance="outline" style="display: block !important;">
-                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.edadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
-                            </mat-form-field>
-                        </div>
-                        <div class="mdl-cell mdl-cell--6-col">
-                            <mat-form-field appearance="outline" style="display: block !important;">
-                                <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.edadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
-                            </mat-form-field>
-                        </div>
-                    </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                <mat-form-field appearance="outline" style="display: block !important;">
+                    <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.edadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                </mat-form-field>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                <mat-form-field appearance="outline" style="display: block !important;">
+                    <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.edadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                </mat-form-field>
+            </div>
+        </div>
 
 
-                    <!--ingresos declarados-->
-                    <div class="mdl-grid" *ngIf="item.status && item.id == 10">
-                        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
-                            {{item.name}}
-                        </div>
-                        <div class="mdl-cell mdl-cell--6-col">
-                            <mat-form-field appearance="outline" style="display: block !important;">
-                                <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.ingresoMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
-                            </mat-form-field>
-                        </div>
-                        <div class="mdl-cell mdl-cell--6-col">
-                            <mat-form-field appearance="outline" style="display: block !important;">
-                                <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.ingresoMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <!-- <mat-card *ngIf="item.status && item.id == 10" style="width: 100%;">
+        <!--ingresos declarados-->
+        <div class="mdl-grid" *ngIf="item.status && item.id == 10">
+            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+                {{item.name}}
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                <mat-form-field appearance="outline" style="display: block !important;">
+                    <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.ingresoMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                </mat-form-field>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+                <mat-form-field appearance="outline" style="display: block !important;">
+                    <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.ingresoMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- <mat-card *ngIf="item.status && item.id == 10" style="width: 100%;">
                         <mat-card-title>{{ item.name }}</mat-card-title>
                         <mat-card-content>
                             <div class="mdl-grid">
@@ -64,41 +60,41 @@
 
 
 
-                    <!--CAPACIDAD DE PAGO-->
+        <!--CAPACIDAD DE PAGO-->
 
-                    <mat-card *ngIf="item.status && item.id == 11" style="width: 100%;">
-                        <mat-card-title>{{ item.name }}</mat-card-title>
-                        <mat-card-content>
-                            <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.capacidadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
-                                    </mat-form-field>
-                                </div>
-                                <div class="mdl-cell mdl-cell--6-col">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.capacidadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-
-                    <!-- Tope mensualidad -->
-                    <div class="mdl-grid" *ngIf="item.status && item.id == 14">
-                        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
-                            {{item.name}}
-                        </div>
-                        <div class="mdl-cell mdl-cell--12-col">
-                            <mat-form-field appearance="outline" style="display: block !important;">
-                                <input matInput placeholder="Porcentaje" type="number" [(ngModel)]="ranges.Porcentaje_pago" (blur)="saveChange(item.id,false)"
-                                    (keyup.enter)="saveChange(item.id,false)">
-                                <mat-icon matSuffix>%</mat-icon>
-                            </mat-form-field>
-                        </div>
+        <mat-card *ngIf="item.status && item.id == 11" style="width: 100%;">
+            <mat-card-title>{{ item.name }}</mat-card-title>
+            <mat-card-content>
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field>
+                            <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.capacidadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                        </mat-form-field>
                     </div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <mat-form-field>
+                            <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.capacidadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
 
-                    <!-- <mat-card *ngIf="item.status && item.id == 14" style="width: 100%;">
+        <!-- Tope mensualidad -->
+        <div class="mdl-grid" *ngIf="item.status && item.id == 14">
+            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+                {{item.name}}
+            </div>
+            <div class="mdl-cell mdl-cell--12-col">
+                <mat-form-field appearance="outline" style="display: block !important;">
+                    <input matInput placeholder="Porcentaje" type="number" [(ngModel)]="ranges.Porcentaje_pago" (blur)="saveChange(item.id,false)"
+                        (keyup.enter)="saveChange(item.id,false)">
+                    <mat-icon matSuffix>%</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- <mat-card *ngIf="item.status && item.id == 14" style="width: 100%;">
                         <mat-card-title>{{ item.name }}</mat-card-title>
                         <mat-card-content>
                             <div class="mdl-grid">
@@ -114,26 +110,26 @@
                     </mat-card> -->
 
 
-                    <!--nacionalidad-->
-                    <div *ngIf="item.status && item.id == 9" class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
-                            {{item.name}}
-                        </div>
-                        <div class="mdl-cell mdl-cell--12-col">
+        <!--nacionalidad-->
+        <div *ngIf="item.status && item.id == 9" class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+                {{item.name}}
+            </div>
+            <div class="mdl-cell mdl-cell--12-col">
 
-                            <ul class="demo-list-two mdl-list">
-                                <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of nacionalidades">
-                                    <span class="mdl-list__item-primary-content">
-                                        <span>{{item.name}}</span>
-                                    </span>
-                                    <span class="mdl-list__item-secondary-content">
-                                        <mat-slide-toggle checked="{{item.status}}" (click)="setNacionalidad(item)"></mat-slide-toggle>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- <div *ngIf="item.status && item.id == 8" class="mdl-grid">
+                <ul class="demo-list-two mdl-list">
+                    <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of nacionalidades">
+                        <span>
+                            <mat-slide-toggle checked="{{item.status}}" (click)="setNacionalidad(item)"></mat-slide-toggle>
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
+                            <span>{{item.name}}</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- <div *ngIf="item.status && item.id == 8" class="mdl-grid">
                         <ul class="demo-list-two mdl-list">
                             <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of nacionalidades">
                                 <span class="mdl-list__item-primary-content">
@@ -161,37 +157,38 @@
                     </mat-card> -->
 
 
-                    <!--ocupation-->
-                    <div *ngIf="item.status && item.id == 8" class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
-                            {{item.name}}
-                        </div>
-                        <div class="mdl-cell mdl-cell--12-col">
-
-                            <ul class="demo-list-two mdl-list">
-                                <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of profesiones">
-                                    <span class="mdl-list__item-primary-content">
-                                        <span>{{item.name}}</span>
-                                    </span>
-                                    <span class="mdl-list__item-secondary-content">
-                                        <mat-slide-toggle checked="{{item.status}}" (click)="setCheck(item)"></mat-slide-toggle>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
+        <!--ocupation-->
+        <div *ngIf="item.status && item.id == 8" class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+                {{item.name}}
             </div>
+            <div class="mdl-cell mdl-cell--12-col">
 
+                <ul class="demo-list-two mdl-list">
+                    <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of profesiones">
+                        <span>
+                            <mat-slide-toggle checked="{{item.status}}" (click)="setCheck(item)"></mat-slide-toggle>
+                        </span>
+                        <span class="mdl-list__item-secondary-content" >
+                            <span>{{item.name}}</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
+    </div>
+    <div class="mdl-grid myContainer">
+        <div class="mdl-cell mdl-cell--6-col" style="background-color: aqua">
+            <button mat-raised-button class="azul" routerLink="/definicion-variables/activacion-variables-cliente" style="width: 100%;">
+                Indicadores de perfil
+            </button>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col" style="background-color: aqua">
+            <button mat-raised-button class="azul" routerLink="/definicion-variables/activacion-variables-indicadores" style="width: 100%;">
+                Indicadores de buró
+            </button>
         </div>
     </div>
-    <button mat-raised-button class="verde" routerLink="/definicion-variables/activacion-variables-cliente" style="left: 5%; position: absolute; bottom: 5px;">
-        Indicadores de perfil
-    </button>
 
-    <button mat-raised-button class="verde" routerLink="/definicion-variables/activacion-variables-indicadores" style="right: 5%; position: absolute; bottom: 5px;">
-        Indicadores de buró
-    </button>
 </div>

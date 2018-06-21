@@ -5,13 +5,13 @@
         </div>
     </div>
     <div class="mdl-grid">
-        <ul class="demo-list-two mdl-list">
+        <ul class="demo-list-two mdl-list" style="margin-left: 25%;">
             <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of perfilList">
-                <span class="mdl-list__item-primary-content">
-                    <span>{{item.name}}</span>
+                <span>
+                    <mat-slide-toggle checked="{{item.status}}" (click)="setCheck(item)"></mat-slide-toggle>
                 </span>
                 <span class="mdl-list__item-secondary-content">
-                    <mat-slide-toggle checked="{{item.status}}" (click)="setCheck(item)"></mat-slide-toggle>
+                    <span>{{item.name}}</span>
                 </span>
             </li>
         </ul>

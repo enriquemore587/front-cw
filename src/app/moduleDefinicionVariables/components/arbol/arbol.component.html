@@ -1,71 +1,92 @@
 <div class="myContainer" style="position: relative;">
-    
-        <div class="card bg-light mb-3" style="height: 90vh !important;">
-            <div class="row" style="margin-left: 5px; margin-top: 5px !important; height: 50px !important;">
-                <div class="col">
+    <div class="mdl-grid" style="height: 80vh !important;">
+        <div class="mdl-cell mdl-cell--8-col" style="height: 75vh !important; overflow: auto;">
+            <!-- List with avatar and controls -->
+            <ul class="demo-list-control mdl-list">
+                <li class="mdl-list__item" style="background-color: rgb(93, 173, 226, .5);" *ngFor="let item of orderList; let i = index">
+                    <span class="mdl-list__item-primary-content">
+                        <strong>{{i+1}}.- </strong>
+                        <mat-form-field *ngIf="getbuttonsPermitions(item.sort)">
+                            <mat-select [(value)]=item.salida (selectionChange)="doSomething($event, i)">
+                                <mat-option [value]=1 [disabled]="salidas.mensualidad.checked">MENSUALIDAD</mat-option>
+                                <mat-option [value]=2 [disabled]="salidas.plazo.checked">PLAZO</mat-option>
+                                <mat-option [value]=3 [disabled]="salidas.linea_credito.checked">LÍNEA FINAL</mat-option>
+                                <mat-option [value]=4 [disabled]="salidas.tasa.checked">TASA</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        {{item.name}}
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                        <button mat-fab style="background-color: rgb(93, 173, 226, .5);" *ngIf="getbuttonsPermitions(item.sort)" (click)="removeVariable(item)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col">
+            <div class="mdl-grid" style="height: 5vh !important; overflow: auto;">
+                <div class="mdl-cell mdl-cell--6-col">
+                    <button mat-raised-button style="background-color: #DCDCDC; color: #000000;" (click)="clearTree()">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <button mat-raised-button style="background-color: #90A7BB; color: #ffffff;" (click)="saveChange()">
+                        <i class="fas fa-save"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mdl-grid" style="height: 20vh !important;">
+                <div class="mdl-cell mdl-cell--12-col">
+
                     <mat-checkbox [(ngModel)]="salidas.mensualidad.checked" (change)="cambio(1)">MENSUALIDAD</mat-checkbox>
                 </div>
-                <div class="col">
+
+                <div class="mdl-cell mdl-cell--12-col">
+
                     <mat-checkbox [(ngModel)]="salidas.plazo.checked" (change)="cambio(2)">PLAZO</mat-checkbox>
                 </div>
-                <div class="col">
+
+                <div class="mdl-cell mdl-cell--12-col">
+
                     <mat-checkbox [(ngModel)]="salidas.linea_credito.checked" (change)="cambio(3)">LÍNEA FINAL</mat-checkbox>
                 </div>
-                <div class="col">
+
+                <div class="mdl-cell mdl-cell--12-col">
+
                     <mat-checkbox [(ngModel)]="salidas.tasa.checked" (change)="cambio(4)">TASA</mat-checkbox>
                 </div>
+
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="card bg-light mb-3" style="height: 80vh !important;">
-                            <div class="card-header" style="position: relative;">{{title}}
-                                <button style="position: absolute; right: 150px; top: 3px;" mat-raised-button class="verde" (click)="clearTree()">
-                                    <i class="fas fa-eraser"></i>
-                                </button>
-                                <button style="position: absolute; right: 3px; top: 3px;" mat-raised-button class="verde" (click)="saveChange()">
-                                    <i class="fas fa-save"></i>
-                                </button>
-                            </div>
-                            <div class="card-body" style=" overflow: auto;">
-                                <div class="alert alert-primary alert-dismissible fade show" role="alert" *ngFor="let item of orderList; let i = index">
-                                    <strong>{{i+1}}.- </strong>
-                                    <mat-form-field *ngIf="getbuttonsPermitions(item.sort)">
-                                        <mat-select [(value)]=item.salida (selectionChange)="doSomething($event, i)">
-                                            <mat-option [value]=1 [disabled]="salidas.mensualidad.checked">MENSUALIDAD</mat-option>
-                                            <mat-option [value]=2 [disabled]="salidas.plazo.checked">PLAZO</mat-option>
-                                            <mat-option [value]=3 [disabled]="salidas.linea_credito.checked">LÍNEA FINAL</mat-option>
-                                            <mat-option [value]=4 [disabled]="salidas.tasa.checked">TASA</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    {{item.name}}
-                                    <button *ngIf="getbuttonsPermitions(item.sort)" type="button" class="close" aria-label="Close" (click)="removeVariable(item)">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="card bg-light mb-3" style="height: 77vh !important;">
-                            <div class="card-header">VARIABLES CREADAS</div>
-                            <div class="card-body" style=" overflow: auto;">
-                                <mat-chip-list class="mat-chip-list-stacked">
-                                    <mat-chip class="card-text verde" *ngFor="let item of listVariables2" selected="true" color="accent" (click)="addVariable(item)">
-                                        {{item.name}}
-                                    </mat-chip>
-                                </mat-chip-list>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="mdl-grid" style="height: 40vh !important; overflow: auto;">
+                <mat-chip-list class="mat-chip-list-stacked" style="width: 100%;">
+                    <mat-chip class="card-text" *ngFor="let item of listVariables2" selected="true" color="default" (click)="addVariable(item)">
+                        {{item.name}}
+                    </mat-chip>
+                </mat-chip-list>
             </div>
+
         </div>
-        
-    <button mat-raised-button class="verde" routerLink="/definicion-variables/scoring" style="left: 5%; position: absolute; bottom: 5px;">
+    </div>
+
+    <div class="mdl-grid" style="margin-top: -50px;">
+        <div class="mdl-cell mdl-cell--6-col" style="background-color: aqua">
+            <button mat-raised-button class="azul" routerLink="/definicion-variables/scoring" style="width: 100%;">
+                Ir a aritmética de scoring
+            </button>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col" style="background-color: aqua">
+            <button mat-raised-button class="azul" routerLink="/pruebas/validacion-formulas" style="width: 100%;">
+                Ir a validación de fórmulas
+            </button>
+        </div>
+    </div>
+
+    <!-- <button mat-raised-button class="verde" routerLink="/definicion-variables/scoring" style="left: 5%; position: absolute; bottom: 5px;">
         <i class="fas fa-arrow-alt-circle-left"></i>
     </button>
     <button mat-raised-button class="verde" style="right: 5%; position: absolute; bottom: 5px;" routerLink="/pruebas/validacion-formulas">
         <i class="fas fa-arrow-alt-circle-right"></i>
-    </button>
+    </button> -->
 </div>

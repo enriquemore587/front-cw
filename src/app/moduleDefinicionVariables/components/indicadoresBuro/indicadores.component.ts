@@ -12,23 +12,23 @@ import { ItemCheck } from '../../models/requestCheck';
   selector: 'indicadores-buro',
   templateUrl: './indicadores.component.html',
   styleUrls: ['./indicadores.component.css'],
-  providers: [ DefinicionVariablesService ]
+  providers: [DefinicionVariablesService]
 })
-export class IndicadoresComponent implements OnInit, DoCheck{
+export class IndicadoresComponent implements OnInit, DoCheck {
   public title = 'Indicadores de buró';
-  public indicadoresList : VariableIndicador[];
-  public responseVI : ResponseVI;
-  public itemCheck : ItemCheck = new ItemCheck(0, false);
+  public indicadoresList: VariableIndicador[];
+  public responseVI: ResponseVI;
+  public itemCheck: ItemCheck = new ItemCheck(0, false);
   constructor(
     private _router: Router,
     private _DefinicionVariablesService: DefinicionVariablesService
-  ){
+  ) {
 
   }
 
-  setCheck(obj: any){
+  setCheck(obj: any) {
     obj.status = !obj.status;
-    
+
     this.itemCheck = new ItemCheck(obj.id, obj.status)
     this._DefinicionVariablesService.setChect(this.itemCheck).subscribe(
       resp => {
@@ -43,26 +43,29 @@ export class IndicadoresComponent implements OnInit, DoCheck{
         console.log("error", err);
       }
     );
-    
+
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getVariables();
   }
 
-  ngDoCheck(){
-        
+  ngDoCheck() {
+
   }
 
-  onSubmmit(){
+  onSubmmit() {
     this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
   }
 
-  getVariables(){
+  getVariables() {
     this._DefinicionVariablesService.getVariables().subscribe(
       resp => {
         this.responseVI = resp;
         if (this.responseVI.status == 0 && this.responseVI.message == 'successful') this.indicadoresList = this.responseVI.data;
+        this.indicadoresList.forEach((element, index) => {
+          if (element.id == 1) this.indicadoresList.splice(index, 1);
+        });
       }
     );
   }

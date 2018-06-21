@@ -6,8 +6,7 @@ import { UserLoginService } from '../../services/user-login.service';
 
 import { Router, ActivatedRoute, Params} from '@angular/router';
 
-import { FormControl, Validators } from '@angular/forms';
-import { ErrorForms } from '../../../material/ErrorsStateMatcher';
+
 import { log } from 'util';
 // begin message
 import { MatSnackBar } from '@angular/material';
@@ -24,19 +23,6 @@ export class LoginComponent implements OnInit {
   public title : string = 'INICIO SESIÓN';
   public user : User;
   
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  pwdFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(4),
-  ]);
-
-  matcher = new ErrorForms();
-
   hide = false;
   constructor(
     private _router: Router,
@@ -53,7 +39,8 @@ export class LoginComponent implements OnInit {
   }
   // end Metodo Messages
   ngOnInit() {
-    
+    let auth = localStorage.getItem('auth');
+   if (auth) this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
   }
 
   onSubmit(registerForm){

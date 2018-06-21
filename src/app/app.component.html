@@ -3,25 +3,51 @@
         <!-- Top row, always visible -->
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">CREDIWHERE</span>
+            <span class="mdl-layout-title blanco">CREDIWHERE</span>
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href routerLink="/definicion-variables/activacion-variables-cliente" class="mdl-layout__tab" routerLinkActive="is-active">Definición de variables</a>
-            <a href routerLink="/pruebas" class="mdl-layout__tab" routerLinkActive="is-active">Test</a>
-            <a href routerLink="/tracking" class="mdl-layout__tab" routerLinkActive="is-active">Tracking</a>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <button class="blanco" mat-button [matMenuTriggerFor]="activVariables">Activación de variables <i class="fas fa-angle-down"></i></button>
+                <button class="blanco" mat-button [matMenuTriggerFor]="criterios">Criterios mínimos <i class="fas fa-angle-down"></i></button>
+                <button class="blanco" mat-button [matMenuTriggerFor]="formulas">Fórmulas <i class="fas fa-angle-down"></i></button>
+                <button class="blanco" mat-button [matMenuTriggerFor]="validacion">Validación y pruebas <i class="fas fa-angle-down"></i></button>
+            </nav>
+
+            <mat-menu #sub="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="activVariables">Activar variables</button>
+                <button mat-menu-item [matMenuTriggerFor]="criterios">Criterios minimos</button>
+                <button mat-menu-item [matMenuTriggerFor]="formulas">Fórmulas</button>
+                <!--button mat-menu-item [matMenuTriggerFor]="pruebas">Pruebas</button-->
+                <button mat-menu-item [matMenuTriggerFor]="validacion">Validación</button>
+            </mat-menu>
+
+            <mat-menu #activVariables="matMenu">
+                <button mat-menu-item routerLink="/definicion-variables/activacion-variables-cliente">Perfil de cliente</button>
+                <button mat-menu-item routerLink="/definicion-variables/activacion-variables-indicadores">Indicadores de buró</button>
+            </mat-menu>
+
+            <mat-menu #criterios="matMenu">
+                <button mat-menu-item routerLink="/definicion-variables/criterios-cliente">Perfil de cliente</button>
+                <button mat-menu-item routerLink="/definicion-variables/criterios-indicadores">Indicadores de buró</button>
+            </mat-menu>
+
+            <mat-menu #formulas="matMenu">
+                <button mat-menu-item routerLink="/definicion-variables/scoring">Scoring</button>
+                <button mat-menu-item routerLink="/definicion-variables/arbol">Árbol</button>
+            </mat-menu>
+            <mat-menu #pruebas="matMenu">
+                <button mat-menu-item routerLink="/pruebas/definicion-casos">Definición de Casos</button>
+                <button mat-menu-item>Cargar bases de datos</button>
+            </mat-menu>
+            <mat-menu #validacion="matMenu">
+                <button mat-menu-item routerLink="/pruebas">Válida fórmulas</button>
+            </mat-menu>
             <div class="mdl-layout-spacer"></div>
-            <a class="mdl-navigation__link" (click)="logOut()" style="color: white; right: 50px;" routerLink="/login-panel" href>
+            <a class="mdl-navigation__link blanco" (click)="logOut()" style="right: 50px;" routerLink="/login-panel" href>
                 <i class="fas fa-sign-out-alt"></i> Salir</a>
         </div>
     </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">{{email}}</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" routerLink="/definicion-variables/activacion-variables-cliente" href>Definición de variables</a>
-            <a class="mdl-navigation__link" routerLink="/pruebas" href>Test</a>
-            <a class="mdl-navigation__link" routerLink="/tracking" href>Tracking</a>
-        </nav>
-    </div>
+
     <main class="mdl-layout__content">
         <div class="page-content">
             <!-- Your content goes here -->

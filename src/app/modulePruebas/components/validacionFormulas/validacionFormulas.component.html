@@ -1,131 +1,133 @@
-<div class="container">
-    <div class="card bg-light mb-3" style="height: 80vh !important;">
-        <div class="card-header" style="position: relative;">
-            {{title}}
-            <button mat-raised-button class="verde" style="position: absolute !important; right: 5px !important; top: 2px;  " (click)="runTEST()">RunTest</button>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card bg-light mb-3" style="height: 70vh !important;">
-                        <!--div class="card-header" style="position: relative;">TEST PARA CLIENTE</div-->
-                        <div class="card-body" style="overflow: auto;">
-                            <table class="table table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Variables</th>
-                                        <th scope="col" style="text-align: center;">Valores</th>
-                                        <th scope="col" style="text-align: center;">Resultado</th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngIf="list_validated.length > 0">
-                                    <tr *ngFor="let item of list_validated; let i = index">
-                                        <th scope="row">
-                                            {{item.name}}
-                                        </th>
-                                        <th scope="row" style="text-align: center;">
-                                            <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value
-                                                == 3 ? 'Empleado' : item.value == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente'
-                                                : item.value == 7 ? 'Pensionado' : ''}}</label>
-                                            <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
-                                            <!-- tasa -->
-                                            <label *ngIf="item.var_fix_id==1">{{item.value | percent}}</label>
-                                            <!-- TOPE MENSUALIDAD -->
-                                            <label *ngIf="item.var_fix_id==14">{{item.value | percent}}</label>
-                                            <!-- Alertas hawk -->
-                                            <label *ngIf="item.var_fix_id==4">{{item.value}}</label>
-                                            <!-- MOP mayor -->
-                                            <label *ngIf="item.var_fix_id==5">{{item.value}}</label>
-                                            <!-- Edad -->
-                                            <label *ngIf="item.var_fix_id==7">{{item.value}}</label>
-                                            <!-- Gasto ICC -->
-                                            <label *ngIf="item.var_fix_id==3">{{item.value | percent}}</label>
-                                            <!-- BC score -->
-                                            <label *ngIf="item.var_fix_id==2">{{item.value}}</label>
-                                            <!-- PAGOS BURÓ -->
-                                            <label *ngIf="item.var_fix_id == -3">{{item.value | currency}}</label>
-                                            <!-- PLAZO SOLICITADO-->
-                                            <label *ngIf="item.var_fix_id == -7">{{item.value}}</label>
-                                            <!-- PLAZO DISPONIBLE -->
-                                            <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
-                                            <!-- MONTO SOLICITADO -->
-                                            <label *ngIf="item.var_fix_id == -9">{{item.value}}</label>
-                                            <!-- SALIDA tasa -->
-                                            <label *ngIf="item.salida == 4">{{item.value}}</label>
-                                            <!-- pesitos -->
-                                            <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
-                                            <!-- custom -->
-                                            <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
+<div class="mdl-grid " style="background-color: #FFFFFF;">
+    <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+        <h1>{{title}}</h1>
+    </div>
+</div>
+<div class="mdl-grid  myContainer ">
+    <div class="mdl-cell mdl-cell--12-col">
+        <button mat-raised-button style="width: 50%; margin-left: 25%; background-color: #C19A1C; color: #ffffff;" (click)="runTEST()">
+            Ejecutar prueba de validación
+        </button>
+    </div>
+</div>
 
-                                            <br>
-                                            <mat-hint *ngIf="item.salida == 1">MENSUALIDAD</mat-hint>
-                                            <mat-hint *ngIf="item.salida == 2">PLAZO</mat-hint>
-                                            <mat-hint *ngIf="item.salida == 3">LÍNEA FINAL</mat-hint>
-                                            <mat-hint *ngIf="item.salida == 4">TASA</mat-hint>
-                                        </th>
-                                        <th scope="row" style="text-align: center;">
-                                            <div class="alert alert-success center" role="alert">
-                                                <i class="fas fa-check-circle"></i>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                    <!-- var_fix_id -->
-                                </tbody>
-                                <tbody *ngIf="list_invalidated.length > 0">
-                                    <tr *ngFor="let item of list_invalidated; let i = index">
-                                        <th scope="row">
-                                            <label>{{item.name}}</label>
-                                        </th>
-                                        <th scope="row" style="text-align: center;">
-                                            <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value
-                                                == 3 ? 'Empleado' : item.value == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente'
-                                                : item.value == 7 ? 'Pensionado' : ''}}</label>
-                                            <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
-                                            <!-- tasa -->
-                                            <label *ngIf="item.var_fix_id==1">{{item.value | percent}}</label>
-                                            <!-- TOPE MENSUALIDAD -->
-                                            <label *ngIf="item.var_fix_id==14">{{item.value | percent}}</label>
-                                            <!-- Alertas hawk -->
-                                            <label *ngIf="item.var_fix_id==4">{{item.value}}</label>
-                                            <!-- MOP mayor -->
-                                            <label *ngIf="item.var_fix_id==5">{{item.value}}</label>
-                                            <!-- Edad -->
-                                            <label *ngIf="item.var_fix_id==7">{{item.value}}</label>
-                                            <!-- Gasto ICC -->
-                                            <label *ngIf="item.var_fix_id==3">{{item.value | percent}}</label>
-                                            <!-- BC score -->
-                                            <label *ngIf="item.var_fix_id==2">{{item.value}}</label>
-                                            <!-- PAGOS BURÓ -->
-                                            <label *ngIf="item.var_fix_id == -3">{{item.value | currency}}</label>
-                                            <!-- PLAZO SOLICITADO-->
-                                            <label *ngIf="item.var_fix_id == -7">{{item.value}}</label>
-                                            <!-- PLAZO DISPONIBLE -->
-                                            <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
-                                            <!-- SALIDA tasa -->
-                                            <label *ngIf="item.salida == 4">{{item.value}}</label>
-                                            <!-- pesitos -->
-                                            <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
-                                            <!-- custom -->
-                                            <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
-                                        </th>
-                                        <th *ngIf="i == get_lastIndex()" scope="row" style="text-align: center;">
-                                            <div class="alert alert-danger center" role="alert">
-                                                <i class="fas fa-times-circle"></i>
-                                            </div>
-                                        </th>
-                                        <th *ngIf="i != get_lastIndex()" scope="row" style="text-align: center;">
-                                            <div class="alert alert-info" role="alert">
-                                                <i class="fas fa-ellipsis-h"></i>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                </tbody>
-                            </table>
+<div *ngIf="wait" class="mdl-grid  myContainer ">
+    <div class="mdl-cell mdl-cell--12-col">
+        <mat-spinner style="margin-left: 45%;" class=""></mat-spinner>
+    </div>
+</div>
 
-                        </div>
-                    </div>
+<div *ngIf="!wait" class="mdl-grid" style="margin-left: 12%; width: 100%">
+    <div class="mdl-cell mdl-cell--3-col center">
+        Variables
+    </div>
+    <div class="mdl-cell mdl-cell--3-col center">
+        Valores
+    </div>
+    <div class="mdl-cell mdl-cell--3-col center">
+        Resultado
+    </div>
+</div>
+<!-- begin lista invalidada -->
+<div *ngIf="!wait">
+    <div *ngFor="let item of list_validated; let i = index">
+        <div class="mdl-grid" style="margin-left: 12%; width: 100%">
+            <div class="mdl-cell mdl-cell--3-col center">
+                {{item.name}}
+            </div>
+            <div class="mdl-cell mdl-cell--3-col center">
+                <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value
+                    == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
+                <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
+                <!-- tasa -->
+                <label *ngIf="item.var_fix_id==1">{{item.value | percent}}</label>
+                <!-- TOPE MENSUALIDAD -->
+                <label *ngIf="item.var_fix_id==14">{{item.value | percent}}</label>
+                <!-- Alertas hawk -->
+                <label *ngIf="item.var_fix_id==4">{{item.value}}</label>
+                <!-- MOP mayor -->
+                <label *ngIf="item.var_fix_id==5">{{item.value}}</label>
+                <!-- Edad -->
+                <label *ngIf="item.var_fix_id==7">{{item.value}}</label>
+                <!-- Gasto ICC -->
+                <label *ngIf="item.var_fix_id==3">{{item.value | percent}}</label>
+                <!-- BC score -->
+                <label *ngIf="item.var_fix_id==2">{{item.value}}</label>
+                <!-- PAGOS BURÓ -->
+                <label *ngIf="item.var_fix_id == -3">{{item.value | currency}}</label>
+                <!-- PLAZO SOLICITADO-->
+                <label *ngIf="item.var_fix_id == -7">{{item.value}}</label>
+                <!-- PLAZO DISPONIBLE -->
+                <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
+                <!-- MONTO SOLICITADO -->
+                <label *ngIf="item.var_fix_id == -9">{{item.value}}</label>
+                <!-- SALIDA tasa -->
+                <label *ngIf="item.salida == 4">{{item.value}}</label>
+                <!-- pesitos -->
+                <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
+                <!-- custom -->
+                <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
+
+                <br>
+                <mat-hint *ngIf="item.salida == 1">MENSUALIDAD</mat-hint>
+                <mat-hint *ngIf="item.salida == 2">PLAZO</mat-hint>
+                <mat-hint *ngIf="item.salida == 3">LÍNEA FINAL</mat-hint>
+                <mat-hint *ngIf="item.salida == 4">TASA</mat-hint>
+            </div>
+            <div class="mdl-cell mdl-cell--3-col center">
+                <div *ngIf="i != get_lastIndex()" scope="row" style="text-align: center; color: green; font-size: 48px;">
+                    <i class="fas fa-check-circle"></i>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- end lista invalidada -->
+<!-- begin lista valida -->
+<div *ngIf="!wait">
+    <div class="mdl-grid" style="margin-left: 12%; width: 100%" *ngFor="let item of list_invalidated; let i = index">
+        <div class="mdl-cell mdl-cell--3-col center">
+            <label>{{item.name}}</label>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col center">
+            <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value
+                == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
+            <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
+            <!-- tasa -->
+            <label *ngIf="item.var_fix_id==1">{{item.value | percent}}</label>
+            <!-- TOPE MENSUALIDAD -->
+            <label *ngIf="item.var_fix_id==14">{{item.value | percent}}</label>
+            <!-- Alertas hawk -->
+            <label *ngIf="item.var_fix_id==4">{{item.value}}</label>
+            <!-- MOP mayor -->
+            <label *ngIf="item.var_fix_id==5">{{item.value}}</label>
+            <!-- Edad -->
+            <label *ngIf="item.var_fix_id==7">{{item.value}}</label>
+            <!-- Gasto ICC -->
+            <label *ngIf="item.var_fix_id==3">{{item.value | percent}}</label>
+            <!-- BC score -->
+            <label *ngIf="item.var_fix_id==2">{{item.value}}</label>
+            <!-- PAGOS BURÓ -->
+            <label *ngIf="item.var_fix_id == -3">{{item.value | currency}}</label>
+            <!-- PLAZO SOLICITADO-->
+            <label *ngIf="item.var_fix_id == -7">{{item.value}}</label>
+            <!-- PLAZO DISPONIBLE -->
+            <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
+            <!-- SALIDA tasa -->
+            <label *ngIf="item.salida == 4">{{item.value}}</label>
+            <!-- pesitos -->
+            <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
+            <!-- custom -->
+            <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col center">
+            <div *ngIf="i == get_lastIndex()" scope="row" style="text-align: center; color: red; font-size: 48px;">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <div *ngIf="i != get_lastIndex()" scope="row" style="text-align: center; color: green; font-size: 48px;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end lista valida -->

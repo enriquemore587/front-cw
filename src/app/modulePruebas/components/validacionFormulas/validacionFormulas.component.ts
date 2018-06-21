@@ -40,6 +40,7 @@ export class ValidacionFormulasComponent implements OnInit {
     public ocupations: any[] = [];
 
     public user: any = {};
+    public wait: boolean = false;
 
     public gasto_personal;
     pagos_buro;
@@ -117,15 +118,16 @@ export class ValidacionFormulasComponent implements OnInit {
     public list_validated: any[] = [];
 
     runTEST() {
+        this.list_invalidated = [];
+        this.list_validated = [];
+        this.wait = true;
         this._PruebasService.get_user_for_test().subscribe(
             resp => {
-                if (resp.status == 0 && resp.message == 'no information')
-                    return this.showMessage('No se encontro usuario para realizar test', "Entendido");
-                this.list_invalidated = [];
-                this.list_validated = [];
+                if (resp.status == 0 && resp.message == 'no information') return this.showMessage('No se encontro usuario para realizar test', "Entendido");
                 resp.data.test = true;
                 this._PruebasService.runValidation(resp.data).subscribe(
                     respuesta => {
+                        this.wait = false;
                         if (respuesta.status == 1200) {
                             this.list_invalidated = respuesta.data;
                             console.log(this.list_invalidated);
@@ -135,6 +137,7 @@ export class ValidacionFormulasComponent implements OnInit {
                         }
                     },
                     err => {
+                        this.wait = false;
                         console.log(err);
                     }
                 );

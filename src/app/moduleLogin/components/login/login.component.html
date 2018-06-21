@@ -1,41 +1,53 @@
-<div class="myContainer centrado" style="margin-top: 15%;">
-    <div class="mdl-grid" style=" margin-top: 20px;">
-            <img style="width: 65px; height: 65px;" src="assets/Logo 1259x1108.png">
+<div style="position: relative; width: 100%; height: 100vh;">
+    <div style="position: relative; width: 100%; height: 100vh; background-image: url('assets/login.png');">
+            <div class="myContainer centrado">
+                    <div class="mdl-grid" style=" margin-top: 20px;">
+                            <img style="width: 65px; height: 65px;" src="assets/Logo 1259x1108.png">
+                    </div>
+                    <div>
+                        <h4 style="margin: 20px;">Crédiwhere</h4>
+                        <p style="margin: 20px;">Por favor, ingrese sus datos para iniciar sesión.</p>
+                    </div>
+                    <div class="mdl-grid">
+                
+                        <form #loginForm="ngForm" class="login-form" (ngSubmit)="onSubmit(loginForm);" style="position: relative;">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                                <input matInput placeholder="Email" [(ngModel)]="user.email" name="email" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="example-full-width" style="margin-top: -30px;">
+                                <input matInput placeholder="Password" [(ngModel)]="user.pwd" name="pwd" [type]="hide ? 'text' : 'password'" minlength="4"
+                                required>
+                                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                
+                            </mat-form-field>
+                            <button mat-raised-button color="primary" type="submit" style="width: 100%;margin-top: -30px !important;" [disabled]="!loginForm.form.valid">ENTRAR</button>
+                        </form>
+                    </div>
+                </div>
     </div>
-    <div>
-        <h4 style="margin: 20px;">Crédiwhere</h4>
-        <p style="margin: 20px;">Por favor, ingrese sus datos para iniciar sesión.</p>
-    </div>
-    <div class="mdl-grid">
-
-        <form #loginForm="ngForm" class="login-form" (ngSubmit)="onSubmit(loginForm);">
-            <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="user.email" name="email" [errorStateMatcher]="matcher">
-                <!-- <mat-hint>Enter your email</mat-hint> -->
-                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                    Please enter a valid email address
-                </mat-error>
-                <mat-error *ngIf="emailFormControl.hasError('required')">
-                    Email is
-                    <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="example-full-width">
-                <input matInput placeholder="Password" [formControl]="pwdFormControl" [(ngModel)]="user.pwd" name="pwd" [type]="hide ? 'text' : 'password'"
-                    [errorStateMatcher]="matcher">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                <!-- <mat-hint>Password</mat-hint> -->
-                <mat-error *ngIf="!pwdFormControl.hasError('required')">
-                    The wrong password
-                </mat-error>
-                <mat-error *ngIf="pwdFormControl.hasError('required')">
-                    Password is
-                    <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-            <button mat-raised-button color="primary" type="submit" style="width: 100%;" [disabled]="!loginForm.form.valid">ENTRAR</button>
-        </form>
-
-
-    </div>
+        <!-- background-image: url('assets/login.png'); -->
+    <!-- <div class="myContainer centrado" style="margin-top: 15%;">
+        <div class="mdl-grid" style=" margin-top: 20px;">
+                <img style="width: 65px; height: 65px;" src="assets/Logo 1259x1108.png">
+        </div>
+        <div>
+            <h4 style="margin: 20px;">Crédiwhere</h4>
+            <p style="margin: 20px;">Por favor, ingrese sus datos para iniciar sesión.</p>
+        </div>
+        <div class="mdl-grid">
+    
+            <form #loginForm="ngForm" class="login-form" (ngSubmit)="onSubmit(loginForm);">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <input matInput placeholder="Email" [(ngModel)]="user.email" name="email" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width" style="margin-top: -30px;">
+                    <input matInput placeholder="Password" [(ngModel)]="user.pwd" name="pwd" [type]="hide ? 'text' : 'password'" minlength="4"
+                    required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" style="width: 100%;margin-top: -30px !important;" [disabled]="!loginForm.form.valid">ENTRAR</button>
+            </form>
+        </div>
+    </div> -->
 </div>
