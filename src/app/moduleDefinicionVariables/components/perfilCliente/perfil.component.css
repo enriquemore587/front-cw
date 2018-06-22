@@ -11,3 +11,8 @@
 .centrado .azul {
     bottom: 5px; width: 359px; margin-left: 50%; right: 179px;
 }
+
+
+mat-slide-toggle.otro {
+    color: blue !important;
+}

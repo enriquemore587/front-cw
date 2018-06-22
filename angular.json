@@ -8,7 +8,11 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -25,7 +29,8 @@
             "styles": [
               "bower_components/material-design-lite/material.min.css",
               "bower_components/components-font-awesome/css/fontawesome-all.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "bower_components/material-design-lite/material.min.js"

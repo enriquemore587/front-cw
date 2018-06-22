@@ -176,7 +176,6 @@ export class ScoringComponent implements OnInit {
       } else if (operadores.test(value)) {
         value = value.match(operadores)[0];
 
-
         this.exp.push({ value: value, id: -1000, name: value });
         if (String(value) == 'sqrt' || String(value) == '^')
           this.exp.push({ value: '(', id: -1000, name: '(' });

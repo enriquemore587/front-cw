@@ -57,12 +57,13 @@
                 </div> -->
             </div>
             <div class="mdl-grid myContainer" *ngIf="item.status && item.id == 2">
-                <div class="mdl-cell mdl-cell--12-col" style="background-color: aqua">
-                    <button mat-raised-button routerLink="/definicion-variables/activacion-variables-indicadores" style="width: 100%;">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <button mat-raised-button (click)="add_configuration()" style="margin-left: 25%; width: 50%; color: #1165A7;">
                         Agregar Configuración
+                        <mat-icon>add</mat-icon>
                     </button>
                 </div>
-                
+
             </div>
 
 
@@ -96,7 +97,7 @@
             <div style="text-align: center" *ngIf="item.status && item.id == 4">
                 <p>{{item.name}}</p>
                 NO
-                <mat-slide-toggle [(ngModel)]="item.is_ok" checked="{{item.is_ok}}" (change)="saveChange(item.id,item.is_ok)"></mat-slide-toggle>
+                <mat-slide-toggle [(ngModel)]="item.is_ok" color="primary" checked="{{item.is_ok}}" (change)="saveChange(item.id,item.is_ok)"></mat-slide-toggle>
                 SI
             </div>
 

@@ -29,10 +29,12 @@
             </mat-form-field>
         </div>
         <!-- <button style="font-size: 9px; background-color: #BB90A5; color: #ffffff; position: absolute; left: 10px; top: -10;" *ngIf="editando" (click)="deleteVariable()" mat-raised-button>Eliminar</button> -->
-        <button style="font-size: 9px; position: absolute; left: 20px; top: -22px;" *ngIf="exp.length > 0" (click)="crearNueva()" mat-raised-button>Cancelar</button>
-        <button style="font-size: 9px; background-color: #BB90A5; color: #ffffff; position: absolute; left: 110px; top: -22px;" *ngIf="editando" (click)="deleteVariable()" mat-raised-button>Eliminar</button>
+        <button style="font-size: 9px; position: absolute; left: 20px; top: -22px;" *ngIf="exp.length > 0" (click)="crearNueva()"
+            mat-raised-button>Cancelar</button>
+        <button style="font-size: 9px; background-color: #BB90A5; color: #ffffff; position: absolute; left: 110px; top: -22px;" *ngIf="editando"
+            (click)="deleteVariable()" mat-raised-button>Eliminar</button>
     </div>
-    
+
 
     <!-- END input de formula -->
 
@@ -62,136 +64,173 @@
             <div class="mdl-cell mdl-cell--8-col">
                 <div class="mdl-grid" style="width: 100%;">
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #DCDCDC;" (click)="create()" [disabled]="!nombreVariable">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #DCDCDC;" (click)="create()"
+                            [disabled]="!nombreVariable">
                             <i class="fas fa-save"></i>
                         </button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="clean()">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="clean()">
                             <i class="fas fa-eraser"></i>
                         </button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="promedio()">PROM</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #90A7BB;" (click)="promedio()">
+                            <span style="font-size: 15px;">
+                                PROM
+                            </span>
+                        </button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator('X')" [disabled]="blockOperators()">X</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" (click)="addOperator('X')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">X</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="sii()">IF</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="sii()">
+                            <span style="font-size: 15px;">
+                                IF
+                            </span>
+                        </button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="then()">THEN</button>
-                    </div>
-                    <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator('(')" [disabled]="blockOperators()">(</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="then()">
+                            <span style="font-size: 15px;">
+                                THEN
+                            </span>
+                        </button>
                     </div>
                 </div>
 
                 <!-- begin segunda linea -->
                 <div class="mdl-grid" style="width: 100%;">
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('7')">7</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('7')">7</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('8')">8</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('8')">8</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('9')">9</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('9')">9</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator('/')" [disabled]="blockOperators()">/</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" (click)="addOperator('/')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">/</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="addOperator('<')">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="addOperator('<')">
                             <</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="addOperator('>')">></button>
-                    </div>
-                    <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator(')')" [disabled]="blockOperators()">)</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="addOperator('>')">></button>
                     </div>
                 </div>
                 <!-- end segunda linea -->
                 <!-- begin tercera linea -->
                 <div class="mdl-grid" style="width: 100%;">
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('4')">4</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('4')">4</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('5')">5</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('5')">5</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('6')">6</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('6')">6</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator('+')" [disabled]="blockOperators()">+</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" (click)="addOperator('+')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">+</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="addOperator('==')">==</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="addOperator('==')">==</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="addOperator('!=')">!=</button>
-                    </div>
-                    <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator('^')" [disabled]="blockOperators()">^</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="addOperator('!=')">!=</button>
                     </div>
                 </div>
                 <!-- end tercera linea -->
                 <!-- begin cuarta linea -->
                 <div class="mdl-grid" style="width: 100%;">
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('1')">1</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('1')">1</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('2')">2</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('2')">2</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('3')">3</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('3')">3</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator('-')" [disabled]="blockOperators()">-</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"  (click)="addOperator('-')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">-</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="addOperator('<=')">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="addOperator('<=')">
                             <=</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="addOperator('>=')">>=</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="addOperator('>=')">>=</button>
                     </div>
-                    <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addDigint('.')">.</button>
-                    </div>
+
                 </div>
                 <!-- end cuarta linea -->
                 <!-- begin quinta linea -->
                 <div class="mdl-grid" style="width: 100%;">
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="minimo()">MIN</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"  (click)="addOperator('(')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">(</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BB90A5;" (click)="addDigint('0')">0</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('0')">0</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="maximo()">MAX</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"  (click)="addOperator(')')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">)</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #90A7BB;" (click)="addOperator('sqrt')" [disabled]="blockOperators()">√</button>
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" (click)="addOperator('sqrt')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">√</button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="_else()">
-                            ELSE
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="_else()">
+                            <span style="font-size: 15px;">
+                                ELSE
+                            </span>
                         </button>
                     </div>
                     <div style="width: 14%;">
-                        <button mat-fab style="background-color: #BBBA90;" (click)="endIf()">
-                            END IF
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BBBA90;" (click)="endIf()">
+                            <span style="font-size: 15px;">
+                                END IF
+                            </span>
                         </button>
                     </div>
-
                 </div>
                 <!-- end quinta linea -->
+                <!-- begin sexta linea -->
+                <div class="mdl-grid" style="width: 100%;">
+                    <div style="width: 14%;">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #90A7BB;" (click)="minimo()">
+                            <span style="font-size: 15px;">
+                                MIN
+                            </span>
+                        </button>
+                    </div>
+                    <div style="width: 14%;">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #BB90A5;" (click)="addDigint('.')">.</button>
+                    </div>
+                    <div style="width: 14%;">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #90A7BB;" (click)="maximo()">
+                            <span style="font-size: 15px;">
+                                MAX
+                            </span>
+                        </button>
+                    </div>
+                    <div style="width: 14%;">
+                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" (click)="addOperator('^')"
+                            [disabled]="blockOperators()" [ngStyle]="{'background-color': blockOperators() ? '#DCDCDC' : '#90A7BB'}">^</button>
+                    </div>
+                </div>
+                <!-- end sexta linea -->
             </div>
         </div>
         <div class="mdl-grid">

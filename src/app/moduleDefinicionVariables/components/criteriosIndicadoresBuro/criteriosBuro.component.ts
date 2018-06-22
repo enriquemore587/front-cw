@@ -80,10 +80,25 @@ export class CriteriosBuro implements OnInit {
         );
     }
 
-    noo(value) {
+    public add_configuration() {
+        let last_item = this.scoreList[this.scoreList.length - 1];
+        let obj_to_save = {
+            in_range: (Number(last_item.range) + 1) + '-' + (Number(last_item.range) + 2),
+            in_deadline: last_item.plazo,
+            in_credit_limit: 1000
+        };
+        this._DefinicionVariablesService.set_configuration_score(obj_to_save).subscribe(
+            resp => {
+                if (resp.status != 0 && resp.message != 'successful') console.log("something bad");
+                return this.getScoreBank();
+            },
+            err => {
+                console.log("error", err);
+            }
+        );
     }
 
-    saveChange(id, value) {
+    public saveChange(id, value) {
         let saveObj: any = {
             "id_var_fix": id,
             "range": null,
@@ -119,7 +134,7 @@ export class CriteriosBuro implements OnInit {
 
 
 
-    getIccBank() {
+    public getIccBank() {
         this._DefinicionVariablesService.getIccBank(this.ranges.icc).subscribe(
             resp => {
                 if (resp.status == 0) {
@@ -137,7 +152,7 @@ export class CriteriosBuro implements OnInit {
     }
 
 
-    changeStore(value: Score) {
+    public changeStore(value: Score) {
         this._DefinicionVariablesService.setAScoreBank(value).subscribe(
             resp => {
                 if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
@@ -148,7 +163,8 @@ export class CriteriosBuro implements OnInit {
         );
     }
 
-    getScoreBank() {
+    public getScoreBank() {
+        this.scoreList = [];
         this._DefinicionVariablesService.getScoreBank().subscribe(
             resp => {
                 if (resp.status == 0) {
@@ -166,7 +182,7 @@ export class CriteriosBuro implements OnInit {
     }
 
     public newScore: Score;
-    getScore() {
+    public getScore() {
         this._DefinicionVariablesService.getHelp_score(this.changeScore).subscribe(
             resp => {
                 if (resp.status == 0) {
@@ -181,7 +197,7 @@ export class CriteriosBuro implements OnInit {
         );
     }
 
-    change_a_ICC(item) {
+    public change_a_ICC(item) {
         let obj = {
             "icc": item.icc,
             "value": item.free
@@ -196,7 +212,7 @@ export class CriteriosBuro implements OnInit {
         );
     }
 
-    changeICC(id: any) {
+    public changeICC(id: any) {
         if (!this.ranges.icc || this.ranges.icc == '') return;
         if (this.ranges.icc > 9) this.ranges.icc = 9;
         if (this.ranges.icc < 4) this.ranges.icc = 4;
@@ -205,7 +221,7 @@ export class CriteriosBuro implements OnInit {
     }
 
 
-    setCheck(item: any) {
+    public setCheck(item: any) {
         console.log(item);
     }
 }

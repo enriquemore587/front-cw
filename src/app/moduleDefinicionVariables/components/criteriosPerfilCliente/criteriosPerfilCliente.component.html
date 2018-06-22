@@ -120,7 +120,7 @@
                 <ul class="demo-list-two mdl-list">
                     <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of nacionalidades">
                         <span>
-                            <mat-slide-toggle checked="{{item.status}}" (click)="setNacionalidad(item)"></mat-slide-toggle>
+                            <mat-slide-toggle checked="{{item.status}}" color="primary" (click)="setNacionalidad(item)"></mat-slide-toggle>
                         </span>
                         <span class="mdl-list__item-secondary-content">
                             <span>{{item.name}}</span>
@@ -167,7 +167,7 @@
                 <ul class="demo-list-two mdl-list">
                     <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of profesiones">
                         <span>
-                            <mat-slide-toggle checked="{{item.status}}" (click)="setCheck(item)"></mat-slide-toggle>
+                            <mat-slide-toggle checked="{{item.status}}" color="primary" (click)="setCheck(item)"></mat-slide-toggle>
                         </span>
                         <span class="mdl-list__item-secondary-content" >
                             <span>{{item.name}}</span>
