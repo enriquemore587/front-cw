@@ -30,7 +30,7 @@ export class ArbolComponent implements OnInit {
   ) {
 
   }
-  
+
   // start Metodo Messages
   showMessage(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -60,19 +60,23 @@ export class ArbolComponent implements OnInit {
 
   cambio(type) {
     if (type == 1) {
+      this.salidas.mensualidad.checked = !this.salidas.mensualidad.checked;
       this.orderList[this.salidas.mensualidad.index].salida = 0;
       this.salidas.mensualidad.index = -1;
       console.log(this.orderList[this.salidas.mensualidad.index]);
     } else if (type == 2) {
+      this.salidas.plazo.checked = !this.salidas.plazo.checked;
       this.orderList[this.salidas.plazo.index].salida = 0;
       this.salidas.plazo.index = -1;
       console.log(this.orderList[this.salidas.plazo.index]);
     } else if (type == 3) {
+      this.salidas.linea_credito.checked = !this.salidas.linea_credito.checked;
       this.orderList[this.salidas.linea_credito.index].salida = 0;
       this.salidas.linea_credito.index = -1;
       console.log(this.orderList[this.salidas.linea_credito.index]);
     }
     else if (type == 4) {
+      this.salidas.tasa.checked = !this.salidas.tasa.checked;
       this.orderList[this.salidas.tasa.index].salida = 0;
       this.salidas.tasa.index = -1;
       console.log(this.orderList[this.salidas.tasa.index]);
@@ -171,11 +175,11 @@ export class ArbolComponent implements OnInit {
       return this.showMessage('Falta - "salida de Mensualidad"', 'ENTENDIDO');
     else if (this.salidas.plazo.index == -1)
       return this.showMessage('Falta - "salida de Plazo"', 'ENTENDIDO');
-   else if (this.salidas.linea_credito.index == -1)
+    else if (this.salidas.linea_credito.index == -1)
       return this.showMessage('Falta - "salida de Linea Final"', 'ENTENDIDO');
-   else if (this.salidas.tasa.index == -1)
+    else if (this.salidas.tasa.index == -1)
       return this.showMessage('Falta - "salida de Tasa"', 'ENTENDIDO');
-          
+
     let ids: any = {
       id_mensualidad: this.orderList[this.salidas.mensualidad.index].id,
       id_plazo: this.orderList[this.salidas.plazo.index].id,
