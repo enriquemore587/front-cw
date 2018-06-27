@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PruebasService } from '../../services/pruebas.service';
 import { log } from 'util';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
 // models
 import { ReqValidateRange } from '../../models/reqValidateRange';
 import { ReqValidateList } from '../../models/reqValidateList';
@@ -56,11 +57,15 @@ export class ValidacionFormulasComponent implements OnInit {
 
 
     constructor(
+        private _router: Router,
         private _PruebasService: PruebasService,
         public snackBar: MatSnackBar  // messages
     ) { }
 
     ngOnInit() {
+        let auth = localStorage.getItem('auth');
+        if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
+        
         //this.getOccupations();
         //this.getVariablesToValid();
     }
@@ -110,7 +115,6 @@ export class ValidacionFormulasComponent implements OnInit {
     }
 
     get_pesos(item: any) {
-        // if (item.salida == 1 || item.salida == 3) return true;
         return item.var_fix_id > 0 && item.var_fix_id != 1 && item.var_fix_id != 4 && item.var_fix_id != 5 && item.var_fix_id != 7 && item.var_fix_id != 8 && item.var_fix_id != 9 && item.var_fix_id != 3 && item.var_fix_id != 2 && item.var_fix_id != 14;
     }
 
@@ -128,13 +132,8 @@ export class ValidacionFormulasComponent implements OnInit {
                 this._PruebasService.runValidation(resp.data).subscribe(
                     respuesta => {
                         this.wait = false;
-                        if (respuesta.status == 1200) {
-                            this.list_invalidated = respuesta.data;
-                            console.log(this.list_invalidated);
-
-                        } else if (respuesta.status == 0) {
-                            this.list_validated = respuesta.data;
-                        }
+                        if (respuesta.status == 1200) this.list_invalidated = respuesta.data;
+                        else if (respuesta.status == 0) this.list_validated = respuesta.data;
                     },
                     err => {
                         this.wait = false;

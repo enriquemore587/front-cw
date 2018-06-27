@@ -47,6 +47,9 @@ export class IndicadoresComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+    let auth = localStorage.getItem('auth');
+    if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
+    
     this.getVariables();
   }
 

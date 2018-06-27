@@ -86,6 +86,9 @@ export class ScoringComponent implements OnInit {
   // end Metodo Messages
 
   ngOnInit() {
+    let auth = localStorage.getItem('auth');
+    if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
+    
     this.loadVariables();
     this.loadVariables2();
   }
@@ -175,19 +178,15 @@ export class ScoringComponent implements OnInit {
         this.exp.push({ value: value, id: 0, name: value });
       } else if (operadores.test(value)) {
         value = value.match(operadores)[0];
-
         this.exp.push({ value: value, id: -1000, name: value });
         if (String(value) == 'sqrt' || String(value) == '^')
           this.exp.push({ value: '(', id: -1000, name: '(' });
-
       }
 
     }
-
     // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    if (input) input.value = '';
+
   }
 
   public remove(item: any): void {
@@ -196,9 +195,7 @@ export class ScoringComponent implements OnInit {
     if (item.name == 'ELSE' && item.id == -1000) this.if_station = 2;
     if (item.name == 'END IF' && item.id == -1000) this.if_station = 3;
     let index = this.exp.indexOf(item);
-    if (index >= 0) {
-      this.exp.splice(index, 1);
-    }
+    if (index >= 0) this.exp.splice(index, 1);
   }
   //end
 
@@ -230,17 +227,18 @@ export class ScoringComponent implements OnInit {
   }
 
   public then() {
-    if (this.exp.length == 1 && this.exp[0].value == 'IF') {
-      this.exp.push({ value: true, id: -1000, name: 'TRUE' });
-    }
+
+    if (this.exp.length == 1 && this.exp[0].value == 'IF') this.exp.push({ value: true, id: -1000, name: 'TRUE' });
     this.exp.push({ value: 'THEN', id: -1000, name: 'THEN' });
     this.if_station = 2;
+
   }
 
-  public _else() {
+  public _else() {    
     this.exp.push({ value: 'ELSE', id: -1000, name: 'ELSE' });
     this.if_station = 3;
   }
+
   public endIf() {
     this.exp.push({ value: 'END IF', id: -1000, name: 'END IF' });
     this.if_station = 0;
@@ -253,8 +251,8 @@ export class ScoringComponent implements OnInit {
   public addOperator(operator: any) {
     if (operator == false) return this.exp = [];
     this.exp.push({ value: operator, id: -1000, name: operator });
-    if (String(operator) == 'sqrt' || String(operator) == '^')
-      this.exp.push({ value: '(', id: -1000, name: '(' });
+    
+    if (String(operator) == 'sqrt' || String(operator) == '^') this.exp.push({ value: '(', id: -1000, name: '(' });
   }
 
 

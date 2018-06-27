@@ -11,8 +11,13 @@
             <div style="text-align: center" *ngIf="item.id == 1">
                 <p>{{item.name}}%</p>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="Tasa" required type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                        [(ngModel)]="ranges.tasa">
+                    <input matInput placeholder="Tasa" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                        [(ngModel)]="ranges.tasa" name="tasa" #tasa="ngModel" required>
+                    <div *ngIf="tasa.invalid && (tasa.dirty || tasa.touched)" class="alert alert-danger">
+                        <mat-error *ngIf="tasa.errors.required">
+                            Tasa is required.
+                        </mat-error>
+                    </div>
                 </mat-form-field>
             </div>
 
@@ -21,7 +26,12 @@
                 <p> {{item.name}}</p>
                 <mat-form-field appearance="outline">
                     <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                        [(ngModel)]="ranges.BC_Score">
+                        [(ngModel)]="ranges.BC_Score" name="bc" #bc="ngModel" required>
+                    <div *ngIf="bc.invalid && (bc.dirty || bc.touched)" class="alert alert-danger">
+                        <mat-error *ngIf="bc.errors.required">
+                            BC Score is required.
+                        </mat-error>
+                    </div>
                 </mat-form-field>
             </div>
 
@@ -108,13 +118,26 @@
                     <div class="mdl-cell mdl-cell--6-col">
                         <mat-form-field appearance="outline">
                             <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                                [(ngModel)]="ranges.MOP_mayor_min">
+                                [(ngModel)]="ranges.MOP_mayor_min" name="MOPmayormin" #MOPmayormin="ngModel" min="1" required>
+                            <div *ngIf="MOPmayormin.invalid && (MOPmayormin.dirty || MOPmayormin.touched)" class="alert alert-danger">
+                                <mat-error *ngIf="MOPmayormin.errors.required">
+                                    Mínimo is required.
+                                </mat-error>
+                                <mat-error *ngIf="MOPmayormin.errors.min">
+                                    Mínimo must be at least 4.
+                                </mat-error>
+                            </div>
                         </mat-form-field>
                     </div>
                     <div class="mdl-cell mdl-cell--6-col">
                         <mat-form-field appearance="outline">
                             <input matInput placeholder="Máximo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                                [(ngModel)]="ranges.MOP_mayor_max">
+                                [(ngModel)]="ranges.MOP_mayor_max" name="MOPmayormax" #MOPmayormax="ngModel" required>
+                            <div *ngIf="MOPmayormax.invalid && (MOPmayormax.dirty || MOPmayormax.touched)" class="alert alert-danger">
+                                <mat-error *ngIf="MOPmayormax.errors.required">
+                                    Máximo is required.
+                                </mat-error>
+                            </div>
                         </mat-form-field>
                     </div>
                 </div>
@@ -129,13 +152,23 @@
                     <div class="mdl-cell mdl-cell--6-col">
                         <mat-form-field appearance="outline">
                             <input matInput placeholder="Mínimo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
-                                [(ngModel)]="ranges.Saldo_Vencido">
+                                [(ngModel)]="ranges.Saldo_Vencido" name="saldoVencidoMin" #saldoVencidoMin="ngModel" required>
+                            <div *ngIf="saldoVencidoMin.invalid && (saldoVencidoMin.dirty || saldoVencidoMin.touched)">
+                                <mat-error *ngIf="saldoVencidoMin.errors.required">
+                                    Mínimo is required.
+                                </mat-error>
+                            </div>
                         </mat-form-field>
                     </div>
                     <div class="mdl-cell mdl-cell--6-col">
                         <mat-form-field appearance="outline">
                             <input matInput placeholder="Máximo" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)" type="number"
-                                [(ngModel)]="ranges.Saldo_Vencido_max">
+                                [(ngModel)]="ranges.Saldo_Vencido_max" name="saldoVencido" #saldoVencido="ngModel" required>
+                            <div *ngIf="saldoVencido.invalid && (saldoVencido.dirty || saldoVencido.touched)">
+                                <mat-error *ngIf="saldoVencido.errors.required">
+                                    Máximo is required.
+                                </mat-error>
+                            </div>
                         </mat-form-field>
                     </div>
                 </div>

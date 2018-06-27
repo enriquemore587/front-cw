@@ -39,6 +39,9 @@ export class CriteriosBuro implements OnInit {
     }
 
     ngOnInit() {
+        let auth = localStorage.getItem('auth');
+        if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
+        
         this._DefinicionVariablesService.getCriteriosIndicadores().subscribe(
             resp => {
                 /* 1 delete

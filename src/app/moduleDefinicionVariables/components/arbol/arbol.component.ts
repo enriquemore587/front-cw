@@ -63,23 +63,19 @@ export class ArbolComponent implements OnInit {
       this.salidas.mensualidad.checked = !this.salidas.mensualidad.checked;
       this.orderList[this.salidas.mensualidad.index].salida = 0;
       this.salidas.mensualidad.index = -1;
-      console.log(this.orderList[this.salidas.mensualidad.index]);
     } else if (type == 2) {
       this.salidas.plazo.checked = !this.salidas.plazo.checked;
       this.orderList[this.salidas.plazo.index].salida = 0;
       this.salidas.plazo.index = -1;
-      console.log(this.orderList[this.salidas.plazo.index]);
     } else if (type == 3) {
       this.salidas.linea_credito.checked = !this.salidas.linea_credito.checked;
       this.orderList[this.salidas.linea_credito.index].salida = 0;
       this.salidas.linea_credito.index = -1;
-      console.log(this.orderList[this.salidas.linea_credito.index]);
     }
     else if (type == 4) {
       this.salidas.tasa.checked = !this.salidas.tasa.checked;
       this.orderList[this.salidas.tasa.index].salida = 0;
       this.salidas.tasa.index = -1;
-      console.log(this.orderList[this.salidas.tasa.index]);
     }
 
   }
@@ -229,6 +225,9 @@ export class ArbolComponent implements OnInit {
   }
 
   ngOnInit() {
+    let auth = localStorage.getItem('auth');
+    if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
+
     this.loadVariables();
     this.loadVariables2();
   }

@@ -67,8 +67,7 @@ export class CriteriosPerfilClienteComponent implements OnInit {
                         else this.showMessage(`Status: ${String(resp.status)}`, "Ocultar mensaje");
                     },
                     err => {
-                        this.showMessage(`Ocurrio un problema`, "Ocultar mensaje");
-                        console.log("error", err);
+                        this.showMessage(`Ocurrió un problema`, "Ocultar mensaje");
                     }
                 );
             }
@@ -90,7 +89,7 @@ export class CriteriosPerfilClienteComponent implements OnInit {
                         //else this.showMessage(`Status: ${String(resp.status)}`, "Ocultar mensaje");
                     },
                     err => {
-                        this.showMessage(`Ocurrio un problema`, "Ocultar mensaje");
+                        this.showMessage(`Ocurrió un problema`, "Ocultar mensaje");
                         console.log("error", err);
                     }
                 );
@@ -119,10 +118,10 @@ export class CriteriosPerfilClienteComponent implements OnInit {
             saveObj.range = this.ranges.min_pag_min_Min + "-" + this.ranges.min_pag_min_Max;
         else if (id == 14)
             saveObj.range = this.ranges.Porcentaje_pago + "-0";
-
+        
         this._DefinicionVariablesService.setBankVariable(saveObj).subscribe(
             resp => {
-                if (resp.status != 0 && resp.message != 'successful') console.log("something bad");
+                if (resp.status != 0 && resp.message != 'successful') this.showMessage(`Ocurrió un problema`, "Ocultar mensaje");
                 //else this.showMessage(`Status: ${String(resp.status)}`, "Ocultar mensaje");
             },
             err => {
@@ -201,6 +200,9 @@ export class CriteriosPerfilClienteComponent implements OnInit {
     }
 
     initMenu() {
+        let auth = localStorage.getItem('auth');
+        if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
+        
         this._DefinicionVariablesService.getCriteriosIndicadoresPerfilCliente().subscribe(
             resp => {
                 if (resp.status == 0 && resp.message == 'successful') {

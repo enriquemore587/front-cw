@@ -40,6 +40,9 @@ export class PerfilComponent implements OnInit{
   }
 
   ngOnInit(){
+    let auth = localStorage.getItem('auth');
+    if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
+    
     this.getVariablesClientes();
   }
 
