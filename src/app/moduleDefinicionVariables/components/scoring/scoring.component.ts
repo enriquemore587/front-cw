@@ -88,7 +88,7 @@ export class ScoringComponent implements OnInit {
   ngOnInit() {
     let auth = localStorage.getItem('auth');
     if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
-    
+
     this.loadVariables();
     this.loadVariables2();
   }
@@ -234,7 +234,7 @@ export class ScoringComponent implements OnInit {
 
   }
 
-  public _else() {    
+  public _else() {
     this.exp.push({ value: 'ELSE', id: -1000, name: 'ELSE' });
     this.if_station = 3;
   }
@@ -250,26 +250,86 @@ export class ScoringComponent implements OnInit {
 
   public addOperator(operator: any) {
     if (operator == false) return this.exp = [];
+    if (this.changingVariable) {
+      if (String(operator) == 'sqrt' || String(operator) == '^') {
+        this.exp = [
+          ...this.exp.slice(0, this.positionToChange),
+          { value: operator, id: -1000, name: operator },
+          { value: '(', id: -1000, name: '(' },
+          ...this.exp.slice(this.positionToChange + 1)
+        ];
+        this.changingVariable = null;
+        this.positionToChange = null;
+        return;
+      }
+      this.exp = [
+        ...this.exp.slice(0, this.positionToChange),
+        { value: operator, id: -1000, name: operator },
+        ...this.exp.slice(this.positionToChange + 1)
+      ];
+      this.changingVariable = null;
+      this.positionToChange = null;
+      return;
+    }
     this.exp.push({ value: operator, id: -1000, name: operator });
-    
+
     if (String(operator) == 'sqrt' || String(operator) == '^') this.exp.push({ value: '(', id: -1000, name: '(' });
   }
 
 
   public addDigint(num: string) {
-    if (this.exp.length == 0) {
-      this.exp.push({ value: num, id: 0, name: num });
-      return;
+    if (this.changingVariable==null) {
+      if (this.exp.length == 0) {
+        this.exp.push({ value: num, id: 0, name: num });
+        return;
+      }
+      let last_number = this.exp[this.exp.length - 1].name;
+      if (isNaN(Number(last_number))) {
+        this.exp = [...this.exp, { value: num, id: 0, name: num }];
+        // this.exp.push({ value: num, id: 0, name: num });
+        return;
+      }
+      this.exp.splice(this.exp.length - 1, 1);
+      this.exp.push({ value: last_number + num, id: 0, name: last_number + num });
+    } else {
+      if (this.exp.length == 0) {
+        this.exp = [
+          ...this.exp.slice(0, this.positionToChange),
+          { value: num, id: 0, name: num },
+          ...this.exp.slice(this.positionToChange + 1)
+        ];
+        // this.changingVariable = null;
+        // this.positionToChange = null;
+        return;
+      }
+      let last_number = this.exp[this.positionToChange].name;
+      if (isNaN(Number(last_number))) {
+        this.exp = [
+          ...this.exp.slice(0, this.positionToChange),
+          { value: num, id: 0, name: num },
+          ...this.exp.slice(this.positionToChange + 1)
+        ];
+        // this.exp.push({ value: num, id: 0, name: num });
+        return;
+      }
+
+      this.exp = [
+        ...this.exp.slice(0, this.positionToChange),
+        { value: last_number + num, id: 0, name: last_number + num },
+        ...this.exp.slice(this.positionToChange + 1)
+      ];
+      // this.exp.splice(this.exp.length - 1, 1);
+      // this.exp.push({ value: last_number + num, id: 0, name: last_number + num });
     }
-    let last_number = this.exp[this.exp.length - 1].value;
-    if (isNaN(Number(last_number))) {
-      this.exp.push({ value: num, id: 0, name: num });
-      return;
-    }
-    this.exp.splice(this.exp.length - 1, 1);
-    this.exp.push({ value: last_number + num, id: 0, name: last_number + num });
   }
 
+  public getColor(item: any) {
+    let exp = new RegExp(/((\+)|(-)|(\/)|(X)|(sqrt)|(\()|(\))|(if)|(then)|(else)|(\<)|(\>)|(\!)|(prom)|(min)|(max)|(\^)|(\=))/i);
+    if (exp.test(item.name)) {
+      return 1;
+    }
+    return 2;
+  }
 
 
   public clean() {
@@ -282,11 +342,26 @@ export class ScoringComponent implements OnInit {
 
   public addItem(value: any, default_variable: boolean) {
     value.id2 = default_variable ? 'd' + value.id : 'c' + value.id;
+    if (this.changingVariable) {
+      this.exp = [
+        ...this.exp.slice(0, this.positionToChange),
+        value,
+        ...this.exp.slice(this.positionToChange + 1)
+      ];
+      this.changingVariable = null;
+      this.positionToChange = null;
+      return;
+    }
     this.exp.push(value);
   }
 
   public variable_editing: any;
+  public objToEdit: any = null;
   public editVariable = variableToEdit => {
+    this.changingVariable = null;
+    this.positionToChange = null;
+
+    this.objToEdit = variableToEdit;
     this.editando = this.editando ? this.editando : !this.editando;
     this.variable_editing = variableToEdit;
     this.id_variable = variableToEdit.id;
@@ -361,7 +436,7 @@ export class ScoringComponent implements OnInit {
         else endList.push({ name: item, id: -1000 });
       }
     }
-    this.exp = endList;
+    this.exp = [...endList];
   }
 
   public deleteVariable = () => {
@@ -401,13 +476,9 @@ export class ScoringComponent implements OnInit {
       }
       else return 'Bad expression';
     }
-    if (rule4.test(expression))
-      return 'Bad expression';
-    if (rule5.test(expression))
-      return 'Bad expression';
-    if (rule6.test(expression))
-      return 'Bad expression';
-
+    if (rule4.test(expression)) return 'Bad expression';
+    if (rule5.test(expression)) return 'Bad expression';
+    if (rule6.test(expression)) return 'Bad expression';
 
     return expression;
   }
@@ -418,17 +489,13 @@ export class ScoringComponent implements OnInit {
       // guarda variables
       if (element.id > 0) {  // variable
         allExp += index == 0 ? element.id2 : '||' + element.id2;
-        //allExp += element.id2; antes
       } else if (element.id == 0) { // number
         allExp += index == 0 ? element.name : '||' + element.name;
-        // allExp += element.value; antes
       } else if (element.id == -1000) {  //operator
         allExp += index == 0 ? element.name : '||' + element.name;
-        //  allExp += element.value; antes
       }
       else if (element.id < 0 && element.id > -1000) {  // YOUNG VARIABLE
         allExp += index == 0 ? element.id2 : '||' + element.id2;
-        //  allExp += element.value; antes
       }
     });
     return allExp;
@@ -465,7 +532,6 @@ export class ScoringComponent implements OnInit {
       else if (element.id < 0 && element.id > -1000) {  //operator
         allExp += index == 0 ? element.id2 : '_' + element.id2;
       }
-
     });
     return allExp;
   }
@@ -495,6 +561,52 @@ export class ScoringComponent implements OnInit {
     return allExp;
   }
 
+  public moveLeft() {
+    let itemToMove = this.exp[this.positionToChange];
+    let itemToMove2 = this.exp[this.positionToChange - 1];
+    let listTemp = this.exp;
+    this.exp = [
+      ...listTemp.slice(0, this.positionToChange - 1),
+      itemToMove,
+      itemToMove2,
+      ...listTemp.slice(this.positionToChange + 1)
+    ];
+    this.positionToChange = null;
+  }
+
+  public moveRight() {
+    let itemToMove = this.exp[this.positionToChange];
+    let itemToMove2 = this.exp[this.positionToChange + 1];
+    let listTemp = this.exp;
+    this.exp = [
+      ...listTemp.slice(0, this.positionToChange),
+      itemToMove2,
+      itemToMove,
+      ...listTemp.slice(this.positionToChange + 2)
+    ];
+    this.positionToChange = null;
+  }
+
+  public selectedVariable(item: any) {
+    return this.positionToChange == this.exp.indexOf(item) && this.changingVariable;
+  }
+
+  public changingVariable = null;
+  public positionToChange: number = null;
+  public changeVariable() {
+    this.changingVariable = true;
+    let last_number = this.exp[this.positionToChange].value;
+    if (isNaN(Number(last_number))) {
+      this.exp[this.positionToChange].name = '';
+      this.exp[this.positionToChange].value = '';
+    }
+  }
+
+  public changeItem(item: any) {
+    this.changingVariable = null;
+    this.positionToChange = this.exp.indexOf(item);
+  }
+
 
   public create() {
     if (this.exp.length == 0) return;
@@ -517,6 +629,7 @@ export class ScoringComponent implements OnInit {
 
           this.id_variable = 0;
 
+          this.editando = false;
         },
         err => {
           this.showMessage('Ocurrió un problema al salvar aritmética, verificar conexión', 'Ocultar mensaje');
@@ -532,6 +645,8 @@ export class ScoringComponent implements OnInit {
             this.nombreVariable = '';
             this.exp = [];
             this.loadVariables2();
+
+            this.editando = false;
           }
           else this.showMessage('Ocurrió un problema al salvar MÁXIMO', 'Ocultar mensaje');
         },
@@ -548,6 +663,8 @@ export class ScoringComponent implements OnInit {
             this.nombreVariable = '';
             this.exp = [];
             this.loadVariables2();
+
+            this.editando = false;
           }
           else this.showMessage('Ocurrió un problema al salvar MÍNIMO', 'Ocultar mensaje');
         },
@@ -564,6 +681,8 @@ export class ScoringComponent implements OnInit {
             this.nombreVariable = '';
             this.exp = [];
             this.loadVariables2();
+
+            this.editando = false;
           }
 
           else this.showMessage('Ocurrió un problema al salvar PROMEDIO', 'Ocultar mensaje');
@@ -587,6 +706,8 @@ export class ScoringComponent implements OnInit {
             this.nombreVariable = '';
             this.exp = [];
             this.loadVariables2();
+
+            this.editando = false;
           }
 
           else this.showMessage('Ocurrió un problema al salvar aritmética', 'Ocultar mensaje');

@@ -6,6 +6,12 @@ mat-chip {
     width: 100%;
   }
   .btn-azul {
-   background-color:  #327AB3;
+    background-color:  #327AB3;
    color: #ffffff;
+  }
+
+  .bg-variable{
+    background-color:  #7bc !important;
+    font-size: 15px !important;
+    font-style: italic !important;
   }

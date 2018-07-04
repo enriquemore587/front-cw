@@ -4,7 +4,6 @@
             <h1>{{title}} ( {{action}} )</h1>
         </div>
     </div>
-    <!-- <button *ngIf="editando" (click)="crearNueva()" mat-raised-button>Crear nueva</button> -->
     <!-- BEGIN input de formula -->
     <div class="mdl-grid myContainer" style="position: relative;">
         <div class="mdl-cell mdl-cell--2-col">
@@ -18,8 +17,9 @@
         <div class="mdl-cell mdl-cell--10-col">
             <mat-form-field appearance="outline" class="demo-chip-list" style="margin-right: 0; display: block;">
                 <mat-chip-list #chipList>
-                    <mat-chip *ngFor="let item of exp" style="font-size: 10px;" [selectable]="selectable" [removable]="removable" (removed)="remove(item)"
-                        color="primary">
+                    <mat-chip *ngFor="let item of exp" [hidden]="item.name == nombreVariable" [ngStyle]="{'background-color' : getColor(item) == 1 ? '#327AB3' : '#DCDCDC'}"
+                        style="font-size: 9px;" [selectable]="selectable" [ngClass]="{'bg-variable': selectedVariable(item)}" [removable]="removable" (removed)="remove(item)" [matMenuTriggerFor]="opcItem"
+                        (click)="changeItem(item)">
                         {{item.name}}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
@@ -28,13 +28,19 @@
                 </mat-chip-list>
             </mat-form-field>
         </div>
-        <!-- <button style="font-size: 9px; background-color: #BB90A5; color: #ffffff; position: absolute; left: 10px; top: -10;" *ngIf="editando" (click)="deleteVariable()" mat-raised-button>Eliminar</button> -->
         <button style="font-size: 9px; position: absolute; left: 20px; top: -22px;" *ngIf="exp.length > 0" (click)="crearNueva()"
             mat-raised-button>Cancelar</button>
         <button style="font-size: 9px; background-color: #BB90A5; color: #ffffff; position: absolute; left: 110px; top: -22px;" *ngIf="editando"
             (click)="deleteVariable()" mat-raised-button>Eliminar</button>
     </div>
 
+    <!-- begin opciones items -->
+    <mat-menu #opcItem="matMenu">
+        <button mat-menu-item (click)="changeVariable()">Change</button>
+        <button mat-menu-item [hidden]="positionToChange == 0" (click)="moveLeft()">Move left</button>
+        <button mat-menu-item [hidden]="positionToChange == exp.length-1" (click)="moveRight()">Move right</button>
+    </mat-menu>
+    <!-- end opciones items -->
 
     <!-- END input de formula -->
 
@@ -47,25 +53,13 @@
                     <button mat-button class="btn-azul" style="width: 100%; text-align: left;" *ngFor="let item of listVariables" (click)="addItem(item, true)">{{item.name}}</button>
                 </div>
                 <hr>
-                <div style="display: grid; grid-template-columns: 1rf 1rf; gap: 5px;">
-                    <button class="btn-azul" mat-button style="text-align: left; width: 100%; position: relative;" *ngFor="let item of listVariables2" (click)="addItem(item, false)">{{item.name}}
-                        <button class="mdl-button mdl-js-button mdl-button--primary" style="height: 100%; color: #ffffff; position: absolute; right: 0;" (click)="editVariable(item)">
-                            <mat-icon>edit</mat-icon>
-                        </button>
+                <div style="display: grid; grid-template-columns: 1rf 1rf; gap: 5px; position: relative;" *ngFor="let item of listVariables2">
+                    <button class="btn-azul" mat-button style="text-align: left; position: relative; margin-top: 5px;" (click)="addItem(item, false)">{{item.name}}
                     </button>
-
-                    <!-- <div class="mdl-cell mdl-cell--2-col">
-                        <button class="mdl-list__item-secondary-action" style="background-color: #90A7BB;" mat-mini-fab (click)="deleteVariable(item)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </div> -->
-                    <!-- <div class="mdl-cell mdl-cell--2-col">
-                        <button class="mdl-list__item-secondary-action" style="background-color: #90A7BB;" mat-mini-fab (click)="editVariable(item)">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </div> -->
+                    <button class="mdl-button mdl-js-button mdl-button--primary" style="color: #fff; position: absolute;  margin-top: 5px; width: 20px; right: 0;" (click)="editVariable(item)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
                 </div>
-
             </div>
             <div class="mdl-cell mdl-cell--8-col">
                 <div class="mdl-grid" style="width: 100%;">
