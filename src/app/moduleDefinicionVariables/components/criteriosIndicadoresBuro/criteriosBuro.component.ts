@@ -41,7 +41,7 @@ export class CriteriosBuro implements OnInit {
     ngOnInit() {
         let auth = localStorage.getItem('auth');
         if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
-        
+
         this._DefinicionVariablesService.getCriteriosIndicadores().subscribe(
             resp => {
                 /* 1 delete
@@ -109,24 +109,32 @@ export class CriteriosBuro implements OnInit {
             "ver_array": null
         };
         if (id == 1) {
+            this.ranges.tasa = this.ranges.tasa ? this.ranges.tasa : 1;
             saveObj.range = this.ranges.tasa + "-0";
         } else
             if (id == 2) {
+                this.ranges.BC_Score = this.ranges.BC_Score ? this.ranges.BC_Score : 1;
                 saveObj.range = this.ranges.BC_Score + "-1000";
             } else if (id == 3) {
+                this.ranges.icc = !this.ranges.icc ? 4 : this.ranges.icc;
+                this.ranges.icc = this.ranges.icc < 4 ? 4 : this.ranges.icc;
+                this.ranges.icc = this.ranges.icc > 9 ? 9 : this.ranges.icc;
                 saveObj.range = this.ranges.icc + "-9";
             } else if (id == 4) {
                 saveObj.is_ok = value;
             }
             else if (id == 5) {
+                this.ranges.MOP_mayor_min = this.ranges.MOP_mayor_min ? this.ranges.MOP_mayor_min : 1;
                 saveObj.range = this.ranges.MOP_mayor_min + "-" + this.ranges.MOP_mayor_max;
             }
             else if (id == 6) {
+                this.ranges.Saldo_Vencido = this.ranges.Saldo_Vencido != null ? this.ranges.Saldo_Vencido : 0;
                 saveObj.range = this.ranges.Saldo_Vencido + "-" + this.ranges.Saldo_Vencido_max;
             }
         this._DefinicionVariablesService.setBankVariable(saveObj).subscribe(
             resp => {
                 if (resp.status != 0 && resp.message != 'successful') console.log("something bad");
+                if (id == 3) this.getIccBank();
             },
             err => {
                 console.log("error", err);
@@ -216,10 +224,9 @@ export class CriteriosBuro implements OnInit {
     }
 
     public changeICC(id: any) {
-        if (!this.ranges.icc || this.ranges.icc == '') return;
+        if (!this.ranges.icc || this.ranges.icc == '' || this.ranges.icc == 0) return this.ranges.icc = 4;
         if (this.ranges.icc > 9) this.ranges.icc = 9;
         if (this.ranges.icc < 4) this.ranges.icc = 4;
-        this.getIccBank();
         this.saveChange(id, false);
     }
 

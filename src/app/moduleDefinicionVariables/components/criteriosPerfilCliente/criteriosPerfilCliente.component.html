@@ -7,11 +7,11 @@
 
     <div class="mdl-grid" *ngFor="let item of indicadoresPerfil">
         <!--edad-->
-        <div class="mdl-grid" *ngIf="item.status && item.id == 7">
-            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+        <div class="mdl-grid divs" *ngIf="item.status && item.id == 7">
+            <div class="mdl-cell mdl-cell--12-col titles">
                 {{item.name}}
             </div>
-            <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-cell mdl-cell--6-col"> 
                 <mat-form-field appearance="outline" style="display: block !important;">
                     <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.edadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
                         name="edadMin" #edadMin="ngModel" required>
@@ -35,10 +35,10 @@
             </div>
         </div>
 
-
+        
         <!--ingresos declarados-->
-        <div class="mdl-grid" *ngIf="item.status && item.id == 10">
-            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+        <div class="mdl-grid divs" *ngIf="item.status && item.id == 10">
+            <div class="mdl-cell mdl-cell--12-col titles">
                 {{item.name}}
             </div>
             <div class="mdl-cell mdl-cell--6-col">
@@ -98,8 +98,8 @@
         </mat-card>
 
         <!-- Tope mensualidad -->
-        <div class="mdl-grid" *ngIf="item.status && item.id == 14">
-            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+        <div class="mdl-grid divs" *ngIf="item.status && item.id == 14">
+            <div class="mdl-cell mdl-cell--12-col titles">
                 {{item.name}}
             </div>
             <div class="mdl-cell mdl-cell--12-col">
@@ -119,12 +119,12 @@
 
         <!--nacionalidad-->
         <div *ngIf="item.status && item.id == 9" class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+            <div class="mdl-cell mdl-cell--12-col titles">
                 {{item.name}}
             </div>
             <div class="mdl-cell mdl-cell--12-col">
 
-                <ul class="demo-list-two mdl-list" style="margin-left: 15%">
+                <ul class="demo-list-two mdl-list" style="margin-left: 20%">
                     <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of nacionalidades">
                         <span>
                             <mat-slide-toggle checked="{{item.status}}" color="primary" (click)="setNacionalidad(item)"></mat-slide-toggle>
@@ -139,11 +139,11 @@
 
         <!--ocupation-->
         <div *ngIf="item.status && item.id == 8" class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
+            <div class="mdl-cell mdl-cell--12-col titles">
                 {{item.name}}
             </div>
             <div class="mdl-cell mdl-cell--12-col">
-                <ul class="demo-list-two mdl-list" style="margin-left: 15%">
+                <ul class="demo-list-two mdl-list" style="margin-left: 20%">
                     <li class="mdl-list__item mdl-list__item--two-line" *ngFor="let item of profesiones">
                         <span>
                             <mat-slide-toggle checked="{{item.status}}" color="primary" (click)="setCheck(item)"></mat-slide-toggle>

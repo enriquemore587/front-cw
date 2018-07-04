@@ -4,3 +4,16 @@
     align-content: center;
     justify-content: center;
 }
+.titles{
+    text-align: center;
+    font-size: 25px;
+    color :#6B6B6B;
+}
+
+.divs{
+    height: 215px !important;
+    
+    /* border-style: hidden hidden solid hidden;
+    border-width: 2px;
+    border-color: #F1F1F1; */
+}

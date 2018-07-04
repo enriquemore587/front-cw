@@ -8,8 +8,8 @@
     <div class="mdl-grid centrado">
         <div class="mdl-cell mdl-cell--12-col" *ngFor="let item of indicadoresBuro">
 
-            <div style="text-align: center" *ngIf="item.id == 1">
-                <p>{{item.name}}%</p>
+            <div style="text-align: center" *ngIf="item.id == 1" class="divs">
+                <p class="titles">{{item.name}}%</p>
                 <mat-form-field appearance="outline">
                     <input matInput placeholder="Tasa" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
                         [(ngModel)]="ranges.tasa" name="tasa" #tasa="ngModel" required>
@@ -22,8 +22,8 @@
             </div>
 
             <!--BC Score-->
-            <div style="text-align: center" *ngIf="item.status && item.id == 2">
-                <p> {{item.name}}</p>
+            <div style="text-align: center" *ngIf="item.status && item.id == 2" class="divs">
+                <p class="titles">{{item.name}}</p>
                 <mat-form-field appearance="outline">
                     <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
                         [(ngModel)]="ranges.BC_Score" name="bc" #bc="ngModel" required>
@@ -36,7 +36,7 @@
             </div>
 
             <div style="text-align: center;" *ngIf="item.status && item.id == 2" class="centrado">
-                <p>Configuración de scores</p>
+                <p class="titles">Configuración de scores</p>
                 <div class="mdl-grid" *ngFor="let item of scoreList">
                     <div class="mdl-cell mdl-cell--4-col">
                         <mat-form-field appearance="outline">
@@ -78,12 +78,12 @@
 
 
             <!-- ICC -->
-            <div style="text-align: center" *ngIf="item.status && item.id == 3" class="centrado">
-                <p>{{item.name}}</p>
+            <div style="text-align: center;" *ngIf="item.status && item.id == 3" class="centrado divs">
+                <p class="titles">{{item.name}}</p>
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">
                         <mat-form-field appearance="outline">
-                            <input id="icc" name="icc" required min="4" matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc" (keyup)="changeICC(item.id)"
+                            <input id="icc" name="icc" required min="4" matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.icc"  (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
                                 type="number" #icc="ngModel">
                             <div *ngIf="icc.invalid && (icc.dirty || icc.touched)" class="alert alert-danger">
                                 <mat-error *ngIf="icc.errors.required">
@@ -104,16 +104,16 @@
             </div>
 
             <!--Alertas Hawk-->
-            <div style="text-align: center" *ngIf="item.status && item.id == 4">
-                <p>{{item.name}}</p>
+            <div style="text-align: center" *ngIf="item.status && item.id == 4" class="divs">
+                <p class="titles">{{item.name}}</p>
                 NO
                 <mat-slide-toggle [(ngModel)]="item.is_ok" color="primary" checked="{{item.is_ok}}" (change)="saveChange(item.id,item.is_ok)"></mat-slide-toggle>
                 SI
             </div>
 
             <!--MOP mayor-->
-            <div style="text-align: center" *ngIf="item.status && item.id == 5" class="centrado">
-                <p>{{item.name}}</p>
+            <div style="text-align: center" *ngIf="item.status && item.id == 5" class="centrado divs">
+                <p class="titles">{{item.name}}</p>
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">
                         <mat-form-field appearance="outline">
@@ -146,8 +146,8 @@
 
             <!--Saldo Vencido-->
 
-            <div style="text-align: center" *ngIf="item.status && item.id == 6" class="centrado">
-                <p>{{item.name}}</p>
+            <div style="text-align: center" *ngIf="item.status && item.id == 6" class="centrado divs">
+                <p class="titles">{{item.name}}</p>
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">
                         <mat-form-field appearance="outline">

@@ -106,19 +106,31 @@ export class CriteriosPerfilClienteComponent implements OnInit {
             "ver_array": null
         };
 
-        if (id == 7)
+        if (id == 7) {
+            this.ranges.edadMin = this.ranges.edadMin ? this.ranges.edadMin : 1;
             saveObj.range = this.ranges.edadMin + "-" + this.ranges.edadMax;
-        else if (id == 10)
+        }
+        else if (id == 10) {
+            this.ranges.ingresoMin = this.ranges.ingresoMin ? this.ranges.ingresoMin : 1;
             saveObj.range = this.ranges.ingresoMin + "-" + this.ranges.ingresoMax;
-        else if (id == 11)
+        }
+        else if (id == 11) {
+            this.ranges.capacidadMin = this.ranges.capacidadMin ? this.ranges.capacidadMin : 1;
             saveObj.range = this.ranges.capacidadMin + "-" + this.ranges.capacidadMax;
-        else if (id == 12)
+        }
+        else if (id == 12) {
+            this.ranges.min_req_pag_min_Min = this.ranges.min_req_pag_min_Min ? this.ranges.min_req_pag_min_Min : 1;
             saveObj.range = this.ranges.min_req_pag_min_Min + "-" + this.ranges.min_req_pag_min_Max;
-        else if (id == 13)
+        }
+        else if (id == 13) {
+            this.ranges.min_pag_min_Min = this.ranges.min_pag_min_Min ? this.ranges.min_pag_min_Min : 1;
             saveObj.range = this.ranges.min_pag_min_Min + "-" + this.ranges.min_pag_min_Max;
-        else if (id == 14)
+        }
+        else if (id == 14) {
+            this.ranges.Porcentaje_pago = this.ranges.Porcentaje_pago ? this.ranges.Porcentaje_pago : 1;
             saveObj.range = this.ranges.Porcentaje_pago + "-0";
-        
+        }
+
         this._DefinicionVariablesService.setBankVariable(saveObj).subscribe(
             resp => {
                 if (resp.status != 0 && resp.message != 'successful') this.showMessage(`Ocurrió un problema`, "Ocultar mensaje");
@@ -202,7 +214,7 @@ export class CriteriosPerfilClienteComponent implements OnInit {
     initMenu() {
         let auth = localStorage.getItem('auth');
         if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
-        
+
         this._DefinicionVariablesService.getCriteriosIndicadoresPerfilCliente().subscribe(
             resp => {
                 if (resp.status == 0 && resp.message == 'successful') {
