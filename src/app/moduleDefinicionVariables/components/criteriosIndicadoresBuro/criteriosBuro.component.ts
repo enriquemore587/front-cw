@@ -57,8 +57,10 @@ export class CriteriosBuro implements OnInit {
                             //this.getScore();
                             this.getScoreBank();
                         } else if (element.id == 3 && element.status) {    //  icc
-                            if (Number(element.range.split('-')[0]) < 4) this.ranges.icc = 4;
-                            else this.ranges.icc = element.range.split('-')[0];
+                            // if (Number(element.range.split('-')[0]) < 4) this.ranges.icc = 4;
+                            // else this.ranges.icc = element.range.split('-')[0];
+                            this.ranges.icc = element.range.split('-')[0];
+                            this.ranges.icc_max = element.range.split('-')[1];
                             this.getIccBank();
                         }
                         else if (element.id == 5 && element.status) {
@@ -117,9 +119,10 @@ export class CriteriosBuro implements OnInit {
                 saveObj.range = this.ranges.BC_Score + "-1000";
             } else if (id == 3) {
                 this.ranges.icc = !this.ranges.icc ? 4 : this.ranges.icc;
+                this.ranges.icc_max = !this.ranges.icc_max || this.ranges.icc_max > 9 ? 9 : this.ranges.icc_max;
                 this.ranges.icc = this.ranges.icc < 4 ? 4 : this.ranges.icc;
                 this.ranges.icc = this.ranges.icc > 9 ? 9 : this.ranges.icc;
-                saveObj.range = this.ranges.icc + "-9";
+                saveObj.range = this.ranges.icc + "-" + this.ranges.icc_max;
             } else if (id == 4) {
                 saveObj.is_ok = value;
             }
@@ -162,11 +165,46 @@ export class CriteriosBuro implements OnInit {
         );
     }
 
+    public deleteRow(item: Score) {
+        let index = this.scoreList.indexOf(item);
+        this._DefinicionVariablesService.deleteAScoreBank(item.id).subscribe(
+            resp => {
+                if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
+                this.scoreList = [
+                    ...this.scoreList.slice(0, index),
+                    ...this.scoreList.slice(index + 1)
+                ];
+            },
+            err => {
+                console.log("error", err);
+            }
+        );
+    }
 
-    public changeStore(value: Score) {
+
+    public changeStore(value: Score, itemChanged: number) {
+        let index = this.scoreList.indexOf(value);
+        let itenmToChangeValues = this.scoreList[index + 1];
         this._DefinicionVariablesService.setAScoreBank(value).subscribe(
             resp => {
                 if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
+                if (itemChanged == 2) {
+                    itenmToChangeValues.desde = Number(value.range) + 1;
+                    this._DefinicionVariablesService.setAScoreBank(itenmToChangeValues).subscribe(
+                        resp => {
+                            if (resp.status != 0 && resp.message != 'successful') console.log("somethink bad");
+                            this.scoreList = [
+                                ...this.scoreList.slice(0, index),
+                                value,
+                                itenmToChangeValues,
+                                ...this.scoreList.slice(index + 2)
+                            ];
+                        },
+                        err => {
+                            console.log("error", err);
+                        }
+                    );
+                }
             },
             err => {
                 console.log("error", err);
@@ -230,8 +268,13 @@ export class CriteriosBuro implements OnInit {
         this.saveChange(id, false);
     }
 
-
-    public setCheck(item: any) {
-        console.log(item);
+    public checkMOP() {
+        this.ranges.MOP_mayor_max = this.ranges.MOP_mayor_max < 1 ? 1 : this.ranges.MOP_mayor_max;
+        this.ranges.MOP_mayor_min = this.ranges.MOP_mayor_min <= this.ranges.MOP_mayor_max ? this.ranges.MOP_mayor_min : this.ranges.MOP_mayor_max;
+    }
+    public checkSaldoVencido() {
+        this.ranges.Saldo_Vencido_max = this.ranges.Saldo_Vencido_max > 10000000 ? 10000000 : this.ranges.Saldo_Vencido_max;
+        this.ranges.Saldo_Vencido_max = this.ranges.Saldo_Vencido_max < 1 ? 1 : this.ranges.Saldo_Vencido_max;
+        this.ranges.Saldo_Vencido = this.ranges.Saldo_Vencido <= this.ranges.Saldo_Vencido_max ? this.ranges.Saldo_Vencido : this.ranges.Saldo_Vencido_max;
     }
 }

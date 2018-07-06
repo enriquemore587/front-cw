@@ -144,6 +144,19 @@ export class CriteriosPerfilClienteComponent implements OnInit {
 
     }
 
+    public checkEdad() {
+        this.ranges.edadMax = this.ranges.edadMax < 100 ? this.ranges.edadMax : 99;
+        this.ranges.edadMax = this.ranges.edadMax < 1 ? 1 : this.ranges.edadMax;
+        this.ranges.edadMin = this.ranges.edadMin <= this.ranges.edadMax ? this.ranges.edadMin : this.ranges.edadMax;
+    }
+    public checkIngreDecMen() {
+        this.ranges.ingresoMax = this.ranges.ingresoMax < 1 ? 1 : this.ranges.ingresoMax;
+        this.ranges.ingresoMin = this.ranges.ingresoMin <= this.ranges.ingresoMax ? this.ranges.ingresoMin : this.ranges.ingresoMax;
+    }
+    public checkTopeMensualidad() {
+        this.ranges.Porcentaje_pago = this.ranges.Porcentaje_pago > 100 ? 100 : this.ranges.Porcentaje_pago;
+    }
+
     getNacionalidad(var_array: string) {
         let nat: Select[] = [];
         nat.push(new Select(1, 'Mexicana', false));

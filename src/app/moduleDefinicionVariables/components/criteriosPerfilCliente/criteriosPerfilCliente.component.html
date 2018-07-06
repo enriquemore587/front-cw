@@ -11,21 +11,23 @@
             <div class="mdl-cell mdl-cell--12-col titles">
                 {{item.name}}
             </div>
-            <div class="mdl-cell mdl-cell--6-col"> 
+            <div class="mdl-cell mdl-cell--6-col">
                 <mat-form-field appearance="outline" style="display: block !important;">
                     <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.edadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                        name="edadMin" #edadMin="ngModel" required>
-                    <div *ngIf="edadMin.invalid && (edadMin.dirty || edadMin.touched)">
-                        <mat-error *ngIf="edadMin.errors.required">
-                            Mínimo is required.
-                        </mat-error>
-                    </div>
+                        name="edadMin" #edadMin="ngModel" required (keyup)="checkEdad()">
+                            <mat-hint [hidden]="edadMin.invalid">Edad mínima</mat-hint>
+                            <div *ngIf="edadMin.invalid && (edadMin.dirty || edadMin.touched)">
+                                <mat-error *ngIf="edadMin.errors.required">
+                                    Mínimo is required.
+                                </mat-error>
+                            </div>
                 </mat-form-field>
             </div>
             <div class="mdl-cell mdl-cell--6-col">
                 <mat-form-field appearance="outline" style="display: block !important;">
                     <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.edadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                        name="edadMax" #edadMax="ngModel" required>
+                        name="edadMax" #edadMax="ngModel" required (keyup)="checkEdad()">
+                    <mat-hint [hidden]="edadMax.invalid">Edad máxima</mat-hint>
                     <div *ngIf="edadMax.invalid && (edadMax.dirty || edadMax.touched)">
                         <mat-error *ngIf="edadMax.errors.required">
                             Máximo is required.
@@ -35,7 +37,7 @@
             </div>
         </div>
 
-        
+
         <!--ingresos declarados-->
         <div class="mdl-grid divs" *ngIf="item.status && item.id == 10">
             <div class="mdl-cell mdl-cell--12-col titles">
@@ -44,7 +46,8 @@
             <div class="mdl-cell mdl-cell--6-col">
                 <mat-form-field appearance="outline" style="display: block !important;">
                     <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.ingresoMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                        name="ingresoMin" #ingresoMin="ngModel" required>
+                        name="ingresoMin" #ingresoMin="ngModel" required (keyup)="checkIngreDecMen()">
+                    <mat-hint [hidden]="ingresoMin.invalid">Ingreso mínimo</mat-hint>
                     <div *ngIf="ingresoMin.invalid && (ingresoMin.dirty || ingresoMin.touched)">
                         <mat-error *ngIf="ingresoMin.errors.required">
                             Mínimo is required.
@@ -55,7 +58,8 @@
             <div class="mdl-cell mdl-cell--6-col">
                 <mat-form-field appearance="outline" style="display: block !important;">
                     <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.ingresoMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
-                        name="ingresoMax" #ingresoMax="ngModel" required>
+                        name="ingresoMax" #ingresoMax="ngModel" required (keyup)="checkIngreDecMen()">
+                    <mat-hint [hidden]="ingresoMax.invalid">Ingreso máximo</mat-hint>
                     <div *ngIf="ingresoMax.invalid && (ingresoMax.dirty || ingresoMax.touched)">
                         <mat-error *ngIf="ingresoMax.errors.required">
                             Máximo is required.
@@ -66,7 +70,6 @@
         </div>
 
         <!--CAPACIDAD DE PAGO-->
-
         <mat-card *ngIf="item.status && item.id == 11" style="width: 100%;">
             <mat-card-title>{{ item.name }}</mat-card-title>
             <mat-card-content>
@@ -75,6 +78,7 @@
                         <mat-form-field>
                             <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.capacidadMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
                                 name="capacidadMin" #capacidadMin="ngModel" required>
+                            <mat-hint [hidden]="capacidadMin.invalid">Capacidad de pago mínimo</mat-hint>
                             <div *ngIf="capacidadMin.invalid && (capacidadMin.dirty || capacidadMin.touched)">
                                 <mat-error *ngIf="capacidadMin.errors.required">
                                     Mínimo is required.
@@ -86,6 +90,7 @@
                         <mat-form-field>
                             <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.capacidadMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
                                 name="capacidadMax" #capacidadMax="ngModel" required>
+                            <mat-hint [hidden]="capacidadMax.invalid">Capacidad de pago máximo</mat-hint>
                             <div *ngIf="capacidadMax.invalid && (capacidadMax.dirty || capacidadMax.touched)">
                                 <mat-error *ngIf="capacidadMax.errors.required">
                                     Máximo is required.
@@ -105,12 +110,13 @@
             <div class="mdl-cell mdl-cell--12-col">
                 <mat-form-field appearance="outline" style="display: block !important;">
                     <input matInput placeholder="Porcentaje" type="number" [(ngModel)]="ranges.Porcentaje_pago" (blur)="saveChange(item.id,false)"
-                        (keyup.enter)="saveChange(item.id,false)" name="Porcentajepago" #Porcentajepago="ngModel" required>
+                        (keyup.enter)="saveChange(item.id,false)" name="Porcentajepago" #Porcentajepago="ngModel" required (keyup)="checkTopeMensualidad()">
                     <mat-icon matSuffix>%</mat-icon>
+                    <mat-hint [hidden]="Porcentajepago.invalid">Tope mensualidad</mat-hint>
 
                     <div *ngIf="Porcentajepago.invalid && (Porcentajepago.dirty || Porcentajepago.touched)">
                         <mat-error *ngIf="Porcentajepago.errors.required">
-                            Máximo is required.
+                            Tope mensualidad is required.
                         </mat-error>
                     </div>
                 </mat-form-field>

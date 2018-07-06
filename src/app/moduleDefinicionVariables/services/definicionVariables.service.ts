@@ -79,6 +79,14 @@ export class DefinicionVariablesService {
 
   }
 
+  deleteAScoreBank(id_score: any): any {
+
+    let params = JSON.stringify({id_score});
+
+    return this._http.post<any>(this.url + 'usersBank/criterios/delete-a-score-bank', params, { headers: this.httpHeaders });
+
+  }
+
   getIccBuro(icc): Observable<any> {
     return this._http.get<any>(this.url + "usersBank/criterios/icc-buro?icc=" + icc, { headers: this.httpHeaders });
   }

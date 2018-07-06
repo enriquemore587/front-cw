@@ -1,0 +1,141 @@
+<table mat-table [dataSource]="_HistoryService.registrosList" class="mat-elevation-z8">
+
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.id}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+    <!-- <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td> -->
+  </ng-container>
+
+  <!-- Nacionalidad Column -->
+  <ng-container matColumnDef="nacionalidad">
+    <th mat-header-cell *matHeaderCellDef> Nacionalidad </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.nacionalidad}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+
+  <!-- Ingreso declarado mensual Column -->
+  <ng-container matColumnDef="ingresoDeclarado">
+    <th mat-header-cell *matHeaderCellDef> Ingreso declarado mensual </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.ingresoDeclarado | currency}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- TOPE MENSUALIDAD Column -->
+  <ng-container matColumnDef="topeMen">
+    <th mat-header-cell *matHeaderCellDef> TOPE MENSUALIDAD </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.topeMen | percent: '3.3'}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- BC score Column -->
+  <ng-container matColumnDef="BCscore">
+    <th mat-header-cell *matHeaderCellDef> BC score </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.BCscore}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Gasto ICC Column -->
+  <ng-container matColumnDef="gastoICC">
+    <th mat-header-cell *matHeaderCellDef> Gasto ICC </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.gastoICC | percent: '3.3'}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Alertas hawk Column -->
+  <ng-container matColumnDef="alertasH">
+    <th mat-header-cell *matHeaderCellDef> Alertas hawk </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.alertasH}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- MOP mayor Column -->
+  <ng-container matColumnDef="MOPmayor">
+    <th mat-header-cell *matHeaderCellDef> MOP mayor </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.MOPmayor}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Saldo vencido Column -->
+  <ng-container matColumnDef="Saldovencido">
+    <th mat-header-cell *matHeaderCellDef> Saldo vencido </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.Saldovencido}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- TASA Column -->
+  <ng-container matColumnDef="tasa">
+    <th mat-header-cell *matHeaderCellDef> TASA </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.tasa | percent}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Edad Column -->
+  <ng-container matColumnDef="edad">
+    <th mat-header-cell *matHeaderCellDef> Edad </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.edad}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- PAGOS BURÓ Column -->
+  <ng-container matColumnDef="pagosBuro">
+    <th mat-header-cell *matHeaderCellDef> PAGOS BURÓ </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.pagosBuro}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- PLAZO SOLICITADO Column -->
+  <ng-container matColumnDef="plazoSolicitado">
+    <th mat-header-cell *matHeaderCellDef> PLAZO SOLICITADO </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.plazoSolicitado}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- MONTO SOLICITADO Column -->
+  <ng-container matColumnDef="montoSolicitado">
+    <th mat-header-cell *matHeaderCellDef> MONTO SOLICITADO </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.montoSolicitado}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- PLAZO DISPONIBLE Column -->
+  <ng-container matColumnDef="plazoDisponible">
+    <th mat-header-cell *matHeaderCellDef> PLAZO DISPONIBLE </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.plazoDisponible}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Mensualidad Column -->
+  <ng-container matColumnDef="mensualidad">
+    <th mat-header-cell *matHeaderCellDef> Mensualidad </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.mensualidad}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Plazo salida Column -->
+  <ng-container matColumnDef="plazo">
+    <th mat-header-cell *matHeaderCellDef> Plazo salida </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.plazo}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Linea aprobada Column -->
+  <ng-container matColumnDef="linea_aprobada">
+    <th mat-header-cell *matHeaderCellDef> Linea aprobada </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.linea_aprobada}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <!-- Tasa salida Column -->
+  <ng-container matColumnDef="_tasa">
+    <th mat-header-cell *matHeaderCellDef> Tasa salida </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction._tasa}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>
