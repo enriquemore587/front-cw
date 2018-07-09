@@ -1,3 +1,6 @@
 .blanco {
-    color: #F1F1F1 !important;
+    color: #707070 !important;
 }
+.example-spacer {
+    flex: 1 1 auto;
+  }

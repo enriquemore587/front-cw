@@ -6,3 +6,17 @@ tr.mat-footer-row {
     font-weight: bold;
 }
   
+td{
+    font-size: 0.7em;
+    text-align: center;
+}
+th{
+    font-size: 0.7em;
+    text-align: center;
+}
+
+.table-container {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }

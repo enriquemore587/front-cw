@@ -24,7 +24,5 @@
 
 .divs{
   height: 215px !important;
-  /* border-style: hidden hidden solid hidden;
-  border-width: 2px;
-  border-color: #F1F1F1; */
+  border-bottom: 2px solid #F1F1F1 !important;
 }

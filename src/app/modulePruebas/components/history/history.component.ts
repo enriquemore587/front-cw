@@ -8,10 +8,10 @@ import { Solicitud } from './solicitud';
   providers : [HistoryService]
 })
 export class HistoryComponent implements OnInit{
-  public displayedColumns: string[] = ['id', 'nacionalidad', 'ingresoDeclarado', 'topeMen', 'BCscore', 'gastoICC', 'alertasH', 'MOPmayor', 'Saldovencido', 'tasa', 'edad', 'pagosBuro', 'plazoSolicitado', 'montoSolicitado', 'plazoDisponible', 'mensualidad', 'plazo', 'linea_aprobada', '_tasa'];
+  public displayedColumns: string[] = ['id', 'nacionalidad', 'ingresoDeclarado', 'topeMen', 'BCscore', 'gastoICC', 'alertasH', 'MOPmayor', 'Saldovencido', 'tasa', 'edad', 'pagosBuro', 'plazoSolicitado', 'montoSolicitado', 'plazoDisponible', 'mensualidad', 'plazo', 'linea_aprobada', '_tasa', 'approved', 'reason'];
   
   constructor(
-    private _HistoryService : HistoryService
+    public _HistoryService : HistoryService
   ) {
     this._HistoryService.getListRegistros();
   }

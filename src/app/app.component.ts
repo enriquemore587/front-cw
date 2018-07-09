@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserLoginService } from './moduleLogin/services/user-login.service';
 
 import { log } from 'util';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent {
   public title: string = 'CREDIWHERE';
   public auth;
   public email;
+  public imagePath = environment.logoName;
 
 
   constructor(

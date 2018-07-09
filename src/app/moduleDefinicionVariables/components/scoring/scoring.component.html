@@ -17,9 +17,9 @@
         <div class="mdl-cell mdl-cell--10-col">
             <mat-form-field appearance="outline" class="demo-chip-list" style="margin-right: 0; display: block;">
                 <mat-chip-list #chipList>
-                    <mat-chip *ngFor="let item of exp" [hidden]="item.name == nombreVariable" [ngStyle]="{'background-color' : getColor(item) == 1 ? '#327AB3' : '#DCDCDC'}"
-                        style="font-size: 9px;" [selectable]="selectable" [ngClass]="{'bg-variable': selectedVariable(item)}" [removable]="removable" (removed)="remove(item)" [matMenuTriggerFor]="opcItem"
-                        (click)="changeItem(item)">
+                    <mat-chip *ngFor="let item of exp; let i = index" [hidden]="item.name == nombreVariable" [ngStyle]="{'background-color' : getColor(item.name) == 1 ? '#327AB3' : '#DCDCDC'}"
+                        style="font-size: 9px;" [selectable]="selectable" [ngClass]="{'bg-variable': selectedVariable(i)}" [removable]="removable" (removed)="remove(item)" [matMenuTriggerFor]="opcItem"
+                        (click)="changeItem(i)">
                         {{item.name}}
                         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>

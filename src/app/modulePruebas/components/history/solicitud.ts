@@ -18,7 +18,9 @@ export class Solicitud {
     public mensualidad:number,
     public plazo:number,
     public linea_aprobada:number,
-    public _tasa:number
+    public _tasa:number,
+    public approved : boolean,
+    public reason : string
   ) {
 
   }

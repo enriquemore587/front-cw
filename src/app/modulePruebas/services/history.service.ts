@@ -50,7 +50,9 @@ export class HistoryService {
               0,
               0,
               0,
-              0
+              0,
+              registro.approved,
+              registro.reason
             )];
           });
 
@@ -59,15 +61,27 @@ export class HistoryService {
           response.data.map(registro => {
             registro.content.map(x => {
               if (x.salida == 1) {
-                temp = [...temp, { id: registro.id, value: x.value }];
+                temp = [...temp, { id: registro.id, value: x.value, salida: x.salida }];
+              }else if (x.salida == 2) {
+                temp = [...temp, { id: registro.id, value: x.value, salida: x.salida }];
+              }else if (x.salida == 3) {
+                temp = [...temp, { id: registro.id, value: x.value, salida: x.salida }];
+              }else if (x.salida == 4) {
+                temp = [...temp, { id: registro.id, value: x.value, salida: x.salida }];
               }
             })
           });
 
+          
+          
+
           this.registrosList.forEach(element => {
             temp.forEach(item => {
               if (element.id == item.id) {
-                element.mensualidad = item.value
+                if (item.salida == 1) element.mensualidad = item.value;
+                if (item.salida == 2) element.plazo = item.value;
+                if (item.salida == 3) element.linea_aprobada = item.value;
+                if (item.salida == 4) element._tasa = item.value;
               }
             });
           });

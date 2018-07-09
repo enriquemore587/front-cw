@@ -68,7 +68,7 @@ export class ScoringComponent implements OnInit {
   }
   public editando = false;
   public crearNueva() {
-    this.editando = !this.editando;
+    //this.editando = !this.editando;
     this.action = 'ARITMÉTICA';
     this.nombreVariable = '';
     this.exp = [];
@@ -278,7 +278,7 @@ export class ScoringComponent implements OnInit {
 
 
   public addDigint(num: string) {
-    if (this.changingVariable==null) {
+    if (this.changingVariable == null) {
       if (this.exp.length == 0) {
         this.exp.push({ value: num, id: 0, name: num });
         return;
@@ -323,9 +323,9 @@ export class ScoringComponent implements OnInit {
     }
   }
 
-  public getColor(item: any) {
+  public getColor(name: string) {
     let exp = new RegExp(/((\+)|(-)|(\/)|(X)|(sqrt)|(\()|(\))|(if)|(then)|(else)|(\<)|(\>)|(\!)|(prom)|(min)|(max)|(\^)|(\=))/i);
-    if (exp.test(item.name)) {
+    if (exp.test(name)) {
       return 1;
     }
     return 2;
@@ -587,24 +587,25 @@ export class ScoringComponent implements OnInit {
     this.positionToChange = null;
   }
 
-  public selectedVariable(item: any) {
-    return this.positionToChange == this.exp.indexOf(item) && this.changingVariable;
+  public selectedVariable(index: number) {
+    return this.positionToChange == index && this.changingVariable;
   }
 
   public changingVariable = null;
   public positionToChange: number = null;
   public changeVariable() {
     this.changingVariable = true;
-    let last_number = this.exp[this.positionToChange].value;
-    if (isNaN(Number(last_number))) {
+    let last_number = this.exp[this.positionToChange].name;
+    let valor = parseInt(last_number);
+    if (!isNaN(Number(valor))) {
       this.exp[this.positionToChange].name = '';
-      this.exp[this.positionToChange].value = '';
     }
   }
+  //ok
 
-  public changeItem(item: any) {
+  public changeItem(index: number) {
     this.changingVariable = null;
-    this.positionToChange = this.exp.indexOf(item);
+    this.positionToChange = index;
   }
 
 

@@ -1,7 +1,8 @@
-<!-- <div class=" mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class=" mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header *ngIf="auth" class="mdl-layout__header mdl-layout__header--waterfall" style="height: 115px;">
+        <!-- Top row, always visible -->
         <div class="mdl-layout__header-row">
-            
+            <!-- Title -->
             <span class="mdl-layout-title blanco">CREDIWHERE</span>
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
@@ -49,61 +50,8 @@
 
     <main class="mdl-layout__content">
         <div class="page-content">
+            <!-- Your content goes here -->
+            <router-outlet></router-outlet>
         </div>
     </main>
-</div> -->
-<mat-toolbar *ngIf="auth" color="primary">
-    <mat-toolbar-row style="height: 114.1px; background-color: #686868;">
-        <img [src]="imagePath" style="width: 220px; height: 56px;">
-        <span class="example-spacer"></span>
-        <a class="mdl-navigation__link" (click)="logOut()" style="right: 50px; color: #FFFFFF !important" routerLink="/login-panel"
-            href>
-            Cerrar sesión</a>
-    </mat-toolbar-row>
-    <mat-toolbar-row style="background-color: #F1F1F1; height: 68.6px;">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="blanco" mat-button [matMenuTriggerFor]="activVariables">Activación de variables
-                <i class="fas fa-angle-down"></i>
-            </button>
-            <button class="blanco" mat-button [matMenuTriggerFor]="criterios">Criterios mínimos
-                <i class="fas fa-angle-down"></i>
-            </button>
-            <button class="blanco" mat-button [matMenuTriggerFor]="formulas">Fórmulas
-                <i class="fas fa-angle-down"></i>
-            </button>
-            <button class="blanco" mat-button [matMenuTriggerFor]="validacion">Validación y pruebas
-                <i class="fas fa-angle-down"></i>
-            </button>
-        </nav>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-menu #sub="matMenu">
-    <button mat-menu-item [matMenuTriggerFor]="activVariables">Activar variables</button>
-    <button mat-menu-item [matMenuTriggerFor]="criterios">Criterios minimos</button>
-    <button mat-menu-item [matMenuTriggerFor]="formulas">Fórmulas</button>
-    <button mat-menu-item [matMenuTriggerFor]="validacion">Validación</button>
-</mat-menu>
-
-<mat-menu #activVariables="matMenu">
-    <button mat-menu-item routerLink="/definicion-variables/activacion-variables-cliente">Perfil de cliente</button>
-    <button mat-menu-item routerLink="/definicion-variables/activacion-variables-indicadores">Indicadores de buró</button>
-</mat-menu>
-
-<mat-menu #criterios="matMenu">
-    <button mat-menu-item routerLink="/definicion-variables/criterios-cliente">Perfil de cliente</button>
-    <button mat-menu-item routerLink="/definicion-variables/criterios-indicadores">Indicadores de buró</button>
-</mat-menu>
-
-<mat-menu #formulas="matMenu">
-    <button mat-menu-item routerLink="/definicion-variables/scoring">Scoring</button>
-    <button mat-menu-item routerLink="/definicion-variables/arbol">Árbol</button>
-</mat-menu>
-<mat-menu #pruebas="matMenu">
-    <button mat-menu-item routerLink="/pruebas/definicion-casos">Definición de Casos</button>
-    <button mat-menu-item>Cargar bases de datos</button>
-</mat-menu>
-<mat-menu #validacion="matMenu">
-    <button mat-menu-item routerLink="/pruebas">Válida fórmulas</button>
-    <button mat-menu-item routerLink="/pruebas/history">Solicitudes</button>
-</mat-menu>
-<router-outlet></router-outlet>
+</div>

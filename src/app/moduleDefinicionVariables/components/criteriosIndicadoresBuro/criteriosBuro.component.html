@@ -8,7 +8,7 @@
     <div class="mdl-grid centrado">
         <div class="mdl-cell mdl-cell--12-col" *ngFor="let item of indicadoresBuro">
 
-            <div style="text-align: center" *ngIf="item.id == 1" class="divs">
+            <div style="text-align: center;" *ngIf="item.id == 1" class="divs">
                 <p class="titles">{{item.name}}%</p>
                 <mat-form-field appearance="outline">
                     <input matInput placeholder="Tasa" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
@@ -23,7 +23,7 @@
             </div>
 
             <!--BC Score-->
-            <div style="text-align: center" *ngIf="item.status && item.id == 2" class="divs">
+            <div style="text-align: center;" *ngIf="item.status && item.id == 2" class="divs">
                 <p class="titles">{{item.name}}</p>
                 <mat-form-field appearance="outline">
                     <input matInput placeholder="Mínimo" type="number" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
@@ -37,7 +37,7 @@
                 </mat-form-field>
             </div>
 
-            <div style="text-align: center;" *ngIf="item.status && item.id == 2" class="centrado">
+            <div style="text-align: center; margin-top: 15px;" *ngIf="item.status && item.id == 2" class="centrado">
                 <p class="titles">Configuración de scores</p>
                 <div class="mdl-grid" *ngFor="let item of scoreList" style="position: relative;">
                     <div class="mdl-cell mdl-cell--3-col">
@@ -72,7 +72,8 @@
                     </button>
                 </div> -->
             </div>
-            <div class="mdl-grid myContainer" *ngIf="item.status && item.id == 2">
+
+            <div style="height: 80px; border-bottom: 2px solid #F1F1F1 !important;" class="" *ngIf="item.status && item.id == 2">
                 <div class="mdl-cell mdl-cell--12-col">
                     <button mat-raised-button (click)="add_configuration()" style="margin-left: 25%; width: 50%; color: #1165A7;">
                         Agregar Configuración
@@ -127,7 +128,7 @@
             </div>
 
             <!--MOP mayor-->
-            <div style="text-align: center" *ngIf="item.status && item.id == 5" class="centrado divs">
+            <div style="text-align: center;" *ngIf="item.status && item.id == 5" class="centrado divs">
                 <p class="titles">{{item.name}}</p>
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">

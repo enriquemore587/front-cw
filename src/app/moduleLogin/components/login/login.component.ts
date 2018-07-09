@@ -11,6 +11,7 @@ import { log } from 'util';
 // begin message
 import { MatSnackBar } from '@angular/material';
 import { variable } from '@angular/compiler/src/output/output_ast';
+import { environment } from '../../../../environments/environment';
 // end message
 
 @Component({
@@ -22,6 +23,7 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 export class LoginComponent implements OnInit {
   public title : string = 'INICIO SESIÓN';
   public user : User;
+  public imagePath = environment.logo;
   
   hide = false;
   constructor(

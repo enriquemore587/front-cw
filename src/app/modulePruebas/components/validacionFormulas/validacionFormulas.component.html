@@ -85,7 +85,7 @@
 <!-- end lista invalidada -->
 <!-- begin lista valida -->
 <div *ngIf="!wait">
-    <div class="mdl-grid" style="margin-left: 12%; width: 100%" *ngFor="let item of list_invalidated; let i = index">
+    <div class="mdl-grid" style="margin-left: 12%; width: 100%; background-color: #F8F8F8;" *ngFor="let item of list_invalidated; let i = index">
         <div class="mdl-cell mdl-cell--3-col center">
             <label>{{item.name}}</label>
         </div>
