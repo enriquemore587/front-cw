@@ -1,9 +1,9 @@
-<div class="mdl-grid " style="background-color: #FFFFFF;">
+<div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col" style="text-align: center;">
         <h1>{{title}}</h1>
     </div>
 </div>
-<div class="mdl-grid  myContainer ">
+<div class="mdl-grid  myContainer">
     <div class="mdl-cell mdl-cell--12-col">
         <button mat-raised-button style="width: 50%; margin-left: 25%; background-color: #C19A1C; color: #ffffff;" (click)="runTEST()">
             Ejecutar prueba de validación
@@ -11,85 +11,85 @@
     </div>
 </div>
 
-<div *ngIf="wait" class="mdl-grid  myContainer ">
+<div *ngIf="wait" class="mdl-grid  myContainer">
     <div class="mdl-cell mdl-cell--12-col">
         <mat-spinner style="margin-left: 45%;" class=""></mat-spinner>
     </div>
 </div>
-
-<div *ngIf="!wait" class="mdl-grid" style="margin-left: 12%; width: 100%">
-    <div class="mdl-cell mdl-cell--3-col center">
-        Variables
-    </div>
-    <div class="mdl-cell mdl-cell--3-col center">
-        Valores
-    </div>
-    <div class="mdl-cell mdl-cell--3-col center">
-        Resultado
+<div *ngIf="!wait" class="myContainer">
+    <div class="div-row">
+        <div class="div-text">
+            Variables
+        </div>
+        <div class="div-text">
+            Valores
+        </div>
+        <div class="div-text">
+            Resultado
+        </div>
     </div>
 </div>
-<!-- begin lista invalidada -->
-<div *ngIf="!wait">
-    <div *ngFor="let item of list_validated; let i = index">
-        <div class="mdl-grid" style="margin-left: 12%; width: 100%;">
-            <div class="mdl-cell mdl-cell--3-col center">
-                {{item.name}}
-            </div>
-            <div class="mdl-cell mdl-cell--3-col center">
-                <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value
-                    == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
-                <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
-                <!-- tasa -->
-                <label *ngIf="item.var_fix_id==1">{{item.value | percent}}</label>
-                <!-- TOPE MENSUALIDAD -->
-                <label *ngIf="item.var_fix_id==14">{{item.value | percent}}</label>
-                <!-- Alertas hawk -->
-                <label *ngIf="item.var_fix_id==4">{{item.value}}</label>
-                <!-- MOP mayor -->
-                <label *ngIf="item.var_fix_id==5">{{item.value}}</label>
-                <!-- Edad -->
-                <label *ngIf="item.var_fix_id==7">{{item.value}}</label>
-                <!-- Gasto ICC -->
-                <label *ngIf="item.var_fix_id==3">{{item.value | percent}}</label>
-                <!-- BC score -->
-                <label *ngIf="item.var_fix_id==2">{{item.value}}</label>
-                <!-- PAGOS BURÓ -->
-                <label *ngIf="item.var_fix_id == -3">{{item.value | currency}}</label>
-                <!-- PLAZO SOLICITADO-->
-                <label *ngIf="item.var_fix_id == -7">{{item.value}}</label>
-                <!-- PLAZO DISPONIBLE -->
-                <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
-                <!-- MONTO SOLICITADO -->
-                <label *ngIf="item.var_fix_id == -9">{{item.value}}</label>
-                <!-- SALIDA tasa -->
-                <label *ngIf="item.salida == 4">{{item.value}}</label>
-                <!-- pesitos -->
-                <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
-                <!-- custom -->
-                <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
 
-                <br>
-                <mat-hint *ngIf="item.salida == 1">MENSUALIDAD</mat-hint>
-                <mat-hint *ngIf="item.salida == 2">PLAZO</mat-hint>
-                <mat-hint *ngIf="item.salida == 3">LÍNEA FINAL</mat-hint>
-                <mat-hint *ngIf="item.salida == 4">TASA</mat-hint>
-            </div>
-            <div class="mdl-cell mdl-cell--3-col center">
-                <div *ngIf="i != get_lastIndex()" scope="row" style="text-align: center; color: green; font-size: 48px;">
-                    <i class="fas fa-check-circle"></i>
-                </div>
+<!-- begin lista invalidada -->
+<div *ngIf="!wait" class="myContainer">
+    <div class="div-row" *ngFor="let item of list_validated; let i = index" [ngClass]="{'bgW':getBG(i)}">
+        <div class="div-text">
+            {{item.name}}
+        </div>
+        <div class="div-text">
+            <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value
+                == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
+            <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
+            <!-- tasa -->
+            <label *ngIf="item.var_fix_id==1">{{item.value | percent}}</label>
+            <!-- TOPE MENSUALIDAD -->
+            <label *ngIf="item.var_fix_id==14">{{item.value | percent}}</label>
+            <!-- Alertas hawk -->
+            <label *ngIf="item.var_fix_id==4">{{item.value}}</label>
+            <!-- MOP mayor -->
+            <label *ngIf="item.var_fix_id==5">{{item.value}}</label>
+            <!-- Edad -->
+            <label *ngIf="item.var_fix_id==7">{{item.value}}</label>
+            <!-- Gasto ICC -->
+            <label *ngIf="item.var_fix_id==3">{{item.value | percent}}</label>
+            <!-- BC score -->
+            <label *ngIf="item.var_fix_id==2">{{item.value}}</label>
+            <!-- PAGOS BURÓ -->
+            <label *ngIf="item.var_fix_id == -3">{{item.value | currency}}</label>
+            <!-- PLAZO SOLICITADO-->
+            <label *ngIf="item.var_fix_id == -7">{{item.value}}</label>
+            <!-- PLAZO DISPONIBLE -->
+            <label *ngIf="item.var_fix_id == -8">{{item.value}}</label>
+            <!-- MONTO SOLICITADO -->
+            <label *ngIf="item.var_fix_id == -9">{{item.value}}</label>
+            <!-- SALIDA tasa -->
+            <label *ngIf="item.salida == 4">{{item.value}}</label>
+            <!-- pesitos -->
+            <label *ngIf="get_pesos(item)">{{item.value | currency}}</label>
+            <!-- custom -->
+            <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
+
+            <br>
+            <mat-hint *ngIf="item.salida == 1">MENSUALIDAD</mat-hint>
+            <mat-hint *ngIf="item.salida == 2">PLAZO</mat-hint>
+            <mat-hint *ngIf="item.salida == 3">LÍNEA FINAL</mat-hint>
+            <mat-hint *ngIf="item.salida == 4">TASA</mat-hint>
+        </div>
+        <div class="div-text">
+            <div *ngIf="i != get_lastIndex()" scope="row" style="text-align: center; color: green; font-size: 48px;">
+                <i class="fas fa-check-circle"></i>
             </div>
         </div>
     </div>
 </div>
 <!-- end lista invalidada -->
 <!-- begin lista valida -->
-<div *ngIf="!wait">
-    <div class="mdl-grid" style="margin-left: 12%; width: 100%; background-color: #F8F8F8;" *ngFor="let item of list_invalidated; let i = index">
-        <div class="mdl-cell mdl-cell--3-col center">
+<div *ngIf="!wait" class="myContainer">
+    <div class="div-row" *ngFor="let item of list_invalidated; let i = index" [ngClass]="{'bgW':getBG(i)}">
+        <div class="div-text">
             <label>{{item.name}}</label>
         </div>
-        <div class="mdl-cell mdl-cell--3-col center">
+        <div class="div-text">
             <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value
                 == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
             <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
@@ -120,7 +120,7 @@
             <!-- custom -->
             <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
         </div>
-        <div class="mdl-cell mdl-cell--3-col center">
+        <div class="div-text">
             <div *ngIf="i == get_lastIndex()" scope="row" style="text-align: center; color: red; font-size: 48px;">
                 <i class="fas fa-times-circle"></i>
             </div>

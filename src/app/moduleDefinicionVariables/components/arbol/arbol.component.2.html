@@ -3,7 +3,7 @@
         <div class="mdl-cell mdl-cell--8-col" style="height: 85vh !important; overflow: auto;">
             <!-- List with avatar and controls -->
             <ul class="demo-list-control mdl-list" style="display: grid; grid-template-columns: 1rf; gap: 5px;">
-                <li class="mdl-list__item" style="background-color: #F8F8F8" *ngFor="let item of orderList; let i = index" [ngClass]="{'bgW':getBG(i)}">
+                <li class="mdl-list__item" style="background-color: #F8F8F8" *ngFor="let item of orderList; let i = index">
                     <span class="mdl-list__item-primary-content">
                         <strong>{{i+1}}.- </strong>
                         <mat-form-field *ngIf="getbuttonsPermitions(item.sort)">
@@ -32,8 +32,12 @@
                         (click)="clearTree()">
                         <i class="fas fa-eraser"></i>
                     </button>
+                    <!-- <button mat-raised-button style="background-color: #DCDCDC; color: #000000;" (click)="clearTree()">
+                        <i class="fas fa-eraser"></i>
+                    </button> -->
                 </div>
                 <div class="mdl-cell mdl-cell--6-col">
+                    <!-- Primary-colored flat button -->
                     <button class="mdl-button mdl-js-button mdl-button--primary" style="background-color: #90A7BB; color: #ffffff; display: block;"
                         (click)="saveChange()">
                         <i class="fas fa-save"></i>
@@ -42,35 +46,33 @@
                 </div>
             </div>
             <div class="mdl-grid" style="height: 25vh !important;">
-                    <div class="mdl-cell mdl-cell--12-col" style="color: #686868">
-                        Parametros
-                    </div>
                 <div class="mdl-cell mdl-cell--12-col">
-                    <mat-slide-toggle [checked]="salidas.mensualidad.checked" [disabled]="!salidas.mensualidad.checked" color="primary" (change)="cambio(1)"><label style="color: #6B6B6B">MENSUALIDAD</label></mat-slide-toggle>
+                    <mat-slide-toggle [checked]="salidas.mensualidad.checked" [disabled]="!salidas.mensualidad.checked" color="primary" (change)="cambio(1)">MENSUALIDAD</mat-slide-toggle>
+                    <!-- <mat-checkbox [(ngModel)]="salidas.mensualidad.checked" (change)="cambio(1)">MENSUALIDAD</mat-checkbox> -->
                 </div>
 
                 <div class="mdl-cell mdl-cell--12-col">
-                    <mat-slide-toggle [checked]="salidas.plazo.checked" [disabled]="!salidas.plazo.checked" color="primary" (change)="cambio(2)"></mat-slide-toggle>
+                    <mat-slide-toggle [checked]="salidas.plazo.checked" [disabled]="!salidas.plazo.checked" color="primary" (change)="cambio(2)">PLAZO</mat-slide-toggle>
+                    <!-- <mat-checkbox [(ngModel)]="salidas.plazo.checked" (change)="cambio(2)">PLAZO</mat-checkbox> -->
                 </div>
 
                 <div class="mdl-cell mdl-cell--12-col">
-                    <mat-slide-toggle [checked]="salidas.linea_credito.checked" [disabled]="!salidas.linea_credito.checked" color="primary" (change)="cambio(3)"><label style="color: #6B6B6B">LÍNEA FINAL</label></mat-slide-toggle>
+                    <mat-slide-toggle [checked]="salidas.linea_credito.checked" [disabled]="!salidas.linea_credito.checked" color="primary" (change)="cambio(3)">LÍNEA FINAL</mat-slide-toggle>
+                    <!-- <mat-checkbox [(ngModel)]="salidas.linea_credito.checked" (change)="cambio(3)">LÍNEA FINAL</mat-checkbox> -->
                 </div>
 
                 <div class="mdl-cell mdl-cell--12-col">
-                    <mat-slide-toggle [checked]="salidas.tasa.checked" [disabled]="!salidas.tasa.checked" color="primary"  (change)="cambio(4)"><label style="color: #6B6B6B">TASA</label></mat-slide-toggle>
+                    <mat-slide-toggle [checked]="salidas.tasa.checked" [disabled]="!salidas.tasa.checked" color="primary"  (change)="cambio(4)">TASA</mat-slide-toggle>
+                    <!-- <mat-checkbox [(ngModel)]="salidas.tasa.checked" (change)="cambio(4)">TASA</mat-checkbox> -->
                 </div>
 
             </div>
-            <div style="height: 40vh !important; overflow: auto;">
-                <div class="card-text" *ngFor="let item of listVariables2" (click)="addVariable(item)">
-                        {{item.name}}
-                </div>
-                <!-- <mat-chip-list class="mat-chip-list-stacked" style="width: 100%;">
-                    <mat-chip class="card-text" *ngFor="let item of listVariables2" selected="true" (click)="addVariable(item)">
+            <div class="mdl-grid" style="height: 40vh !important; overflow: auto;">
+                <mat-chip-list class="mat-chip-list-stacked" style="width: 100%;">
+                    <mat-chip class="card-text" *ngFor="let item of listVariables2" selected="true" color="default" (click)="addVariable(item)">
                         {{item.name}}
                     </mat-chip>
-                </mat-chip-list> -->
+                </mat-chip-list>
             </div>
 
         </div>

@@ -213,6 +213,9 @@ export class ArbolComponent implements OnInit {
     );
   }
 
+  public getBG(index: number) {
+    return (index % 2) == 0;
+  }
   addVariable(item: any) {
     item.sort = this.orderList.length + 1;
     this.orderList.push(item);

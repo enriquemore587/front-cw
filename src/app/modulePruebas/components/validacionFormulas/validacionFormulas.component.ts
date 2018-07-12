@@ -65,7 +65,7 @@ export class ValidacionFormulasComponent implements OnInit {
     ngOnInit() {
         let auth = localStorage.getItem('auth');
         if (!auth) return this._router.navigate(['/login-panel/inicioSesion']);
-        
+
         //this.getOccupations();
         //this.getVariablesToValid();
     }
@@ -120,6 +120,10 @@ export class ValidacionFormulasComponent implements OnInit {
 
     public list_invalidated: any[] = [];
     public list_validated: any[] = [];
+
+    public getBG(index: number) {
+        return (index % 2) == 0;
+    }
 
     runTEST() {
         this.list_invalidated = [];

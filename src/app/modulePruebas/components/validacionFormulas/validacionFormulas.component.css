@@ -1,0 +1,12 @@
+.div-row{
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    height: 72.5px;
+    background-color: #F8F8F8;
+}
+.div-text{
+text-align: center;
+}
+
+.bgW{
+    background: transparent !important;
+}

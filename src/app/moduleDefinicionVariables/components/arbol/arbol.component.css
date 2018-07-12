@@ -2,3 +2,25 @@
     margin-left: 12% !important;
     margin-right: 12% !important;
   }
+
+  .bgW{
+    background: transparent !important;
+}
+
+.card-text{
+  background-color: #B332AA;
+  height: 50px;
+  width: 100%;
+  margin-top: 5px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.card-text:hover{
+  box-shadow: 2px 2px 2px 2px #888888;
+  cursor: pointer;
+}
