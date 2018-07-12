@@ -74,6 +74,9 @@
             <button class="blanco" mat-button [matMenuTriggerFor]="validacion">Validación y pruebas
                 <i class="fas fa-angle-down"></i>
             </button>
+            <button class="blanco" mat-button [matMenuTriggerFor]="admin">Admin
+                <i class="fas fa-angle-down"></i>
+            </button>
         </nav>
     </mat-toolbar-row>
 </mat-toolbar>
@@ -105,5 +108,8 @@
 <mat-menu #validacion="matMenu">
     <button mat-menu-item routerLink="/pruebas">Válida fórmulas</button>
     <button mat-menu-item routerLink="/pruebas/history">Solicitudes</button>
+</mat-menu>
+<mat-menu #admin="matMenu">
+    <button mat-menu-item routerLink="/admin">Usuarios</button>
 </mat-menu>
 <router-outlet></router-outlet>

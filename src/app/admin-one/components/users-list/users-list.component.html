@@ -1,0 +1,61 @@
+<mat-accordion class="example-headers-align">
+
+  <mat-expansion-panel *ngFor="let usuario of _UserListService.userList; let i = index;" [expanded]="step === i" (opened)="setStep(i)"
+    hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title style="width: 50%;">
+        <label style="color: rgb(131, 131, 131)">Correo electrónico
+          <span style="color: black">{{usuario.mail}}</span>
+        </label>
+      </mat-panel-title>
+      <mat-panel-description>
+        <label style="color: rgb(131, 131, 131)">Registro
+          <span style="color: black">{{usuario.registration | date:'medium'}}</span>
+        </label>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">info</mat-icon>
+          Informacion general
+        </ng-template>
+        <div class="contenedor-informacion-general">
+            <p>{{_UserListService.generalInformation.nombrecompleto}}</p>
+            <p>{{_UserListService.generalInformation.direccion}}</p>
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+          Imagenes aprobadas
+        </ng-template>
+        <div class="contenedor">
+
+        </div>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">thumb_down</mat-icon>
+          Imagenes erroneas
+        </ng-template>
+        <div class="contenedor">
+
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+      <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
