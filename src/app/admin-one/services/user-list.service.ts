@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../components/users-list/models/user';
-import { log } from 'util';
 import { GeneralInformation } from '../components/users-list/models/generalInformation';
+import { Location } from '../models/Locatios';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserListService {
-  private url: string = environment.url;
+  public url: string = environment.url;
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('auth') });
   public userList: User[] = [];
   public generalInformation: GeneralInformation;
+  public urlList : Location[];
 
   constructor(
     private _http: HttpClient
@@ -38,9 +39,21 @@ export class UserListService {
       .subscribe(
         respuesta => {
           if (respuesta.status == 0 && respuesta.data != undefined) {
-            respuesta.data.nombrecompleto.replace(" _", '');
             this.generalInformation = <GeneralInformation>respuesta.data;
+            this.generalInformation.nombreCompleto.replace('_','');
           }
+        },
+        error => {
+          console.log('error', error);
+        })
+  }
+
+  public getLocationsByUserSuccess(user_id: string, success: boolean) {
+    this._http.get<any>(`${this.url}admin/get-locations-by-user-success?user_id=${user_id}&success=${success}`, { headers: this.httpHeaders })
+      .subscribe(
+        pathList => {
+          this.urlList = <Location[]>pathList;
+          console.log(this.urlList);          
         },
         error => {
           console.log('error', error);

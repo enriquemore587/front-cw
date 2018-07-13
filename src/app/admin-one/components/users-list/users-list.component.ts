@@ -8,19 +8,22 @@ import { UserListService } from '../../services/user-list.service';
   providers: [UserListService]
 })
 export class UsersListComponent implements OnInit {
+  
+  public step : number = 0;
 
   constructor(
     public _UserListService: UserListService
   ) {
+    this.step = 0;
   }
 
   ngOnInit() {
   }
 
-  public step = 0;
 
   public setStep(index: number) {
     this._UserListService.getGeneralPersonalData(this._UserListService.userList[index].id);
+    this._UserListService.getLocationsByUserSuccess(this._UserListService.userList[index].id, true);
     this.step = index;
   }
 
@@ -30,6 +33,11 @@ export class UsersListComponent implements OnInit {
 
   public prevStep() {
     this.step--;
+  }
+
+  public okk(){
+    console.log(1);
+    
   }
 
 }

@@ -21,8 +21,6 @@ import { ErrorComponent } from './components/error/error.component';
 
 import { SourceMaterialModule } from './material/app.material';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

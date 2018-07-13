@@ -21,8 +21,10 @@
           Informacion general
         </ng-template>
         <div class="contenedor-informacion-general">
-            <p>{{_UserListService.generalInformation.nombrecompleto}}</p>
-            <p>{{_UserListService.generalInformation.direccion}}</p>
+          <p>{{_UserListService.generalInformation.nombreCompleto}}</p>
+          <p>{{_UserListService.generalInformation.direccion}}</p>
+          <p>{{_UserListService.generalInformation.nationality == 223 ? 'MEXICANO (A)' : 'EXTRANJERO (A)'}}</p>
+          <p>{{_UserListService.generalInformation.birthdate}}</p>
         </div>
       </mat-tab>
 
@@ -31,8 +33,12 @@
           <mat-icon class="example-tab-icon">thumb_up</mat-icon>
           Imagenes aprobadas
         </ng-template>
-        <div class="contenedor">
-
+        <div class="imagenes-aprobadas">
+          <div class="container-galeria">
+            <div class="container-img" *ngFor="let img of _UserListService.urlList">
+              <img style="width: 100%; height: 100%;" src="{{_UserListService.url + 'admin/get-image-file?imageFile=' + img.location}}">
+            </div>
+          </div>
         </div>
       </mat-tab>
 
@@ -47,10 +53,10 @@
       </mat-tab>
     </mat-tab-group>
 
-    <mat-action-row>
+    <!-- <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Anterior</button>
       <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
-    </mat-action-row>
+    </mat-action-row> -->
   </mat-expansion-panel>
 
 </mat-accordion>
