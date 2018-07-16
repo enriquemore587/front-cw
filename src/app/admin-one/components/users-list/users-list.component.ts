@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserListService } from '../../services/user-list.service';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+
+export interface DialogData {
+  url: string;
+}
 
 @Component({
   selector: 'app-users-list',
@@ -8,11 +13,11 @@ import { UserListService } from '../../services/user-list.service';
   providers: [UserListService]
 })
 export class UsersListComponent implements OnInit {
-  
-  public step : number = 0;
 
+  public step: number = 0;
   constructor(
-    public _UserListService: UserListService
+    public _UserListService: UserListService,
+    public dialog: MatDialog
   ) {
     this.step = 0;
   }
@@ -24,20 +29,35 @@ export class UsersListComponent implements OnInit {
   public setStep(index: number) {
     this._UserListService.getGeneralPersonalData(this._UserListService.userList[index].id);
     this._UserListService.getLocationsByUserSuccess(this._UserListService.userList[index].id, true);
+    this._UserListService.getLocationsByUserSuccess(this._UserListService.userList[index].id, false);
     this.step = index;
   }
+  
+  public sendURL(url: string) {
+    console.log(url);
+    const dialogRef = this.dialog.open(ShowImageDialog, {
+      width: '100vh',
+      data: { url: url }
+    });
 
-  public nextStep() {
-    this.step++;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
-  public prevStep() {
-    this.step--;
-  }
+}
 
-  public okk(){
-    console.log(1);
-    
-  }
+
+@Component({
+  selector: 'showImage',
+  templateUrl: 'showImage.html',
+})
+export class ShowImageDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ShowImageDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
+  onNoClick(): void { this.dialogRef.close(); }
 
 }

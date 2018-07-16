@@ -9,22 +9,32 @@
 }
 
 mat-tab-group{
-    border-left: 5px solid #c5c75b !important;
+    border-left: 5px solid #B58B00 !important;
 }
 
 .imagenes-aprobadas{
     width: 100%;
     height: 500px;
 }
+.imagenes-Noaprobadas{
+    width: 100%;
+    height: 500px;
+}
+
 .container-galeria{
     width: 100%;
     display: grid;
     grid-gap: 5px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-row-gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .container-img{
     height: 200px;
     padding: 10px;
-    background-color: gainsboro;
+    background-color: rgb(245, 245, 245);
+}
+
+.overImage:hover{
+    cursor: pointer;
 }

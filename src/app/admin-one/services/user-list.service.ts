@@ -14,6 +14,7 @@ export class UserListService {
   public userList: User[] = [];
   public generalInformation: GeneralInformation;
   public urlList : Location[];
+  public urlListBad : Location[];
 
   constructor(
     private _http: HttpClient
@@ -52,8 +53,10 @@ export class UserListService {
     this._http.get<any>(`${this.url}admin/get-locations-by-user-success?user_id=${user_id}&success=${success}`, { headers: this.httpHeaders })
       .subscribe(
         pathList => {
-          this.urlList = <Location[]>pathList;
-          console.log(this.urlList);          
+          if (success) this.urlList = <Location[]>pathList;
+          else this.urlListBad = <Location[]>pathList;
+          console.log('this.urlList', this.urlList);
+          console.log('this.urlListBad', this.urlListBad);
         },
         error => {
           console.log('error', error);
