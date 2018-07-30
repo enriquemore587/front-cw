@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 export class AppComponent {
   public title: string = 'CREDIWHERE';
   public auth;
+  public name_profile;
   public email;
   public imagePath = environment.logoName;
 
@@ -24,7 +25,12 @@ export class AppComponent {
   ) {
   }
 
+  public showMainMenu(){
+    return this._UserLoginService.getAuth() && this._UserLoginService.getName_profile() == 'USUARIO BANCO';
+  }
+
   ngOnInit() {
+    this.name_profile = this._UserLoginService.getName_profile();
     this.auth = this._UserLoginService.getAuth();
     this.email = localStorage.getItem('email');
     this._router.navigate(['/']);

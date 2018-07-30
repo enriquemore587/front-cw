@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpModule } from '@angular/http';
-
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { routing, appToutingProviders } from './app.routing';
 
 import { ModuloLogin } from './moduleLogin/moduleLogin.module';
@@ -20,6 +18,7 @@ import { ErrorComponent } from './components/error/error.component';
 
 
 import { SourceMaterialModule } from './material/app.material';
+import { ModuleFormalizaModule } from './module-formaliza/components/module-formaliza.module';
 
 @NgModule({
   declarations: [
@@ -36,11 +35,12 @@ import { SourceMaterialModule } from './material/app.material';
     ModuloDefinicionVariables,
     ModuloPruebas,
     ModuleTrackingModule,
-    AdminOneModule
+    AdminOneModule,
+    ModuleFormalizaModule
   ],
   exports: [SourceMaterialModule],
   entryComponents: [],  /** LINE OF MATERIAL.ANGULAR.JS */
-  providers: [appToutingProviders],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, appToutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

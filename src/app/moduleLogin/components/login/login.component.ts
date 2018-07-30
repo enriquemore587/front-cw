@@ -4,7 +4,7 @@ import { GLOBAL } from '../../../services/global';
 
 import { UserLoginService } from '../../services/user-login.service';
 
-import { Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
 import { log } from 'util';
@@ -18,20 +18,20 @@ import { environment } from '../../../../environments/environment';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [ UserLoginService ]
+  providers: [UserLoginService]
 })
 export class LoginComponent implements OnInit {
-  public title : string = 'INICIO SESIÓN';
-  public user : User;
+  public title: string = 'INICIO SESIÓN';
+  public user: User;
   public imagePath = environment.logo;
-  
+
   hide = false;
   constructor(
     private _router: Router,
-    private _UserLoginService : UserLoginService,
+    private _UserLoginService: UserLoginService,
     public snackBar: MatSnackBar  // messages
-  ) { 
-    this.user = new User('','');
+  ) {
+    this.user = new User('', '');
   }
   // start Metodo Messages
   showMessage(message: string, action: string) {
@@ -42,19 +42,28 @@ export class LoginComponent implements OnInit {
   // end Metodo Messages
   ngOnInit() {
     let auth = localStorage.getItem('auth');
-   if (auth) this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
+    let name_profile = this._UserLoginService.getName_profile();
+    if (auth && name_profile == 'USUARIO BANCO') this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
+    if (auth && name_profile == 'EJECUTIVO BANCO') this._router.navigate(['/formaliza']);
   }
 
-  onSubmit(registerForm){
+  onSubmit(registerForm) {
     this._UserLoginService.login(this.user).subscribe(
       resp => {
         if (resp.status == 0) {
           registerForm.reset();
+          // guardo el tipo de perfil
+          localStorage.setItem('name_profile', resp.data.name_profile);
           localStorage.setItem('auth', resp.data.token);
           localStorage.setItem('email', this.user.email);
           localStorage.setItem('menu', JSON.stringify(resp.data.menu));
-          this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
-        }else{
+          if (resp.data.name_profile == 'USUARIO BANCO') {
+            this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
+          }
+          else if (resp.data.name_profile == 'EJECUTIVO BANCO') {
+            this._router.navigate(['/formaliza']);
+          }
+        } else {
           this.showMessage('Usuario/contraseña incorrectos', 'Ocultar mensaje');
         }
       },

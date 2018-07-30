@@ -55,8 +55,8 @@ export class UserListService {
         pathList => {
           if (success) this.urlList = <Location[]>pathList;
           else this.urlListBad = <Location[]>pathList;
-          console.log('this.urlList', this.urlList);
-          console.log('this.urlListBad', this.urlListBad);
+          // console.log('this.urlList', this.urlList);
+          // console.log('this.urlListBad', this.urlListBad);
         },
         error => {
           console.log('error', error);

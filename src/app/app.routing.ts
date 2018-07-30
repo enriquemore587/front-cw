@@ -1,7 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LoginComponent } from './moduleLogin/components/login/login.component';
 
