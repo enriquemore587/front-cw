@@ -34,6 +34,8 @@ export class ListadoAprobacionesService {
           return;
         }
         this.userFound = <UserFound>response.data;
+        console.log(this.userFound);
+        
         this.options.nameClient = `${this.userFound.nombre}  ${this.userFound.paterno} ${this.userFound.materno}`;
         this.options.msg = '1 solicitud aprobada pendiente de formalizar';
       });

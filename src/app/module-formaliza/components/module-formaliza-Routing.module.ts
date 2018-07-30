@@ -12,7 +12,7 @@ const FormalizaRoutes: Routes = [
         path: 'formaliza',
         component: MainFormalizaComponent,
         children: [
-            { path: '', redirectTo: 'documentos-cliente', pathMatch: 'full' },
+            { path: '', redirectTo: 'listado-aprobaciones', pathMatch: 'full' },
             { path: 'listado-aprobaciones', component: ListadoAprobacionesComponent },
             { path: 'documentos-cliente', component: DocumentosClienteComponent}
         ]

@@ -5,6 +5,7 @@ export class UserFound {
         public paterno: string = '',
         public materno: string = '',
         public nombre: string = '',
-        public curp: string = ''
+        public curp: string = '',
+        public direccion: string = ''
     ) { }
 }
