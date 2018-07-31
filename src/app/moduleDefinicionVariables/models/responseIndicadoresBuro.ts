@@ -1,4 +1,4 @@
-import { IndicadorBuro } from '../models/indicadorBuro';
+import { IndicadorBuro } from './indicadorBuro';
 export class ResponseIB {
     constructor(
         public status : number,

@@ -35,14 +35,15 @@ export class ListadoAprobacionesService {
         }
         this.userFound = <UserFound>response.data;
         console.log(this.userFound);
+
+        localStorage.setItem('user_information', JSON.stringify(this.userFound));
         
         this.options.nameClient = `${this.userFound.nombre}  ${this.userFound.paterno} ${this.userFound.materno}`;
-        this.options.msg = '1 solicitud aprobada pendiente de formalizar';
+        this.options.msg = this.userFound.status_request ? '1 solicitud aprobada pendiente de formalizar' : '';
       });
   }
 
   public buscar(rfc_curp: boolean) {
-    //bdd7e8e8-b561-e44b-3dde-b19c273c13f9    length
     let varToCheck = rfc_curp ? this.options.rfc_curp : this.options.n_folio;
     if (rfc_curp)
       this.getUserForFormaliza(varToCheck, varToCheck.length > 13 ? 'curp' : 'rfc');

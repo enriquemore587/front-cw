@@ -6,6 +6,11 @@ export class UserFound {
         public materno: string = '',
         public nombre: string = '',
         public curp: string = '',
-        public direccion: string = ''
+        public direccion: string = '',
+        public status_request: string = '',
+        public monto: string = '',
+        public plazo: string = '',
+        public tasa: string = '',
+        public mensualidad: string = ''
     ) { }
 }

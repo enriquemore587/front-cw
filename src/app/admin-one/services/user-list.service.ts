@@ -13,8 +13,8 @@ export class UserListService {
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('auth') });
   public userList: User[] = [];
   public generalInformation: GeneralInformation;
-  public urlList : Location[];
-  public urlListBad : Location[];
+  public urlList: Location[];
+  public urlListBad: Location[];
 
   constructor(
     private _http: HttpClient
@@ -41,7 +41,7 @@ export class UserListService {
         respuesta => {
           if (respuesta.status == 0 && respuesta.data != undefined) {
             this.generalInformation = <GeneralInformation>respuesta.data;
-            this.generalInformation.nombreCompleto.replace('_','');
+            this.generalInformation.nombreCompleto.replace('_', '');
           }
         },
         error => {

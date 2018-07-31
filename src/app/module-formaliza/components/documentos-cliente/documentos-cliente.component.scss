@@ -1,7 +1,7 @@
 .contenedor{
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 2fr 2fr 1fr;
     // display: flex;
     // flex-direction: column;
     // align-items: center;
@@ -19,5 +19,11 @@
     
     .example-full-width {
         display: block;
+    }
+    .botones{
+        width: 100%;
+        margin-top: 15px;
+        background-color: #8B98A1;
+        color: #ffffff;        
     }
 }

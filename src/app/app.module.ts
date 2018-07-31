@@ -18,7 +18,7 @@ import { ErrorComponent } from './components/error/error.component';
 
 
 import { SourceMaterialModule } from './material/app.material';
-import { ModuleFormalizaModule } from './module-formaliza/components/module-formaliza.module';
+import { ModuleFormalizaModule } from './module-formaliza/module-formaliza.module';
 
 @NgModule({
   declarations: [

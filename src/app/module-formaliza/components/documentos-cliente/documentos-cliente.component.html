@@ -1,0 +1,51 @@
+<div class="center" style="width: 100%; height: 10vh; font-size: 60px; padding-top: 47px; color: #6B6B6B;">
+  Documentos del cliente
+</div>
+<div class="contenedor" style="height: 69vh !important; background-color: #FAFAFA;">
+  <div style="padding: 15%;">
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DocumentosClienteService.imageBTNS.INE.textBTN)}"
+      (click)="setName(_DocumentosClienteService.imageBTNS.INE)">{{_DocumentosClienteService.imageBTNS.INE.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DocumentosClienteService.imageBTNS.BACK.textBTN)}"
+      (click)="setName(_DocumentosClienteService.imageBTNS.BACK)">{{_DocumentosClienteService.imageBTNS.BACK.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DocumentosClienteService.imageBTNS.INGRESOS.textBTN)}"
+      (click)="setName(_DocumentosClienteService.imageBTNS.INGRESOS)">{{_DocumentosClienteService.imageBTNS.INGRESOS.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DocumentosClienteService.imageBTNS.DOMICILIO.textBTN)}"
+      (click)="setName(_DocumentosClienteService.imageBTNS.DOMICILIO)">{{_DocumentosClienteService.imageBTNS.DOMICILIO.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DocumentosClienteService.imageBTNS.SOLICITUD.textBTN)}"
+      (click)="setName(_DocumentosClienteService.imageBTNS.SOLICITUD)">{{_DocumentosClienteService.imageBTNS.SOLICITUD.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DocumentosClienteService.imageBTNS.CONTACTO.textBTN)}"
+      (click)="setName(_DocumentosClienteService.imageBTNS.CONTACTO)">{{_DocumentosClienteService.imageBTNS.CONTACTO.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DocumentosClienteService.imageBTNS.TABLA.textBTN)}"
+      (click)="setName(_DocumentosClienteService.imageBTNS.TABLA)">{{_DocumentosClienteService.imageBTNS.TABLA.textBTN}}</button>
+  </div>
+
+  <div style="margin-top: 50px; height: 45vh; padding: 30px;">
+    <!-- <img [hidden]="!_DocumentosClienteService.BTN_SELECTED.location" mat-card-image  src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <img class="overImage" style="width: 100%; height: 100%;" src="{{_DocumentosClienteService.url + 'admin/get-image-file?imageFile=' + _DocumentosClienteService.BTN_SELECTED.location}}">
+  </div>
+
+  <div>
+    <div style="padding: 15%;">
+      <button mat-button color="primary">
+        <mat-icon>local_printshop</mat-icon>
+      </button>
+      <button mat-button color="primary">
+        <mat-icon>cloud_download</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div style="width: 100%; display: grid; grid-template-columns: 1fr 2fr 1fr;background-color: #FAFAFA;">
+    <div></div>
+    <div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col">
+          <button mat-stroked-button style="width: 100%; background-color: #116AAE; border: 1px solid #116AAE; color: #ffffff;" routerLink="/formaliza">Regresar a documentos del cliente</button>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+          <button mat-stroked-button  style="width: 100%; background-color: #116AAE; border: 1px solid #116AAE; color: #ffffff;" routerLink="/formaliza/documentos-firma">Siguiente</button>
+        </div>
+      </div>
+    </div>
+    <div></div>
+</div>

@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           // guardo el tipo de perfil
           localStorage.setItem('name_profile', resp.data.name_profile);
           localStorage.setItem('auth', resp.data.token);
-          localStorage.setItem('email', this.user.email);
+          localStorage.setItem('nombre_usuario', resp.data.nombre_usuario);
           localStorage.setItem('menu', JSON.stringify(resp.data.menu));
           if (resp.data.name_profile == 'USUARIO BANCO') {
             this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
