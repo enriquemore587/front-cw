@@ -1,11 +1,8 @@
 .contenedor{
     width: 100%;
+    height: 50%;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-
     .center{
         text-align: center;
     }
@@ -24,5 +21,8 @@
     .derecha{
         text-align: right !important;
         color: #6B6B6B;
+    }
+    .botones{
+        width: 100%; background-color: #116AAE; border: 1px solid #116AAE; color: #ffffff
     }
 }

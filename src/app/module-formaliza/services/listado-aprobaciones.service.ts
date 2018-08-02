@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { UserForFind } from '../components/listado-aprobaciones/models/UserForFind';
 import { environment } from '../../../environments/environment';
-import { UserFound } from '../components/listado-aprobaciones/models/UserFound';
+import { UserFound } from '../models/UserFound';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ListadoAprobacionesService {
   public userFound: UserFound = new UserFound();
   public: string = '';
   public options: any = {
-    rfc_curp: '',
+    rfc_curp: 'VEAE940421HMCRMN06',
     n_folio: '',
     msg: '',
     nameClient: ''
@@ -37,7 +37,7 @@ export class ListadoAprobacionesService {
         console.log(this.userFound);
 
         localStorage.setItem('user_information', JSON.stringify(this.userFound));
-        
+
         this.options.nameClient = `${this.userFound.nombre}  ${this.userFound.paterno} ${this.userFound.materno}`;
         this.options.msg = this.userFound.status_request ? '1 solicitud aprobada pendiente de formalizar' : '';
       });

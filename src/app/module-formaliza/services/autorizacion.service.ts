@@ -6,22 +6,20 @@ import { UserFound } from '../models/UserFound';
 @Injectable({
   providedIn: 'root'
 })
-export class DetalleClienteService {
-
-  public userFount: UserFound = new UserFound();
+export class AutorizacionService {
   public url: string = environment.url;
-  public httpHeaders = new HttpHeaders({ 'Content-type': 'application/json', 'Autorization': localStorage.getItem('auth') });
+  private httpHeaders = new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': localStorage.getItem('auth') });
+  public userFount: UserFound = new UserFound();
   public nombre_usuario: string = localStorage.getItem('nombre_usuario');
   constructor(
-    private _http: HttpClient
+    public _http: HttpClient
   ) {
+    console.log("Authorization Service is running. . .");
+    
     this.getUserInformation();
   }
 
   public getUserInformation() {
     this.userFount = <UserFound>JSON.parse(localStorage.getItem('user_information'));
-    console.log(this.userFount);
-
   }
-
 }

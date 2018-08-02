@@ -10,12 +10,8 @@
         <div class="mdl-cell mdl-cell--9-col">
           <p style="font-size: 20px; color: #6B6B6B;">
             {{_DetalleClienteService.userFount.nombre + ' ' + _DetalleClienteService.userFount.paterno + ' ' + _DetalleClienteService.userFount.materno}}
-            <button mat-button color="primary">
-              <mat-icon>local_printshop</mat-icon>
-            </button>
-            <button mat-button color="primary">
-              <mat-icon>cloud_download</mat-icon>
-            </button>
+            <!-- <mat-icon color="primary" class="mano">local_printshop</mat-icon> -->
+            <mat-icon color="primary" class="mano" style="margin-left: 5px;">cloud_download</mat-icon>
           </p>
           <p style="font-size: 13px; color: #6B6B6B;">
             <span style="font-weight: bold;">Domicilio:</span> {{_DetalleClienteService.userFount.direccion}}
@@ -51,17 +47,16 @@
   <div></div>
   <div>
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--3-col">
+      <div class="mdl-cell mdl-cell--2-col">
       </div>
-      <div class="mdl-cell mdl-cell--3-col">
+      <div class="mdl-cell mdl-cell--4-col">
         <button mat-stroked-button class="botones" routerLink="/formaliza">Regresar a búsqueda</button>
       </div>
-      <div class="mdl-cell mdl-cell--3-col">
+      <div class="mdl-cell mdl-cell--4-col">
         <button mat-stroked-button class="botones" routerLink="/formaliza/documentos-cliente">Siguiente</button>
       </div>
-      <div class="mdl-cell mdl-cell--3-col">
+      <div class="mdl-cell mdl-cell--2-col">
       </div>
-
     </div>
   </div>
   <div></div>

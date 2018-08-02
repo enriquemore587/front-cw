@@ -11,6 +11,9 @@ import { ListadoAprobacionesComponent } from './components/listado-aprobaciones/
 import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cliente.component';
 import { DoumentosClienteComponent } from './components/documentos-cliente/documentos-cliente.component';
 import { DocumentosFirmarComponent } from './components/documentos-firmar/documentos-firmar.component';
+import { AutorizacionComponent } from './components/autorizacion/autorizacion.component';
+import { CreditoAutorizadoComponent } from './components/credito-autorizado/credito-autorizado.component';
+import { PdfViewComponent } from './components/pdf-view/pdf-view.component';
 
 
 
@@ -22,6 +25,7 @@ import { DocumentosFirmarComponent } from './components/documentos-firmar/docume
     HttpModule
   ],
   declarations: [MainFormalizaComponent, HeaderComponent, WelcomeFinalizaComponent, ListadoAprobacionesComponent,
-    DetalleClienteComponent, DoumentosClienteComponent, DocumentosFirmarComponent]
+    DetalleClienteComponent, DoumentosClienteComponent, DocumentosFirmarComponent, AutorizacionComponent, CreditoAutorizadoComponent, PdfViewComponent],
+  entryComponents: [PdfViewComponent]
 })
 export class ModuleFormalizaModule { }

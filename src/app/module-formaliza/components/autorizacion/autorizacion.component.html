@@ -1,0 +1,66 @@
+<div class="center" style="width: 100%; height: 10vh; font-size: 60px; padding-top: 47px; color: #6B6B6B;">
+  Autorización
+</div>
+<div class="contenedor" style="height: 69vh !important; background-color: #FAFAFA;">
+  <div></div>
+  <div>
+    <mat-card style="margin-top: 30px; height: 170px;">
+
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <p style="font-size: 35px; color: #6B6B6B;">
+            {{_AutorizacionService.userFount.nombre + ' ' + _AutorizacionService.userFount.paterno + ' ' + _AutorizacionService.userFount.materno}}
+          </p>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+          <p style="color: #6B6B6B !important; font-size: 25px;">Detalles del crédito</p>
+          <p style="color: #6B6B6B !important; font-size: 20px; ">
+            <span style="font-weight: bold;">Monto:</span> {{_AutorizacionService.userFount.monto | currency }}
+            <span style="font-weight: bold;">Plazo: </span> {{_AutorizacionService.userFount.plazo}} meses
+            <span style="font-weight: bold;">Tasa: </span> {{_AutorizacionService.userFount.tasa}} %
+            <span style="font-weight: bold;">Mensualidad: </span> {{_AutorizacionService.userFount.mensualidad | currency }}
+          </p>
+          <p style="color: #6B6B6B !important;  font-size: 20px; ">
+            <span style="font-weight: bold;">Producto: </span>{{_AutorizacionService.userFount.producto}}
+          </p>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card style="background-color: #EEEEEE !important; height: 126px;">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="CLABE" value="1518863219875554">
+          </mat-form-field>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+          <mat-form-field>
+            <mat-select placeholder="Banco" [(ngModel)]="selected">
+              <mat-option *ngFor="let banco of bancos" [value]="banco.value">
+                {{banco.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div></div>
+  <div></div>
+  <div>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--1-col">
+      </div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <button mat-stroked-button class="botones" routerLink="/formaliza/documentos-firma">Regresar a documentos por firmar</button>
+      </div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <button mat-stroked-button class="botones" style="background-color: #C5A12D !important;" routerLink="/formaliza/credito-autorizado">AUTORIZAR</button>
+      </div>
+      <div class="mdl-cell mdl-cell--1-col">
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>

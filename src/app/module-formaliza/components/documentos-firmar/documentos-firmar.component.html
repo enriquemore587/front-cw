@@ -1,79 +1,277 @@
 <div class="center" style="width: 100%; height: 10vh; font-size: 60px; padding-top: 47px; color: #6B6B6B;">
   Documentos a firmar
 </div>
-<div class="contenedor" style="height: 69vh !important; background-color: #FAFAFA;">
+<div class="contenedor" style="height: 100% !important; background-color: #FAFAFA;">
   <div></div>
   <div>
     <mat-card style="margin-top: 15px;">
       <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col">
-          <p style="font-size: 28px;color: #6B6B6B;">Contrato</p>
+        <div class="mdl-cell mdl-cell--3-col">
+          <p style="font-size: 21px;color: #6B6B6B;">Contrato</p>
         </div>
-        <div class="mdl-cell mdl-cell--5-col derecha">
+        <div class="mdl-cell mdl-cell--6-col derecha">
+          <p style="color: green;" *ngIf="statusOPC.contrato==4">Listo</p>
+          <p *ngIf="statusOPC.contrato==3">Guarde los cambios</p>
+          <p *ngIf="statusOPC.contrato==2">Suba el documento firmado</p>
+          <p *ngIf="statusOPC.contrato==1">Descargue el documento a firmar</p>
         </div>
-        <div class="mdl-cell mdl-cell--5-col">
-          <button mat-button color="primary">
-            <mat-icon>cloud_download</mat-icon>
+        <div class="mdl-cell mdl-cell--3-col">
+
+          <!-- <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="donwloadContrato('CONTRATO')" [disabled]="statusOPC.contrato==4"> -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('CONTRATO')" [disabled]="statusOPC.contrato==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
           </button>
-          <button mat-button color="primary">
-            <mat-icon>cloud_upload</mat-icon>
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput.click()"
+            [disabled]="statusOPC.contrato==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_upload</mat-icon>
           </button>
-          <button mat-button color="primary">
-            <mat-icon>done_outline</mat-icon>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="save('CONTRATO')"
+            *ngIf="statusOPC.contrato!=4" [disabled]="statusOPC.contrato!=3">
+            <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
           </button>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-  <div></div>
-  <div></div>
-  <div>
-    <mat-card style="margin-top: -15px;">
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col">
-          <p style="font-size: 28px;color: #6B6B6B;">Pagaré</p>
-        </div>
-        <div class="mdl-cell mdl-cell--5-col derecha">
-          <p>Suba el documento firmado</p>
-        </div>
-        <div class="mdl-cell mdl-cell--5-col">
-          <button mat-button color="primary">
-            <mat-icon>cloud_download</mat-icon>
+          <input hidden type="file" #imgFileInput (change)="contratoFileToUpload($event)" />
+          <!--  -->
+          <!--  -->
+          <button mat-icon-button *ngIf="statusOPC.contrato==4" style="background-color: #EDEDED; color: green; margin-left: 15px;">
+            <mat-icon aria-label="Example icon-button with a heart icon">done_outline</mat-icon>
           </button>
-          <button mat-button color="primary">
-            <mat-icon>cloud_upload</mat-icon>
-          </button>
-          <button mat-button color="primary">
-            <mat-icon>done_outline</mat-icon>
-          </button>
+          <!--  -->
+
         </div>
       </div>
     </mat-card>
   </div>
   <div></div>
+  <!-- 1er row -->
   <div></div>
   <div>
-    <mat-card style="margin-top: -15px;">
+    <mat-card>
       <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col">
-          <p style="font-size: 28px;color: #6B6B6B;">Contrato</p>
+        <div class="mdl-cell mdl-cell--3-col">
+          <p style="font-size: 21px;color: #6B6B6B;">Pagaré</p>
         </div>
-        <div class="mdl-cell mdl-cell--5-col derecha">
-          <p>Descargue el documento a firmar</p>
+        <div class="mdl-cell mdl-cell--6-col derecha">
+          <p style="color: green;" *ngIf="statusOPC.pagare==4">Listo</p>
+          <p *ngIf="statusOPC.pagare==3">Guarde los cambios</p>
+          <p *ngIf="statusOPC.pagare==2">Suba el documento firmado</p>
+          <p *ngIf="statusOPC.pagare==1">Descargue el documento a firmar</p>
         </div>
-        <div class="mdl-cell mdl-cell--5-col">
-          <button mat-button color="primary">
-            <mat-icon>cloud_download</mat-icon>
+        <div class="mdl-cell mdl-cell--3-col">
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('PAGARÉ')" [disabled]="statusOPC.pagare==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
           </button>
-          <button mat-button color="primary">
-            <mat-icon>cloud_upload</mat-icon>
+          <!--  -->
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput2.click()"
+            [disabled]="statusOPC.pagare==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_upload</mat-icon>
           </button>
-          <button mat-button color="primary">
-            <mat-icon>done_outline</mat-icon>
+          <input hidden type="file" #imgFileInput2 (change)="pagareFileToUpload($event)" />
+          <!--  -->
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;"  (click)="save('PAGARÉ')"
+            *ngIf="statusOPC.pagare!=4" [disabled]="statusOPC.pagare!=3">
+            <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
           </button>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.pagare=4"
+            *ngIf="statusOPC.pagare==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">done_outline</mat-icon>
+          </button>
+          <!--  -->
+
         </div>
       </div>
     </mat-card>
+  </div>
+  <div></div>
+  <!-- 2a row -->
+  <div></div>
+  <div>
+    <mat-card>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <p style="font-size: 21px;color: #6B6B6B;">Consentimiento</p>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col derecha">
+          <p style="color: green;" *ngIf="statusOPC.consentimiento==4">Listo</p>
+          <p *ngIf="statusOPC.consentimiento==3">Guarde los cambios</p>
+          <p *ngIf="statusOPC.consentimiento==2">Suba el documento firmado</p>
+          <p *ngIf="statusOPC.consentimiento==1">Descargue el documento a firmar</p>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col">
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('CONSENTIMIENTO')" [disabled]="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
+          </button>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput3.click()"
+            [disabled]="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_upload</mat-icon>
+          </button>
+          <input hidden type="file" #imgFileInput3 (change)="consentimientoFileToUpload($event)" />
+          <!--  -->
+
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;"  (click)="save('CONSENTIMIENTO')"
+            *ngIf="statusOPC.consentimiento!=4" [disabled]="statusOPC.consentimiento!=3">
+            <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+          </button>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.consentimiento=4"
+            *ngIf="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">done_outline</mat-icon>
+          </button>
+          <!--  -->
+
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div></div>
+  <!-- 3a row -->
+  <div></div>
+  <div>
+    <mat-card>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <p style="font-size: 21px;color: #6B6B6B;">Solicitud electrónica</p>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col derecha">
+          <p style="color: green;" *ngIf="statusOPC.consentimiento==4">Listo</p>
+          <p *ngIf="statusOPC.consentimiento==3">Guarde los cambios</p>
+          <p *ngIf="statusOPC.consentimiento==2">Suba el documento firmado</p>
+          <p *ngIf="statusOPC.consentimiento==1">Descargue el documento a firmar</p>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col">
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('CONSENTIMIENTO')" [disabled]="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
+          </button>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput3.click()"
+            [disabled]="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_upload</mat-icon>
+          </button>
+          <input hidden type="file" #imgFileInput3 (change)="consentimientoFileToUpload($event)" />
+          <!--  -->
+
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;"  (click)="save('CONSENTIMIENTO')"
+            *ngIf="statusOPC.consentimiento!=4" [disabled]="statusOPC.consentimiento!=3">
+            <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+          </button>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.consentimiento=4"
+            *ngIf="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">done_outline</mat-icon>
+          </button>
+          <!--  -->
+
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div></div>
+  <!-- 4a row -->
+  <div></div>
+  <div>
+    <mat-card>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <p style="font-size: 21px;color: #6B6B6B;">Tabla de amortización</p>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col derecha">
+          <p style="color: green;" *ngIf="statusOPC.consentimiento==4">Listo</p>
+          <p *ngIf="statusOPC.consentimiento==3">Guarde los cambios</p>
+          <p *ngIf="statusOPC.consentimiento==2">Suba el documento firmado</p>
+          <p *ngIf="statusOPC.consentimiento==1">Descargue el documento a firmar</p>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col">
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('Tabla de amortización')" [disabled]="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
+          </button>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput3.click()"
+            [disabled]="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">cloud_upload</mat-icon>
+          </button>
+          <input hidden type="file" #imgFileInput3 (change)="consentimientoFileToUpload($event)" />
+          <!--  -->
+
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="save('Tabla de amortización')"
+            *ngIf="statusOPC.consentimiento!=4" [disabled]="statusOPC.consentimiento!=3">
+            <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+          </button>
+          <!--  -->
+
+
+          <!--  -->
+          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.consentimiento=4"
+            *ngIf="statusOPC.consentimiento==4">
+            <mat-icon aria-label="Example icon-button with a heart icon">done_outline</mat-icon>
+          </button>
+          <!--  -->
+
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div></div>
+  <!-- 5a row -->
+  <div></div>
+  <div>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--1-col">
+      </div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <button mat-stroked-button class="botones" routerLink="/formaliza/documentos-cliente">Regresar a documentos del cliente</button>
+      </div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <button mat-stroked-button class="botones" routerLink="/formaliza/autorizacion">Siguiente</button>
+      </div>
+      <div class="mdl-cell mdl-cell--1-col">
+      </div>
+    </div>
   </div>
   <div></div>
 </div>

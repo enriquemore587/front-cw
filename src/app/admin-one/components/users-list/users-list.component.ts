@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 export interface DialogData {
   url: string;
-}
+} 
 
 @Component({
   selector: 'app-users-list',

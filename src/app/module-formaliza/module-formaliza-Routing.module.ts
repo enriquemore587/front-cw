@@ -5,6 +5,8 @@ import { ListadoAprobacionesComponent } from './components/listado-aprobaciones/
 import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cliente.component';
 import { DoumentosClienteComponent } from './components/documentos-cliente/documentos-cliente.component';
 import { DocumentosFirmarComponent } from './components/documentos-firmar/documentos-firmar.component';
+import { AutorizacionComponent } from './components/autorizacion/autorizacion.component';
+import { CreditoAutorizadoComponent } from './components/credito-autorizado/credito-autorizado.component';
 
 
 
@@ -17,7 +19,9 @@ const FormalizaRoutes: Routes = [
             { path: 'listado-aprobaciones', component: ListadoAprobacionesComponent },
             { path: 'detalle-cliente', component: DetalleClienteComponent },
             { path: 'documentos-cliente', component: DoumentosClienteComponent },
-            {path: 'documentos-firma', component: DocumentosFirmarComponent}
+            { path: 'documentos-firma', component: DocumentosFirmarComponent },
+            { path: 'autorizacion', component: AutorizacionComponent },
+            { path: 'credito-autorizado', component: CreditoAutorizadoComponent}
         ]
     }
 ]

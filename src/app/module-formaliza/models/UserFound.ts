@@ -11,6 +11,7 @@ export class UserFound {
         public monto: string = '',
         public plazo: string = '',
         public tasa: string = '',
-        public mensualidad: string = ''
+        public mensualidad: string = '',
+        public producto: string = ''
     ) { }
 }

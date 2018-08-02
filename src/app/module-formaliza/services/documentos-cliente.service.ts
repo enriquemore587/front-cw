@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Image } from '../components/documentos-cliente/models/image';
-import { UserFound } from '../components/listado-aprobaciones/models/UserFound';
+import { UserFound } from '../models/UserFound';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +35,6 @@ export class DocumentosClienteService {
     },
     SOLICITUD: {
       textBTN: 'Solicitud electrónica',
-      location: ''
-    },
-    CONTACTO: {
-      textBTN: 'Contrato',
       location: ''
     },
     TABLA: {
