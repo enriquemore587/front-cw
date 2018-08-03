@@ -13,7 +13,6 @@ import { DialogData } from '../../interfaces/dialog-data';
 })
 export class PdfViewComponent implements OnInit {
 
-
   ngOnInit() { }
   constructor(
     public dialogRef: MatDialogRef<PdfViewComponent>,
@@ -31,7 +30,7 @@ export class PdfViewComponent implements OnInit {
       var heightLeft = imgHeight;
 
       const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
       var position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
       pdf.save(`${this.data.url}.pdf`); // Generated PDF   

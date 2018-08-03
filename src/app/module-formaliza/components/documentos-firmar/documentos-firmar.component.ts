@@ -14,7 +14,9 @@ export class DocumentosFirmarComponent implements OnInit {
   public statusOPC = {
     contrato: 1,
     pagare: 1,
-    consentimiento: 1
+    consentimiento: 1,
+    solicitud: 1,
+    tabla: 1
   };
 
   constructor(
@@ -46,6 +48,21 @@ export class DocumentosFirmarComponent implements OnInit {
     this._DocumentosFirmarService.sendImageTEST(this.filesToUpload);
   }
 
+  
+  public tablaFileToUpload(fileInput: any) {
+    this.statusOPC.tabla = 3;
+    this.filesToUpload = <File>fileInput.target.files[0];
+    console.log('tablaFileToUpload', this.filesToUpload);
+    this._DocumentosFirmarService.sendImageTEST(this.filesToUpload);
+  }
+
+  public solicitudFileToUpload(fileInput: any) {
+    this.statusOPC.solicitud = 3;
+    this.filesToUpload = <File>fileInput.target.files[0];
+    console.log('solicitudFileToUpload', this.filesToUpload);
+    this._DocumentosFirmarService.sendImageTEST(this.filesToUpload);
+  }
+
   donwloadContrato(name: string) {
     if (name == 'CONTRATO') this.statusOPC.contrato = 2;
     else if (name == 'PAGARÉ') this.statusOPC.pagare = 2;
@@ -58,6 +75,8 @@ export class DocumentosFirmarComponent implements OnInit {
     if (url == 'CONTRATO') this.statusOPC.contrato = 2;
     else if (url == 'PAGARÉ') this.statusOPC.pagare = 2;
     else if (url == 'CONSENTIMIENTO') this.statusOPC.consentimiento = 2;
+    else if (url == 'Solicitud electrónica') this.statusOPC.solicitud = 2;
+    else if (url == 'Tabla de amortización') this.statusOPC.tabla = 2;
 
     console.log(url);
     const dialogRef = this.dialog.open(PdfViewComponent, {
@@ -66,13 +85,13 @@ export class DocumentosFirmarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
+      console.log('The dialog was closed', result);
     });
   }
 
 
   public save(url: string) {
-    
+
 
     console.log(url);
     const dialogRef = this.dialog.open(PdfViewComponent, {

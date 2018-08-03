@@ -3,6 +3,9 @@ import { environment } from '../../../environments/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Image } from '../components/documentos-cliente/models/image';
 import { UserFound } from '../models/UserFound';
+import { saveAs } from 'file-saver';
+import * as sha1 from 'js-sha1';
+
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +72,21 @@ export class DocumentosClienteService {
               this.imageBTNS.DOMICILIO.location = img.location;
             }
           });
-          this.BTN_SELECTED.location =  this.imageBTNS.INE.location;
+          this.BTN_SELECTED.location = this.imageBTNS.INE.location;
           console.log('this.imageBTNS', this.imageBTNS);
+        },
+        error => {
+          console.log('error', error);
+        })
+  }
+
+  public getAImage() {
+    let body = { imageFile: this.BTN_SELECTED.location };
+    this._http.post(`${this.url}admin/get-image-file2`, body,
+      { headers: new HttpHeaders().append('Content-Type', 'application/json'), responseType: 'blob' })
+      .subscribe(
+        img => {
+          saveAs(img, this.BTN_SELECTED.textBTN);
         },
         error => {
           console.log('error', error);

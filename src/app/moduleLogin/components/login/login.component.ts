@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
-import { GLOBAL } from '../../../services/global';
 
 import { UserLoginService } from '../../services/user-login.service';
 
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 
-
-import { log } from 'util';
 // begin message
 import { MatSnackBar } from '@angular/material';
-import { variable } from '@angular/compiler/src/output/output_ast';
 import { environment } from '../../../../environments/environment';
 // end message
 
@@ -64,6 +60,7 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/formaliza']);
           }
         } else {
+          this.user.pwd = '';
           this.showMessage('Usuario/contraseña incorrectos', 'Ocultar mensaje');
         }
       },

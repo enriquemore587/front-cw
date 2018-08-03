@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
+import * as sha1 from 'js-sha1';
 
 import { environment } from '../../../environments/environment';
 
@@ -23,7 +24,7 @@ export class UserLoginService {
   ) { }
 
   login(user_to_login: User): any {
-
+    user_to_login.pwd = sha1(user_to_login.pwd);    
     let params = JSON.stringify(user_to_login);
 
     return this._http.post<any>(this.url + 'session/login-bank', params, { headers: this.httpHeaders });

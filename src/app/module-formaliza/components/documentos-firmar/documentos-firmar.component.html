@@ -160,41 +160,41 @@
           <p style="font-size: 21px;color: #6B6B6B;">Solicitud electrónica</p>
         </div>
         <div class="mdl-cell mdl-cell--6-col derecha">
-          <p style="color: green;" *ngIf="statusOPC.consentimiento==4">Listo</p>
-          <p *ngIf="statusOPC.consentimiento==3">Guarde los cambios</p>
-          <p *ngIf="statusOPC.consentimiento==2">Suba el documento firmado</p>
-          <p *ngIf="statusOPC.consentimiento==1">Descargue el documento a firmar</p>
+          <p style="color: green;" *ngIf="statusOPC.solicitud==4">Listo</p>
+          <p *ngIf="statusOPC.solicitud==3">Guarde los cambios</p>
+          <p *ngIf="statusOPC.solicitud==2">Suba el documento firmado</p>
+          <p *ngIf="statusOPC.solicitud==1">Descargue el documento a firmar</p>
         </div>
         <div class="mdl-cell mdl-cell--3-col">
 
           <!--  -->
-          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('CONSENTIMIENTO')" [disabled]="statusOPC.consentimiento==4">
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('Solicitud electrónica')" [disabled]="statusOPC.solicitud==4">
             <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
           </button>
           <!--  -->
 
 
           <!--  -->
-          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput3.click()"
-            [disabled]="statusOPC.consentimiento==4">
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput4.click()"
+            [disabled]="statusOPC.solicitud==4">
             <mat-icon aria-label="Example icon-button with a heart icon">cloud_upload</mat-icon>
           </button>
-          <input hidden type="file" #imgFileInput3 (change)="consentimientoFileToUpload($event)" />
+          <input hidden type="file" #imgFileInput4 (change)="solicitudFileToUpload($event)" />
           <!--  -->
 
 
 
           <!--  -->
-          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;"  (click)="save('CONSENTIMIENTO')"
-            *ngIf="statusOPC.consentimiento!=4" [disabled]="statusOPC.consentimiento!=3">
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;"  (click)="save('Solicitud electrónica')"
+            *ngIf="statusOPC.solicitud!=4" [disabled]="statusOPC.solicitud!=3">
             <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
           </button>
           <!--  -->
 
 
           <!--  -->
-          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.consentimiento=4"
-            *ngIf="statusOPC.consentimiento==4">
+          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.solicitud=4"
+            *ngIf="statusOPC.solicitud==4">
             <mat-icon aria-label="Example icon-button with a heart icon">done_outline</mat-icon>
           </button>
           <!--  -->
@@ -213,41 +213,41 @@
           <p style="font-size: 21px;color: #6B6B6B;">Tabla de amortización</p>
         </div>
         <div class="mdl-cell mdl-cell--6-col derecha">
-          <p style="color: green;" *ngIf="statusOPC.consentimiento==4">Listo</p>
-          <p *ngIf="statusOPC.consentimiento==3">Guarde los cambios</p>
-          <p *ngIf="statusOPC.consentimiento==2">Suba el documento firmado</p>
-          <p *ngIf="statusOPC.consentimiento==1">Descargue el documento a firmar</p>
+          <p style="color: green;" *ngIf="statusOPC.tabla==4">Listo</p>
+          <p *ngIf="statusOPC.tabla==3">Guarde los cambios</p>
+          <p *ngIf="statusOPC.tabla==2">Suba el documento firmado</p>
+          <p *ngIf="statusOPC.tabla==1">Descargue el documento a firmar</p>
         </div>
         <div class="mdl-cell mdl-cell--3-col">
 
           <!--  -->
-          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('Tabla de amortización')" [disabled]="statusOPC.consentimiento==4">
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE;" (click)="sendURL('Tabla de amortización')" [disabled]="statusOPC.tabla==4">
             <mat-icon aria-label="Example icon-button with a heart icon">cloud_download</mat-icon>
           </button>
           <!--  -->
 
 
           <!--  -->
-          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput3.click()"
-            [disabled]="statusOPC.consentimiento==4">
+          <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="imgFileInput5.click()"
+            [disabled]="statusOPC.tabla==4">
             <mat-icon aria-label="Example icon-button with a heart icon">cloud_upload</mat-icon>
           </button>
-          <input hidden type="file" #imgFileInput3 (change)="consentimientoFileToUpload($event)" />
+          <input hidden type="file" #imgFileInput5 (change)="tablaFileToUpload($event)" />
           <!--  -->
 
 
 
           <!--  -->
           <button mat-icon-button style="background-color: #EDEDED; color: #116AAE; margin-left: 15px;" (click)="save('Tabla de amortización')"
-            *ngIf="statusOPC.consentimiento!=4" [disabled]="statusOPC.consentimiento!=3">
+            *ngIf="statusOPC.tabla!=4" [disabled]="statusOPC.tabla!=3">
             <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
           </button>
           <!--  -->
 
 
           <!--  -->
-          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.consentimiento=4"
-            *ngIf="statusOPC.consentimiento==4">
+          <button mat-icon-button style="background-color: #EDEDED; color: green; margin-left: 15px;" (click)="statusOPC.tabla=4"
+            *ngIf="statusOPC.tabla==4">
             <mat-icon aria-label="Example icon-button with a heart icon">done_outline</mat-icon>
           </button>
           <!--  -->

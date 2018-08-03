@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AutorizacionService } from '../../services/autorizacion.service';
 
 export interface Banco {
-  value: string;
+  value: number;
   viewValue: string;
 }
 
@@ -13,12 +13,15 @@ export interface Banco {
   providers: [AutorizacionService]
 })
 export class AutorizacionComponent implements OnInit {
-  bancos: Banco[] = [
-    { value: 'steak-0', viewValue: 'SANTANDER' },
-    { value: 'pizza-1', viewValue: 'BANORTE' },
-    { value: 'tacos-2', viewValue: 'BANCOMER' }
+
+  public editing : boolean = false;
+
+  public bancos: Banco[] = [
+    { value: 1, viewValue: 'SANTANDER' },
+    { value: 2, viewValue: 'BANORTE' },
+    { value: 3, viewValue: 'BANCOMER' }
   ];
-  selected = "steak-0";
+  selected = 2;
 
   constructor(
     public _AutorizacionService: AutorizacionService

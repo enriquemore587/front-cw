@@ -29,19 +29,27 @@
 
     <mat-card style="background-color: #EEEEEE !important; height: 126px;">
       <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--6-col">
+        <div class="mdl-cell mdl-cell--5-col">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="CLABE" value="1518863219875554">
+            <input [disabled]="!editing" matInput placeholder="CLABE" value="1518863219875554">
           </mat-form-field>
         </div>
-        <div class="mdl-cell mdl-cell--6-col">
+        <div class="mdl-cell mdl-cell--5-col">
           <mat-form-field>
-            <mat-select placeholder="Banco" [(ngModel)]="selected">
+            <mat-select [disabled]="!editing" placeholder="Banco" [(ngModel)]="selected">
               <mat-option *ngFor="let banco of bancos" [value]="banco.value">
                 {{banco.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col">
+          <button mat-icon-button [hidden]="editing" (click)="editing=!editing">
+            <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+          </button>
+          <button mat-icon-button [hidden]="!editing" (click)="editing=!editing">
+            <mat-icon aria-label="Example icon-button with a heart icon">save</mat-icon>
+          </button>
         </div>
       </div>
     </mat-card>

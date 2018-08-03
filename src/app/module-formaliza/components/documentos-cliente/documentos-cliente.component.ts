@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ListadoAprobacionesService } from '../../services/listado-aprobaciones.service';
 import { DocumentosClienteService } from '../../services/documentos-cliente.service';
 
 @Component({

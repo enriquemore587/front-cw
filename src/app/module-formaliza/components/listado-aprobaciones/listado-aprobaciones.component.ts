@@ -14,6 +14,7 @@ export class ListadoAprobacionesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    localStorage.removeItem('user_information');
   }
 
   showNextBTN() {
