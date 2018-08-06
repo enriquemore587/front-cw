@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { UserForFind } from '../../models/UserForFind';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { UserFound } from '../../models/UserFound';
+import { UserForFind } from '../../models/UserForFind';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ListadoAprobacionesService {
+export class BusquedaExpedientesService {
 
   public userForFind: UserForFind = new UserForFind('', '');
   public userFound: UserFound = new UserFound();
@@ -19,13 +19,12 @@ export class ListadoAprobacionesService {
   };
   public url: string = environment.url;
   private httpHeaders = new HttpHeaders({ 'Content-type': 'application/json', 'Authorization': localStorage.getItem('auth') });
-
   constructor(
     private _http: HttpClient
   ) { }
 
   public getUserForFormaliza(valor: string, search_mode: string) {
-    this._http.get<any>(`${this.url}ejecutivo/get-user-for-formaliza?valor=${valor}&search_mode=${search_mode}`, { headers: this.httpHeaders })
+    this._http.get<any>(`${this.url}direccion/get-user-for-formaliza?valor=${valor}&search_mode=${search_mode}`, { headers: this.httpHeaders })
       .subscribe(response => {
         if (response.message == "no information") {
           this.options.nameClient = 'Usuario no encontrado';
@@ -49,5 +48,4 @@ export class ListadoAprobacionesService {
     else
       this.getUserForFormaliza(varToCheck, 'folio');
   }
-
 }

@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Image } from '../../models/image';
-import { saveAs } from 'file-saver';
 import { UserFound } from '../../models/UserFound';
-
+import { saveAs } from 'file-saver';
+import { Image } from '../../models/image';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DocumentosClienteService {
+export class DetallesClienteService {
+
   public url: string = environment.url;
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('auth') });
   public imageList: Image[] = [];
   public userFound: UserFound = new UserFound();
   public BTN_SELECTED: any = {
-    textBTN: 'INE Frente',
+    textBTN: 'Información general',
     location: ''
   };
   public imageBTNS: any = {
+    GENERAL_INFORMATION: {
+      textBTN: 'Información general',
+      location: null
+    },
     INE: {
       textBTN: 'INE Frente',
       location: ''
@@ -44,10 +48,18 @@ export class DocumentosClienteService {
       location: ''
     }
   };
+  public nombre_usuario: string = localStorage.getItem('nombre_usuario');
   constructor(
     private _http: HttpClient
   ) {
+    this.getUserInformation();
+    // this.userFound = <UserFound>JSON.parse(localStorage.getItem('user_information'));
+  }
+
+
+  public getUserInformation() {
     this.userFound = <UserFound>JSON.parse(localStorage.getItem('user_information'));
+    console.log(this.userFound.nombre);
     this.getLocationsByUserSuccess(this.userFound.user_id, true);
   }
 
@@ -71,7 +83,7 @@ export class DocumentosClienteService {
               this.imageBTNS.DOMICILIO.location = img.location;
             }
           });
-          this.BTN_SELECTED.location = this.imageBTNS.INE.location;
+          this.BTN_SELECTED.location = null;
           console.log('this.imageBTNS', this.imageBTNS);
         },
         error => {

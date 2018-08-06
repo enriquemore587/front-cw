@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
     let auth = localStorage.getItem('auth');
     let name_profile = this._UserLoginService.getName_profile();
     if (auth && name_profile == 'USUARIO BANCO') this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
-    if (auth && name_profile == 'EJECUTIVO BANCO') this._router.navigate(['/formaliza']);
+    else if (auth && name_profile == 'EJECUTIVO BANCO') this._router.navigate(['/formaliza']);
+    else if (auth && name_profile == 'DIRECTIVO DE BANCO') this._router.navigate(['/director-panel']);
   }
 
   onSubmit(registerForm) {
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
           else if (resp.data.name_profile == 'EJECUTIVO BANCO') {
             this._router.navigate(['/formaliza']);
           }
+          else if (resp.data.name_profile == 'DIRECTIVO DE BANCO') this._router.navigate(['/director-panel']);
         } else {
           this.user.pwd = '';
           this.showMessage('Usuario/contraseña incorrectos', 'Ocultar mensaje');

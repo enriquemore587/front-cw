@@ -19,6 +19,7 @@ import { ErrorComponent } from './components/error/error.component';
 
 import { SourceMaterialModule } from './material/app.material';
 import { ModuleFormalizaModule } from './module-formaliza/module-formaliza.module';
+import { DirectorBancoModule } from './director-banco/director-banco.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ModuleFormalizaModule } from './module-formaliza/module-formaliza.modul
     ModuloPruebas,
     ModuleTrackingModule,
     AdminOneModule,
-    ModuleFormalizaModule
+    ModuleFormalizaModule,
+    DirectorBancoModule
   ],
   exports: [SourceMaterialModule],
   entryComponents: [],  /** LINE OF MATERIAL.ANGULAR.JS */

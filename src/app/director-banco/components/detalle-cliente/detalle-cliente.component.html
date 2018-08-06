@@ -1,0 +1,79 @@
+<div class="center" style="width: 100%; height: 10vh; font-size: 60px; padding-top: 47px; color: #6B6B6B;">
+  Detalle del cliente
+</div>
+<div class="contenedor" style="height: 69vh !important; background-color: #FAFAFA;">
+  <div style="padding: 15%;">
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DetallesClienteService.imageBTNS.GENERAL_INFORMATION.textBTN)}"
+      (click)="setName(_DetallesClienteService.imageBTNS.GENERAL_INFORMATION)">{{_DetallesClienteService.imageBTNS.GENERAL_INFORMATION.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DetallesClienteService.imageBTNS.INE.textBTN)}"
+      (click)="setName(_DetallesClienteService.imageBTNS.INE)">{{_DetallesClienteService.imageBTNS.INE.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DetallesClienteService.imageBTNS.BACK.textBTN)}"
+      (click)="setName(_DetallesClienteService.imageBTNS.BACK)">{{_DetallesClienteService.imageBTNS.BACK.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DetallesClienteService.imageBTNS.INGRESOS.textBTN)}"
+      (click)="setName(_DetallesClienteService.imageBTNS.INGRESOS)">{{_DetallesClienteService.imageBTNS.INGRESOS.textBTN}}</button>
+    <button mat-stroked-button class="botones" [ngStyle]="{'background-color': isBTNActive(_DetallesClienteService.imageBTNS.DOMICILIO.textBTN)}"
+      (click)="setName(_DetallesClienteService.imageBTNS.DOMICILIO)">{{_DetallesClienteService.imageBTNS.DOMICILIO.textBTN}}</button>
+  </div>
+
+  <div style="margin-top: 50px; height: 45vh; padding: 10px;">
+    <img class="overImage" *ngIf="_DetallesClienteService.BTN_SELECTED.location" style="width: 100%; height: 100%;" src="{{_DetallesClienteService.url + 'admin/get-image-file?imageFile=' + _DetallesClienteService.BTN_SELECTED.location}}">
+    <mat-card *ngIf="_DetallesClienteService.BTN_SELECTED.location==null" style="margin-top: 30px; height: 170px;">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--9-col">
+          <p style="font-size: 20px; color: #6B6B6B;">
+            {{_DetallesClienteService.userFound.nombre + ' ' + _DetallesClienteService.userFound.paterno + ' ' + _DetallesClienteService.userFound.materno}}
+            <!-- <mat-icon color="primary" class="mano">local_printshop</mat-icon> -->
+            <mat-icon color="primary" class="mano" style="margin-left: 5px;">cloud_download</mat-icon>
+          </p>
+          <p style="font-size: 13px; color: #6B6B6B;">
+            <span style="font-weight: bold;">Domicilio:</span> domicilio {{_DetallesClienteService.userFound.direccion}}
+          </p>
+          <p style="font-size: 13px; color: #6B6B6B;">
+            <span style="font-weight: bold;">Ejecutivo que le atendió:</span>
+            {{_DetallesClienteService.nombre_usuario}}
+          </p>
+        </div>
+        <div class="mdl-cell mdl-cell--3-col">
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        </div>
+      </div>
+    </mat-card>
+    <mat-card *ngIf="_DetallesClienteService.BTN_SELECTED.location==null" style="background-color: #EEEEEE !important; height: 160px;">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <p style="color: #6B6B6B !important; font-size: 25px;">Detalles del crédito</p>
+          <p style="color: #6B6B6B !important; font-size: 20px; ">
+            <span style="font-weight: bold;">Monto:</span> {{_DetallesClienteService.userFound.monto | currency }}
+            <span style="font-weight: bold;">Plazo: </span> {{_DetallesClienteService.userFound.plazo}} meses
+            <span style="font-weight: bold;">Tasa: </span> {{_DetallesClienteService.userFound.tasa}} %
+            <span style="font-weight: bold;">Mensualidad: </span> {{_DetallesClienteService.userFound.mensualidad | currency }}
+          </p>
+          <p style="color: #6B6B6B !important;  font-size: 20px; ">
+            <span style="font-weight: bold;">Producto: </span>{{_DetallesClienteService.userFound.producto}}
+          </p>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div>
+    <div style="padding: 15%;">
+      <mat-icon *ngIf="_DetallesClienteService.BTN_SELECTED.location" color="primary" class="mano" style="margin-left: 5px;" (click)="_DetallesClienteService.getAImage()">cloud_download</mat-icon>
+    </div>
+  </div>
+</div>
+<div style="width: 100%; display: grid; grid-template-columns: 1fr 3fr 1fr;background-color: #FAFAFA;">
+  <div></div>
+  <div>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--1-col"></div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <button mat-stroked-button style="width: 100%; background-color: #116AAE; border: 1px solid #116AAE; color: #ffffff;" routerLink="/director-panel/busqueda-expedientes">Regresar a detalles</button>
+      </div>
+      <div class="mdl-cell mdl-cell--5-col">
+        <button mat-stroked-button style="width: 100%; background-color: #116AAE; border: 1px solid #116AAE; color: #ffffff;" routerLink="/director-panel">Siguiente</button>
+      </div>
+      <div class="mdl-cell mdl-cell--1-col"></div>
+    </div>
+  </div>
+  <div></div>
+</div>
