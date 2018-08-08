@@ -21,7 +21,11 @@ export class DetallesClienteService {
   public imageBTNS: any = {
     GENERAL_INFORMATION: {
       textBTN: 'Información general',
-      location: null
+      location: 1
+    },
+    VALIDACIONES: {
+      textBTN: 'Validaciones',
+      location: 2
     },
     INE: {
       textBTN: 'INE Frente',
@@ -83,7 +87,7 @@ export class DetallesClienteService {
               this.imageBTNS.DOMICILIO.location = img.location;
             }
           });
-          this.BTN_SELECTED.location = null;
+          this.BTN_SELECTED.location = 1;
           console.log('this.imageBTNS', this.imageBTNS);
         },
         error => {

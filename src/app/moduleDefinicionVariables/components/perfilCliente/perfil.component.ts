@@ -10,7 +10,6 @@ import { ItemCheck } from '../../models/requestCheck';
 
 /**BEGIN MESSAGE */
 import { MatSnackBar } from '@angular/material';
-import { variable } from '@angular/compiler/src/output/output_ast';
 /**END MESSAGE */
 @Component({
   selector: 'perfil-cliente',

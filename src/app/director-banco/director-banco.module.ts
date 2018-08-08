@@ -8,6 +8,7 @@ import { DetalleClienteComponent } from './components/detalle-cliente/detalle-cl
 import { DirectorRoutingModule } from './director-banco-Routing';
 import { SourceMaterialModule } from '../material/app.material';
 import { HttpModule } from '@angular/http';
+import { SolicitantesComponent } from './components/solicitantes/solicitantes.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { HttpModule } from '@angular/http';
     HeaderDirectorBancoComponent,
     AuditoriaComponent,
     BusquedaExpedientesComponent,
-    DetalleClienteComponent
+    DetalleClienteComponent,
+    SolicitantesComponent
   ],
   exports: [MainDirectorBancoComponent]
 })
