@@ -15,7 +15,7 @@
                             </mat-select>
                         </mat-form-field>
                         {{item.name}}
-                    </span>
+                    </span> 
                     <span class="mdl-list__item-secondary-action">
                         <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="background-color: #F8F8F8;"
                             *ngIf="getbuttonsPermitions(item.sort)" (click)="removeVariable(item)">
@@ -66,11 +66,6 @@
                 <div class="card-text" *ngFor="let item of listVariables2" (click)="addVariable(item)">
                         {{item.name}}
                 </div>
-                <!-- <mat-chip-list class="mat-chip-list-stacked" style="width: 100%;">
-                    <mat-chip class="card-text" *ngFor="let item of listVariables2" selected="true" (click)="addVariable(item)">
-                        {{item.name}}
-                    </mat-chip>
-                </mat-chip-list> -->
             </div>
 
         </div>
@@ -88,11 +83,4 @@
             </button>
         </div>
     </div>
-
-    <!-- <button mat-raised-button class="verde" routerLink="/definicion-variables/scoring" style="left: 5%; position: absolute; bottom: 5px;">
-        <i class="fas fa-arrow-alt-circle-left"></i>
-    </button>
-    <button mat-raised-button class="verde" style="right: 5%; position: absolute; bottom: 5px;" routerLink="/pruebas/validacion-formulas">
-        <i class="fas fa-arrow-alt-circle-right"></i>
-    </button> -->
 </div>

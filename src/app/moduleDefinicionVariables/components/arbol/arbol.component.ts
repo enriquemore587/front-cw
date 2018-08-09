@@ -54,8 +54,8 @@ export class ArbolComponent implements OnInit {
     return this.salidas.mensualidad.checked && this.salidas.linea_credito.checked && this.salidas.plazo.checked && this.salidas.tasa.checked;
   }
 
-  getbuttonsPermitions(sort) {
-    return sort > 11;
+  getbuttonsPermitions(sort) { 
+    return sort > 13;
   }
 
   cambio(type) {
@@ -182,7 +182,7 @@ export class ArbolComponent implements OnInit {
       id_linea_credito: this.orderList[this.salidas.linea_credito.index].id,
       id_tasa: this.orderList[this.salidas.tasa.index].id
     };
-
+    
     this._DefinicionVariablesService.set_variables_will_be_output(ids).subscribe(
       respuesta => {
 
@@ -190,7 +190,7 @@ export class ArbolComponent implements OnInit {
 
         this.orderList.forEach((element, index) => {
 
-          if (element.sort > 11) listToSent.push([0, element.id, index + 1]);
+          if (element.sort > 13) listToSent.push([0, element.id, index + 1]);
           else listToSent.push([element.id, 0, index + 1]);
 
         });

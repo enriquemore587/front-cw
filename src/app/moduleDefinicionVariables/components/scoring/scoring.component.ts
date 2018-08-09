@@ -1,28 +1,18 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { log } from 'util';
+import { Router} from '@angular/router';
 
 import { DefinicionVariablesService } from '../../services/definicionVariables.service';
-import { VariableIndicador } from '../../models/variableIndicador';
-import { ResponseVI } from '../../models/responseVI';
-import { and } from '@angular/router/src/utils/collection';
-import { ItemCheck } from '../../models/requestCheck';
 import { VarToExp } from '../../models/varToExp';
 
-//start
-//end
 
 //start
 
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { elementAt } from 'rxjs/operators';
 //end
 
 // begin message
 import { MatSnackBar } from '@angular/material';
-import { variable, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { all } from 'q';
 // end message
 
 
@@ -298,8 +288,6 @@ export class ScoringComponent implements OnInit {
           { value: num, id: 0, name: num },
           ...this.exp.slice(this.positionToChange + 1)
         ];
-        // this.changingVariable = null;
-        // this.positionToChange = null;
         return;
       }
       let last_number = this.exp[this.positionToChange].name;

@@ -134,7 +134,6 @@ export class CriteriosPerfilClienteComponent implements OnInit {
         this._DefinicionVariablesService.setBankVariable(saveObj).subscribe(
             resp => {
                 if (resp.status != 0 && resp.message != 'successful') this.showMessage(`Ocurrió un problema`, "Ocultar mensaje");
-                //else this.showMessage(`Status: ${String(resp.status)}`, "Ocultar mensaje");
             },
             err => {
                 this.showMessage(`Ocurrio un problema`, "Ocultar mensaje");

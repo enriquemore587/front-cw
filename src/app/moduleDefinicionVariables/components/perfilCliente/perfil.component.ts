@@ -1,11 +1,9 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { log } from 'util';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { DefinicionVariablesService } from '../../services/definicionVariables.service';
 import { VariableIndicador } from '../../models/variableIndicador';
 import { ResponseVI } from '../../models/responseVI';
-import { and } from '@angular/router/src/utils/collection';
 import { ItemCheck } from '../../models/requestCheck';
 
 /**BEGIN MESSAGE */

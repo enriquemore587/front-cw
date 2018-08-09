@@ -18,13 +18,13 @@
 </div>
 <div *ngIf="!wait" class="myContainer">
     <div class="div-row">
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             Variables
         </div>
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             Valores
         </div>
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             Resultado
         </div>
     </div>
@@ -32,11 +32,11 @@
 
 <!-- begin lista invalidada -->
 <div *ngIf="!wait" class="myContainer">
-    <div class="div-row" *ngFor="let item of list_validated; let i = index" [ngClass]="{'bgW':getBG(i)}">
-        <div class="div-text">
+    <div class="div-row" *ngFor="let item of list_validated; let i = index" style="margin-top: 10px;" [ngClass]="{'bgW':getBG(i)}">
+        <div class="div-text" style="padding: 15px;">
             {{item.name}}
         </div>
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value
                 == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
             <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
@@ -75,7 +75,7 @@
             <mat-hint *ngIf="item.salida == 3">LÍNEA FINAL</mat-hint>
             <mat-hint *ngIf="item.salida == 4">TASA</mat-hint>
         </div>
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             <div *ngIf="i != get_lastIndex()" scope="row" style="text-align: center; color: green; font-size: 48px;">
                 <i class="fas fa-check-circle"></i>
             </div>
@@ -86,10 +86,10 @@
 <!-- begin lista valida -->
 <div *ngIf="!wait" class="myContainer">
     <div class="div-row" *ngFor="let item of list_invalidated; let i = index" [ngClass]="{'bgW':getBG(i)}">
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             <label>{{item.name}}</label>
         </div>
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             <label *ngIf="item.var_fix_id==8">{{item.value == 1 ? 'Ama de casa' : item.value == 2 ? 'Desempleado' : item.value == 3 ? 'Empleado' : item.value
                 == 4 ? 'Estudiante' : item.value == 5 ? 'Independiente' : item.value == 7 ? 'Pensionado' : ''}}</label>
             <label *ngIf="item.var_fix_id==9">{{item.value == 1 ? 'Mexicana' : 'Extranjera'}}</label>
@@ -120,7 +120,7 @@
             <!-- custom -->
             <label *ngIf="item.var_fix_id==undefined && item.salida != 4">{{item.value}}</label>
         </div>
-        <div class="div-text">
+        <div class="div-text" style="padding: 15px;">
             <div *ngIf="i == get_lastIndex()" scope="row" style="text-align: center; color: red; font-size: 48px;">
                 <i class="fas fa-times-circle"></i>
             </div>
