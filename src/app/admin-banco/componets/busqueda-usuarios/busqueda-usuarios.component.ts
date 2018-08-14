@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BusquedaUsuariosService } from '../../services/busqueda-usuarios.service';
-import { UserItem } from '../../models/UserItem';
 
 
 @Component({
@@ -11,7 +10,7 @@ import { UserItem } from '../../models/UserItem';
 })
 export class BusquedaUsuariosComponent implements OnInit {
 
-  public displayedColumns: string[] = ['id', 'mail', 'profile', 'num_client', 'ver'];
+  public displayedColumns: string[] = ['registration', 'mail', 'profile', 'num_client', 'ver'];
   constructor(
     public _BusquedaUsuariosService: BusquedaUsuariosService
   ) {
@@ -22,6 +21,5 @@ export class BusquedaUsuariosComponent implements OnInit {
   ngOnInit() {
   }
 
-  public showDetail() {
-  }
+  
 }

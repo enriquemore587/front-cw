@@ -7,6 +7,7 @@ import { AdminRoutingModule } from './admin-Routing';
 import { SourceMaterialModule } from '../material/app.material';
 import { HttpModule } from '@angular/http';
 import { EditUserComponent } from './componets/edit-user/edit-user.component';
+import { ConfirmationComponent } from './componets/confirmation/confirmation.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { EditUserComponent } from './componets/edit-user/edit-user.component';
     SourceMaterialModule,
     HttpModule
   ],
-  declarations: [MainComponent, HeaderAdminComponent, BusquedaUsuariosComponent, EditUserComponent],
-  exports: [ MainComponent ]
+  declarations: [MainComponent, HeaderAdminComponent, BusquedaUsuariosComponent, EditUserComponent,ConfirmationComponent],
+  exports: [ MainComponent ],
+  entryComponents: [ConfirmationComponent]
 })
 export class AdminBancoModule { }

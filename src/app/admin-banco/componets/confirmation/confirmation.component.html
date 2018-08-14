@@ -1,0 +1,13 @@
+<mat-toolbar color="">
+  <mat-toolbar-row>
+    <span>{{data.msg}}</span>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <span></span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button (click)="cancelar()">Cancelar</button>
+    <span style="width: 50px;"></span>
+    <button mat-raised-button style="background-color: #C8A637; color: #ffffff;" (click)="confirmar()">{{data.action}}</button>
+  </mat-toolbar-row>
+</mat-toolbar>

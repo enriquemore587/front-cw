@@ -78,10 +78,9 @@ export class DocumentosFirmarComponent implements OnInit {
     else if (url == 'Solicitud electrónica') this.statusOPC.solicitud = 2;
     else if (url == 'Tabla de amortización') this.statusOPC.tabla = 2;
 
-    console.log(url);
     const dialogRef = this.dialog.open(PdfViewComponent, {
       width: '100vh',
-      data: { url: url, action: 'descargar' }
+      data: { url: url, action: 'descargar' } 
     });
 
     dialogRef.afterClosed().subscribe(result => {

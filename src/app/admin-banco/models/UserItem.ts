@@ -1,9 +1,9 @@
-export class UserItem{
+export class UserItem {
     constructor(
-        public id: string,
-        public mail: string,
-        public registration: Date,
-        public profile: string,
-        public num_client: string
-    ){}
+        public id: string = "",
+        public mail: string = "",
+        public registration: Date = new Date(),
+        public profile: string = "",
+        public num_client: string = ""
+    ) { }
 }
