@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
     if (auth && name_profile == 'USUARIO BANCO') this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
     else if (auth && name_profile == 'EJECUTIVO BANCO') this._router.navigate(['/formaliza']);
     else if (auth && name_profile == 'DIRECTIVO DE BANCO') this._router.navigate(['/director-panel']);
+    else if (auth && name_profile == 'ADMINISTRADOR BANCO') this._router.navigate(['/admin-panel']);
   }
 
   onSubmit(registerForm) {
@@ -57,10 +58,12 @@ export class LoginComponent implements OnInit {
           if (resp.data.name_profile == 'USUARIO BANCO') {
             this._router.navigate(['/definicion-variables/activacion-variables-cliente']);
           }
-          else if (resp.data.name_profile == 'EJECUTIVO BANCO') {
+          else if (resp.data.name_profile == 'EJECUTIVO BANCO')
             this._router.navigate(['/formaliza']);
-          }
-          else if (resp.data.name_profile == 'DIRECTIVO DE BANCO') this._router.navigate(['/director-panel']);
+          else if (resp.data.name_profile == 'DIRECTIVO DE BANCO')
+            this._router.navigate(['/director-panel']);
+          else if (resp.data.name_profile == 'ADMINISTRADOR BANCO')
+            this._router.navigate(['/admin-panel']);
         } else {
           this.user.pwd = '';
           this.showMessage('Usuario/contraseña incorrectos', 'Ocultar mensaje');

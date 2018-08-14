@@ -20,6 +20,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { SourceMaterialModule } from './material/app.material';
 import { ModuleFormalizaModule } from './module-formaliza/module-formaliza.module';
 import { DirectorBancoModule } from './director-banco/director-banco.module';
+import { AdminBancoModule } from './admin-banco/admin-banco.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DirectorBancoModule } from './director-banco/director-banco.module';
     ModuleTrackingModule,
     AdminOneModule,
     ModuleFormalizaModule,
-    DirectorBancoModule
+    DirectorBancoModule,
+    AdminBancoModule
   ],
   exports: [SourceMaterialModule],
   entryComponents: [],  /** LINE OF MATERIAL.ANGULAR.JS */

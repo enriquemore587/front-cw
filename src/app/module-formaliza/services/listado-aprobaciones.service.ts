@@ -27,7 +27,7 @@ export class ListadoAprobacionesService {
   public getUserForFormaliza(valor: string, search_mode: string) {
     this._http.get<any>(`${this.url}ejecutivo/get-user-for-formaliza?valor=${valor}&search_mode=${search_mode}`, { headers: this.httpHeaders })
       .subscribe(response => {
-        if (response.message == "no information") {
+        if (response.message == "no information") { 
           this.options.nameClient = 'Usuario no encontrado';
           this.options.msg = '';
           return;
