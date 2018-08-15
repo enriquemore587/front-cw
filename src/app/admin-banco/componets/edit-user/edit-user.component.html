@@ -6,6 +6,20 @@
   <mat-card class="item-class" style="height: 100%; background-color: #fff">
     <table cellspacing="25" style="width: 100%;">
       <tr>
+        <div>
+          <table>
+            <tr>
+              <td style="width: 10%;">
+                <button style="width: 100%;background-color: #BB90A5; color: white;" mat-raised-button>Generar baja</button>
+              </td>
+              <td style="width: 10%;">
+                <button style="width: 100%; background-color: rgb(145, 175, 197); color: #ffffff;" mat-raised-button>Bitacora</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </tr>
+      <tr>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Primer nombre" [(ngModel)]="_EditUserService._UserToEdit.name">
         </mat-form-field>
@@ -37,26 +51,22 @@
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Número de usuario" [(ngModel)]="_EditUserService._UserToEdit.num_client" disabled>
+          <input matInput placeholder="Número de usuario" [(ngModel)]="_EditUserService._UserToEdit.num_client" readonly>
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Perfil" [(ngModel)]="_EditUserService._UserToEdit.profile" disabled>
+          <input matInput placeholder="Perfil" [(ngModel)]="_EditUserService._UserToEdit.profile" readonly>
         </mat-form-field>
-      </tr>
-      <tr>
+      </tr><tr>
         <div>
           <table>
             <tr>
-              <td>
-                <button style="width: 100%; background-color: #C8A637; color: #ffffff;" mat-raised-button>Guardar</button>
+              <td style="width: 50%">
+                <button style="width: 100%; background-color: #116AAE; color: #ffffff;" routerLink="/admin-panel" mat-raised-button>Regresar a búsqueda de usuarios</button>
               </td>
               <td>
-                <button style="width: 100%;background-color: #BB90A5; color: white;" mat-raised-button>Generar baja</button>
-              </td>
-              <td>
-                <button style="width: 100%; background-color: #116AAE; color: #ffffff;" mat-raised-button>Bitacora</button>
+                <button style="width: 100%; background-color: #C8A637; color: #ffffff;" mat-raised-button (click)="_EditUserService.updateUserDataFromAdmin()">Guardar</button>
               </td>
             </tr>
           </table>

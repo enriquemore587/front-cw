@@ -12,7 +12,7 @@ import { ItemCheck } from '../../models/requestCheck';
 import { MatSnackBar } from '@angular/material';
 import { variable } from '@angular/compiler/src/output/output_ast';
 // end message
-
+ 
 @Component({
   selector: 'arbol-component',
   templateUrl: './arbol.component.html',

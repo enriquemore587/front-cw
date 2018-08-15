@@ -8,6 +8,7 @@ import { SourceMaterialModule } from '../material/app.material';
 import { HttpModule } from '@angular/http';
 import { EditUserComponent } from './componets/edit-user/edit-user.component';
 import { ConfirmationComponent } from './componets/confirmation/confirmation.component';
+import { NewUserComponent } from './componets/new-user/new-user.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ConfirmationComponent } from './componets/confirmation/confirmation.com
     SourceMaterialModule,
     HttpModule
   ],
-  declarations: [MainComponent, HeaderAdminComponent, BusquedaUsuariosComponent, EditUserComponent,ConfirmationComponent],
+  declarations: [MainComponent, HeaderAdminComponent, BusquedaUsuariosComponent, EditUserComponent,ConfirmationComponent, NewUserComponent],
   exports: [ MainComponent ],
   entryComponents: [ConfirmationComponent]
 })

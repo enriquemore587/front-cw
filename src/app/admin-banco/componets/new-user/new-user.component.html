@@ -1,0 +1,68 @@
+<div class="center" style="width: 100%; height: 10vh; font-size: 60px; padding-top: 47px; color: #6B6B6B;">
+  NUEVO USUARIO
+</div>
+<div class="contenedor" style="height: 100% !important; background-color: #FAFAFA; padding: 20px;">
+
+  <mat-card style="height: 100%; background-color: #fff">
+    <table cellspacing="25" style="width: 100%;">
+      <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Primer nombre" [(ngModel)]="_NewUserService._UserToCreate.name">
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Segundo nombre" [(ngModel)]="_NewUserService._UserToCreate.name2">
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Apellido paterno" [(ngModel)]="_NewUserService._UserToCreate.last_name">
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Apellido materno" [(ngModel)]="_NewUserService._UserToCreate.last_name2">
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="RFC" [(ngModel)]="_NewUserService._UserToCreate.rfc">
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" [(ngModel)]="_NewUserService._UserToCreate.email">
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" [(ngModel)]="_NewUserService._UserToCreate.pwd">
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field>
+          <mat-select placeholder="Perfil" [(ngModel)]="_NewUserService._UserToCreate.profile">
+            <mat-option *ngFor="let perfil of _NewUserService._ProfileTypesList" [value]="perfil.id">
+              {{perfil.description}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </tr>
+      <tr>
+        <div>
+          <table style="width: 100%;">
+            <tr>
+              <td style="width: 50%">
+                <button style="width: 100%; background-color: #116AAE; color: #ffffff;" routerLink="/admin-panel" mat-raised-button>Regresar a búsqueda de usuarios</button>
+              </td>
+              <td>
+                <button style="width: 100%; background-color: #C8A637; color: #ffffff;" (click)="_NewUserService.createUser()" mat-raised-button>Crear</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </tr>
+    </table>
+  </mat-card>
+</div>

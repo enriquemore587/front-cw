@@ -4,6 +4,7 @@ import { HeaderAdminComponent } from './componets/header-admin/header-admin.comp
 import { MainComponent } from './componets/main/main.component';
 import { BusquedaUsuariosComponent } from './componets/busqueda-usuarios/busqueda-usuarios.component';
 import { EditUserComponent } from './componets/edit-user/edit-user.component';
+import { NewUserComponent } from './componets/new-user/new-user.component';
 
 const AdminRoutingRoutes : Routes = [
     {
@@ -12,7 +13,8 @@ const AdminRoutingRoutes : Routes = [
         children: [
             { path: '', redirectTo: 'busqueda-usuarios', pathMatch: 'full' },
             { path: 'busqueda-usuarios', component: BusquedaUsuariosComponent },
-            { path: 'edit-user', component: EditUserComponent }
+            { path: 'edit-user', component: EditUserComponent },
+            { path: 'new-user', component: NewUserComponent }
         ]
     }
 ];
