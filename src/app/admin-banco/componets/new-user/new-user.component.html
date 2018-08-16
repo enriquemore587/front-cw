@@ -57,7 +57,7 @@
                 <button style="width: 100%; background-color: #116AAE; color: #ffffff;" routerLink="/admin-panel" mat-raised-button>Regresar a búsqueda de usuarios</button>
               </td>
               <td>
-                <button style="width: 100%; background-color: #C8A637; color: #ffffff;" (click)="_NewUserService.createUser()" mat-raised-button>Crear</button>
+                <button style="width: 100%; background-color: #C8A637; color: #ffffff;" [disabled]="!_NewUserService._UserToCreate._READY()" (click)="_NewUserService.createUser()" mat-raised-button>Crear</button>
               </td>
             </tr>
           </table>

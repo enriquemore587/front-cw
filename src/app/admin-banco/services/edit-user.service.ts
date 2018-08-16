@@ -28,7 +28,6 @@ export class EditUserService {
         resp => {
           let respuesta: any = <any>resp;
           this._UserToEdit = <UserToEdit>respuesta.data.data_user;
-          console.log(this._UserToEdit);
         },
         error => {
           console.log('error', error);

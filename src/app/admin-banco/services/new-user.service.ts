@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { UserToCreate } from '../models/UserToCreate';
 
+import * as sha1 from 'js-sha1';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,20 +31,37 @@ export class NewUserService {
       { headers: this.httpHeaders })
       .subscribe(
         (resp: any) => {
-          if (resp.status == 0 && resp.message == 'successful') {
-            this._ProfileTypesList = <ProfileTypes[]>resp.data;
-            console.log(this._ProfileTypesList);
-
-          }
+          if (resp.status == 0 && resp.message == 'successful') this._ProfileTypesList = <ProfileTypes[]>resp.data;
         },
-        error => {
-          console.log('error', error);
-        })
+        error => console.log('error', error)
+      );
   }
 
   public createUser() {
-    console.log(this._UserToCreate);
-    
+    if (this._UserToCreate._READY()) {
+      this._UserToCreate.pwd = sha1(this._UserToCreate.pwd);
+      this._http.post(`${this.url}admin-bank/create-user-bank-for-admin-bank`, this._UserToCreate, { headers: this.httpHeaders })
+        .subscribe(
+          (res: any) => {
+            if (res.status == 0 && res.message == 'successful') {
+              this.showMessage('Usuario creado exitosamente', 'Ocultar');
+              this._UserToCreate = new UserToCreate();
+            }
+            else {
+              this.showMessage(`${res.message} ya registrado`, 'Ocultar');
+              this._UserToCreate.pwd = '';
+            }
+          },
+          (err: any) => console.log('error', err)
+        );
+    }
   }
 
+  // start Metodo Messages
+  public showMessage(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 4000,
+    });
+  }
+  // end Metodo Messages
 }

@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import { EditUserComponent } from './componets/edit-user/edit-user.component';
 import { ConfirmationComponent } from './componets/confirmation/confirmation.component';
 import { NewUserComponent } from './componets/new-user/new-user.component';
+import { BitacoraUsuariosComponent } from './componets/bitacora-usuarios/bitacora-usuarios.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { NewUserComponent } from './componets/new-user/new-user.component';
     SourceMaterialModule,
     HttpModule
   ],
-  declarations: [MainComponent, HeaderAdminComponent, BusquedaUsuariosComponent, EditUserComponent,ConfirmationComponent, NewUserComponent],
+  declarations: [MainComponent, HeaderAdminComponent, BusquedaUsuariosComponent, EditUserComponent,ConfirmationComponent, NewUserComponent, BitacoraUsuariosComponent],
   exports: [ MainComponent ],
   entryComponents: [ConfirmationComponent]
 })

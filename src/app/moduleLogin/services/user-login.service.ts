@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GLOBAL } from '../../services/global';
 
-import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import * as sha1 from 'js-sha1';
 

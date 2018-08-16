@@ -5,6 +5,7 @@ import { MainComponent } from './componets/main/main.component';
 import { BusquedaUsuariosComponent } from './componets/busqueda-usuarios/busqueda-usuarios.component';
 import { EditUserComponent } from './componets/edit-user/edit-user.component';
 import { NewUserComponent } from './componets/new-user/new-user.component';
+import { BitacoraUsuariosComponent } from './componets/bitacora-usuarios/bitacora-usuarios.component';
 
 const AdminRoutingRoutes : Routes = [
     {
@@ -14,7 +15,8 @@ const AdminRoutingRoutes : Routes = [
             { path: '', redirectTo: 'busqueda-usuarios', pathMatch: 'full' },
             { path: 'busqueda-usuarios', component: BusquedaUsuariosComponent },
             { path: 'edit-user', component: EditUserComponent },
-            { path: 'new-user', component: NewUserComponent }
+            { path: 'new-user', component: NewUserComponent },
+            { path: 'bitacora-usuarios', component: BitacoraUsuariosComponent }
         ]
     }
 ];

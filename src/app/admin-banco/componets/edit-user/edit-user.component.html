@@ -9,10 +9,10 @@
         <div>
           <table>
             <tr>
-              <td style="width: 10%;">
+              <!-- <td style="width: 10%;">
                 <button style="width: 100%;background-color: #BB90A5; color: white;" mat-raised-button>Generar baja</button>
-              </td>
-              <td style="width: 10%;">
+              </td> -->
+              <td>
                 <button style="width: 100%; background-color: rgb(145, 175, 197); color: #ffffff;" mat-raised-button>Bitacora</button>
               </td>
             </tr>
@@ -21,42 +21,42 @@
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Primer nombre" [(ngModel)]="_EditUserService._UserToEdit.name">
+          <input matInput placeholder="Primer nombre" [(ngModel)]="_EditUserService._UserToEdit.name" #name (input)="name.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Segundo nombre" [(ngModel)]="_EditUserService._UserToEdit.name2">
+          <input matInput placeholder="Segundo nombre" [(ngModel)]="_EditUserService._UserToEdit.name2"  #name2 (input)="name2.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Apellido paterno" [(ngModel)]="_EditUserService._UserToEdit.last_name">
+          <input matInput placeholder="Apellido paterno" [(ngModel)]="_EditUserService._UserToEdit.last_name"  #lastname (input)="lastname.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Apellido materno" [(ngModel)]="_EditUserService._UserToEdit.last_name2">
+          <input matInput placeholder="Apellido materno" [(ngModel)]="_EditUserService._UserToEdit.last_name2"  #lastname2 (input)="lastname2.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="RFC" [(ngModel)]="_EditUserService._UserToEdit.rfc">
+          <input matInput placeholder="RFC" [(ngModel)]="_EditUserService._UserToEdit.rfc"  #rfc (input)="rfc.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Email" [(ngModel)]="_EditUserService._UserToEdit.email">
+          <input matInput placeholder="Email" [(ngModel)]="_EditUserService._UserToEdit.email"  #email (input)="email.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Número de usuario" [(ngModel)]="_EditUserService._UserToEdit.num_client" readonly>
+          <input matInput placeholder="Número de usuario" [(ngModel)]="_EditUserService._UserToEdit.num_client" readonly #numclient (input)="numclient.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr>
       <tr>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Perfil" [(ngModel)]="_EditUserService._UserToEdit.profile" readonly>
+          <input matInput placeholder="Perfil" [(ngModel)]="_EditUserService._UserToEdit.profile" readonly #profile (input)="profile.value=$event.target.value.toUpperCase()">
         </mat-form-field>
       </tr><tr>
         <div>

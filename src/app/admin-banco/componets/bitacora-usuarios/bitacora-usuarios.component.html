@@ -1,0 +1,62 @@
+<div class="center" style="width: 100%; height: 10vh; font-size: 60px; padding-top: 47px; color: #6B6B6B;">
+  Bitácora de usuarios
+</div>
+<div class="contenedor" style="height: 69vh !important; background-color: #FAFAFA; padding: 20px;">
+
+  <mat-card class="item-class" style="height: 15%; background-color: #fff">
+    <table cellspacing="25" style="width: 100%;">
+      <tr>
+        <td>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <input matInput placeholder="Email" #Email (input)="Email.value=$event.target.value.toUpperCase()">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <input matInput placeholder="Número de usuario" #usuario (input)="usuario.value=$event.target.value.toUpperCase()">
+          </mat-form-field>
+        </td>
+        <td>
+          <button style="width: 100%; background-color: #C8A637; color: #ffffff;" routerLink="/admin-panel/new-user" mat-raised-button>Nuevo usuario</button>
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+  <mat-card style="height: 60%; overflow: auto;">
+    <!-- <table class="myTable" mat-table [dataSource]="_BusquedaUsuariosService.ELEMENT_DATA">
+        <ng-container matColumnDef="registration">
+          <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
+          <td mat-cell *matCellDef="let element" (click)="_BusquedaUsuariosService.editUser(element.id)"> {{element.registration | date:'medium' }} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="mail">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element" (click)="_BusquedaUsuariosService.editUser(element.id)"> {{element.mail}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="profile">
+          <th mat-header-cell *matHeaderCellDef> Perfil </th>
+          <td mat-cell *matCellDef="let element" (click)="_BusquedaUsuariosService.editUser(element.id)"> {{element.profile}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="num_client">
+          <th mat-header-cell *matHeaderCellDef> Número de usuario </th>
+          <td mat-cell *matCellDef="let element" (click)="_BusquedaUsuariosService.editUser(element.id)">
+            {{element.num_client}}
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="ver">
+          <th mat-header-cell *matHeaderCellDef> Baja </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="delete-btn" mat-icon-button (click)="_BusquedaUsuariosService.confirmar(element)">
+              <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table> -->
+  </mat-card>
+</div>
