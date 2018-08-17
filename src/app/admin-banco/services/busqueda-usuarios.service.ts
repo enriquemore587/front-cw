@@ -33,9 +33,40 @@ export class BusquedaUsuariosService {
       .subscribe(
         resp => {
           let respuesta: any = <any>resp;
-          if (respuesta.status == 0 && respuesta.message == 'successful') {
+          if (respuesta.status == 0 && respuesta.message == 'successful')
             this.ELEMENT_DATA = <UserItem[]>respuesta.data.users_list;
-          }
+          else this.showMessage("Datos no disponibles", "Entendidos");
+        },
+        error => {
+          console.log('error', error);
+        })
+  }
+
+  public get_list_users_for_admin_bank_like_email(input: string) {
+    this._http.get(`${this.url}admin-bank/get-list-users-for-admin-bank-like-email?input=${input}`,
+      { headers: this.httpHeaders })
+      .subscribe(
+        resp => {
+          let respuesta: any = <any>resp;
+          if (respuesta.status == 0 && respuesta.message == 'successful')
+            this.ELEMENT_DATA = <UserItem[]>respuesta.data.users_list;
+          else this.showMessage("Datos no disponibles", "Entendidos");
+        },
+        error => {
+          console.log('error', error);
+        })
+  }
+
+
+  public get_list_users_for_admin_bank_like_num(input: string) {
+    this._http.get(`${this.url}admin-bank/get-list-users-for-admin-bank-like-num?input=${input}`,
+      { headers: this.httpHeaders })
+      .subscribe(
+        resp => {
+          let respuesta: any = <any>resp;
+          if (respuesta.status == 0 && respuesta.message == 'successful')
+            this.ELEMENT_DATA = <UserItem[]>respuesta.data.users_list;
+          else this.showMessage("Datos no disponibles", "Entendidos");
         },
         error => {
           console.log('error', error);
