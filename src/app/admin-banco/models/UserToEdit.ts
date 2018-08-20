@@ -1,13 +1,13 @@
 export class UserToEdit {
     constructor(
-        user_id: string = '',
-        rfc: string = '',
-        num_client: string = '',
-        email: string = '',
-        name: string = '',
-        name2: string = '',
-        last_name: string = '',
-        last_name2: string = '',
-        profile: string = ''
+        public user_id: string = '',
+        public rfc: string = '',
+        public num_client: string = '',
+        public email: string = '',
+        public name: string = '',
+        public name2: string = '',
+        public last_name: string = '',
+        public last_name2: string = '',
+        public profile: string = ''
     ) { }
 }

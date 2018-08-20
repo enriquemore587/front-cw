@@ -67,6 +67,70 @@
             </div>
         </div>
 
+
+        <!--Ingreso BRUTO-->
+        <div class="divs" *ngIf="item.status && item.id == 15">
+            <p class="titles"> {{item.name}} </p>
+            <div class="mdl-grid" style="text-align: center; width: 50%;">
+                <div class="mdl-cell mdl-cell--6-col">
+                    <mat-form-field appearance="outline" style="display: block !important;">
+                        <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.BRUTOMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                            name="BRUTOMin" #BRUTOMin="ngModel" required (keyup)="checkIngreBRUTO()">
+                        <mat-hint [hidden]="BRUTOMin.invalid">Ingreso mínimo</mat-hint>
+                        <div *ngIf="BRUTOMin.invalid && (BRUTOMin.dirty || BRUTOMin.touched)">
+                            <mat-error *ngIf="BRUTOMin.errors.required">
+                                Mínimo is required.
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <mat-form-field appearance="outline" style="display: block !important;">
+                        <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.BRUTOMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                            name="BRUTOMax" #BRUTOMax="ngModel" required (keyup)="checkIngreBRUTO()">
+                        <mat-hint [hidden]="BRUTOMax.invalid">Ingreso máximo</mat-hint>
+                        <div *ngIf="BRUTOMax.invalid && (BRUTOMax.dirty || BRUTOMax.touched)">
+                            <mat-error *ngIf="BRUTOMax.errors.required">
+                                Máximo is required.
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Ingreso NETO-->
+        <div class="divs" *ngIf="item.status && item.id == 16">
+            <p class="titles"> {{item.name}} </p>
+            <div class="mdl-grid" style="text-align: center; width: 50%;">
+                <div class="mdl-cell mdl-cell--6-col">
+                    <mat-form-field appearance="outline" style="display: block !important;">
+                        <input matInput placeholder="Mínimo" type="number" [(ngModel)]="ranges.NETOMin" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                            name="NETOMin" #NETOMin="ngModel" required (keyup)="checkIngreNETO()">
+                        <mat-hint [hidden]="NETOMin.invalid">Ingreso mínimo</mat-hint>
+                        <div *ngIf="NETOMin.invalid && (NETOMin.dirty || NETOMin.touched)">
+                            <mat-error *ngIf="NETOMin.errors.required">
+                                Mínimo is required.
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <mat-form-field appearance="outline" style="display: block !important;">
+                        <input matInput placeholder="Máximo" type="number" [(ngModel)]="ranges.NETOMax" (blur)="saveChange(item.id,false)" (keyup.enter)="saveChange(item.id,false)"
+                            name="NETOMax" #NETOMax="ngModel" required (keyup)="checkIngreNETO()">
+                        <mat-hint [hidden]="NETOMax.invalid">Ingreso máximo</mat-hint>
+                        <div *ngIf="NETOMax.invalid && (NETOMax.dirty || NETOMax.touched)">
+                            <mat-error *ngIf="NETOMax.errors.required">
+                                Máximo is required.
+                            </mat-error>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
         <!--CAPACIDAD DE PAGO-->
         <mat-card *ngIf="item.status && item.id == 11" style="width: 100%;">
             <mat-card-title>{{ item.name }}</mat-card-title>

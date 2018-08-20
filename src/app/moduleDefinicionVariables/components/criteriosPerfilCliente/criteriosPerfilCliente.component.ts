@@ -130,6 +130,14 @@ export class CriteriosPerfilClienteComponent implements OnInit {
             this.ranges.Porcentaje_pago = this.ranges.Porcentaje_pago ? this.ranges.Porcentaje_pago : 1;
             saveObj.range = this.ranges.Porcentaje_pago + "-0";
         }
+        else if (id == 15) {
+            this.ranges.BRUTOMin = this.ranges.BRUTOMin ? this.ranges.BRUTOMin : 1;
+            saveObj.range = this.ranges.BRUTOMin + "-" + this.ranges.BRUTOMax;
+        }
+        else if (id == 16) {
+            this.ranges.NETOMin = this.ranges.NETOMin ? this.ranges.NETOMin : 1;
+            saveObj.range = this.ranges.NETOMin + "-" + this.ranges.NETOMax;
+        }
 
         this._DefinicionVariablesService.setBankVariable(saveObj).subscribe(
             resp => {
@@ -151,6 +159,16 @@ export class CriteriosPerfilClienteComponent implements OnInit {
     public checkIngreDecMen() {
         this.ranges.ingresoMax = this.ranges.ingresoMax < 1 ? 1 : this.ranges.ingresoMax;
         this.ranges.ingresoMin = this.ranges.ingresoMin <= this.ranges.ingresoMax ? this.ranges.ingresoMin : this.ranges.ingresoMax;
+    }
+    
+    public checkIngreBRUTO() {
+        this.ranges.BRUTOMax = this.ranges.BRUTOMax < 1 ? 1 : this.ranges.BRUTOMax;
+        this.ranges.BRUTOMin = this.ranges.BRUTOMin <= this.ranges.BRUTOMax ? this.ranges.BRUTOMin : this.ranges.BRUTOMax;
+    }
+    
+    public checkIngreNETO() {
+        this.ranges.NETOMax = this.ranges.NETOMax < 1 ? 1 : this.ranges.NETOMax;
+        this.ranges.NETOMin = this.ranges.NETOMin <= this.ranges.NETOMax ? this.ranges.NETOMin : this.ranges.NETOMax;
     }
     public checkTopeMensualidad() {
         this.ranges.Porcentaje_pago = this.ranges.Porcentaje_pago > 100 ? 100 : this.ranges.Porcentaje_pago;
@@ -271,6 +289,16 @@ export class CriteriosPerfilClienteComponent implements OnInit {
                         /* Minimo pago minimo */
                         else if (element.id == 14 && element.status) {
                             this.ranges.Porcentaje_pago = element.range.split('-')[0];
+                        }
+                        /* Ingreso BRUTO */
+                        else if (element.id == 15 && element.status) {
+                            this.ranges.BRUTOMin = element.range.split('-')[0];
+                            this.ranges.BRUTOMax = element.range.split('-')[1];
+                        }
+                        /* Ingreso NETO */
+                        else if (element.id == 16 && element.status) {
+                            this.ranges.NETOMin = element.range.split('-')[0];
+                            this.ranges.NETOMax = element.range.split('-')[1];
                         }
                     });
                 }
