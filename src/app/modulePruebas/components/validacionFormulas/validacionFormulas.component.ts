@@ -137,7 +137,10 @@ export class ValidacionFormulasComponent implements OnInit {
                     respuesta => {
                         this.wait = false;
                         if (respuesta.status == 1200) this.list_invalidated = respuesta.data;
-                        else if (respuesta.status == 0) this.list_validated = respuesta.data;
+                        else if (respuesta.status == 0 && respuesta.message == "successful") this.list_validated = respuesta.data;
+                        else if (respuesta.status == 2200 && respuesta.message == "no information") {
+                            this.showMessage("Usuario con informacion incompleta","Ocultar");
+                        }
                     },
                     err => {
                         this.wait = false;
