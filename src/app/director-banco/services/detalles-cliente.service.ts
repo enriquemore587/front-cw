@@ -63,7 +63,6 @@ export class DetallesClienteService {
 
   public getUserInformation() {
     this.userFound = <UserFound>JSON.parse(localStorage.getItem('user_information'));
-    console.log(this.userFound.nombre);
     this.getLocationsByUserSuccess(this.userFound.user_id, true);
   }
 
@@ -88,7 +87,6 @@ export class DetallesClienteService {
             }
           });
           this.BTN_SELECTED.location = 1;
-          console.log('this.imageBTNS', this.imageBTNS);
         },
         error => {
           console.log('error', error);

@@ -20,8 +20,6 @@ export class DetalleClienteService {
 
   public getUserInformation() {
     this.userFount = <UserFound>JSON.parse(localStorage.getItem('user_information'));
-    console.log(this.userFount);
-
   }
 
 }

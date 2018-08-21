@@ -5,7 +5,6 @@ import { UserItem } from '../models/UserItem';
 import { MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ConfirmationComponent } from '../componets/confirmation/confirmation.component';
-import { log } from 'util';
 import { UserToDown } from '../models/UserToDown';
 
 

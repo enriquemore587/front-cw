@@ -15,7 +15,7 @@ export class EditUserService {
 
   constructor(
     private _http: HttpClient,
-    private _Router: Router,
+    private _router: Router,
     public snackBar: MatSnackBar  // messages
   ) {
     this.getUserToEdit();
@@ -42,6 +42,7 @@ export class EditUserService {
         (response: any) => {
           if (response.status == 0) {
             this.showMessage("Cambios guardados","Ocultar mensaje");
+            this._router.navigate(['/admin-panel']);
           }
         },
         error => {

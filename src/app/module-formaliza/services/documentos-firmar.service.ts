@@ -12,7 +12,6 @@ export class DocumentosFirmarService {
   constructor(
     public _http: HttpClient
   ) {
-    console.log('Documentos-firmar is running. . . !');
   }
 
   public sendImageTEST(file: File) {
@@ -24,10 +23,8 @@ export class DocumentosFirmarService {
     })
       .subscribe(event => {
         if (event.type == HttpEventType.UploadProgress) {
-          console.log(Math.round(event.loaded / event.total) * 100 + "%");
-
+          console.log(((event.loaded / event.total) * 100).toFixed(2) + "%");
         }
-
       });
   }
 

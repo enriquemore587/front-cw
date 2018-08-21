@@ -33,8 +33,7 @@ export class ListadoAprobacionesService {
           return;
         }
         this.userFound = <UserFound>response.data;
-        console.log(this.userFound);
-
+        
         localStorage.setItem('user_information', JSON.stringify(this.userFound));
 
         this.options.nameClient = `${this.userFound.nombre}  ${this.userFound.paterno} ${this.userFound.materno}`;

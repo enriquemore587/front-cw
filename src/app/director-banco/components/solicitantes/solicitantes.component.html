@@ -3,28 +3,84 @@
 </div>
 <div class="contenedor" style="height: 69vh !important; background-color: #FAFAFA; padding: 20px;">
 
-  <mat-card class="item-class" style="height: 15%; background-color: #fff">
+  <div class="item-class" style="height: 15%; background-color: #fff">
     <table cellspacing="25" style="width: 100%;">
       <tr>
         <td>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input matInput placeholder="Nombre o apellidos">
+            <input matInput placeholder="Nombre o apellidos" (keyup.enter)="_SolicitantesService.getSolicitantesListByNames($event.target.value)">
           </mat-form-field>
         </td>
         <td>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input matInput placeholder="RFC o CURP">
+            <input matInput placeholder="RFC o CURP" (keyup.enter)="_SolicitantesService.getSolicitantesListByrfcurp($event.target.value)">
           </mat-form-field>
         </td>
         <td>
           <mat-form-field appearance="outline" style="width: 100%;">
-            <input matInput placeholder="Folio">
+            <input matInput placeholder="Num. Solicitante" (keyup.enter)="_SolicitantesService.getSolicitantesListByNUM($event.target.value)">
           </mat-form-field>
         </td>
       </tr>
     </table>
-  </mat-card>
-  <mat-card class="item-class" style="height: 60%;">
-  </mat-card>
+  </div>
+  <div class="item-class" style="height: 60%;">
+    <table class="myTable" style="width: 100%;" mat-table [dataSource]="_SolicitantesService.ELEMENT_DATA">
+      <!-- numero Column -->
+      <ng-container matColumnDef="numero">
+        <th mat-header-cell *matHeaderCellDef> Num. Solicitante </th>
+        <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+      </ng-container>
+
+      <!-- nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}}
+        </td>
+      </ng-container>
+
+      <!-- gender Column -->
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Genero </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}}
+        </td>
+      </ng-container>
+
+      <!-- level_study Column -->
+      <ng-container matColumnDef="level_study">
+        <th mat-header-cell *matHeaderCellDef> Nivel de estudios </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.level_study}}
+        </td>
+      </ng-container>
+
+      <!-- occupation Column -->
+      <ng-container matColumnDef="occupation">
+        <th mat-header-cell *matHeaderCellDef> Ocupación </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.occupation}}
+        </td>
+      </ng-container>
+
+      <!-- ingreso_declarado Column -->
+      <ng-container matColumnDef="ingreso_declarado">
+        <th mat-header-cell *matHeaderCellDef> Ingreso declarado </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.ingreso_declarado}}
+        </td>
+      </ng-container>
+
+      <!-- approved Column -->
+      <ng-container matColumnDef="approved">
+        <th mat-header-cell *matHeaderCellDef> Ingreso declarado </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.approved ? 'APROBADO' : 'RECHAZADO'}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
 
 </div>

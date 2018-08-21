@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SolicitantesService } from '../../services/solicitantes.service';
 
 @Component({
   selector: 'app-solicitantes',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SolicitantesComponent implements OnInit {
 
-  constructor() { }
+  public displayedColumns: string[] = ['numero', 'nombre', 'gender', 'level_study', 'occupation', 'ingreso_declarado', 'approved'];
+  constructor(
+    public _SolicitantesService : SolicitantesService
+  ) { }
 
   ngOnInit() {
   }

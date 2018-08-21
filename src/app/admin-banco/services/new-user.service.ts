@@ -18,13 +18,11 @@ export class NewUserService {
   public _UserToCreate: UserToCreate = new UserToCreate();
   constructor(
     private _http: HttpClient,
-    private _Router: Router,
+    private _router: Router,
     public snackBar: MatSnackBar  // messages
   ) {
     this.getProfilesList();
   }
-
-
 
   public getProfilesList() {
     this._http.get(`${this.url}admin-bank/get-profiles-for-admin-bank`,
@@ -45,7 +43,8 @@ export class NewUserService {
           (res: any) => {
             if (res.status == 0 && res.message == 'successful') {
               this.showMessage('Usuario creado exitosamente', 'Ocultar');
-              this._UserToCreate = new UserToCreate();
+              // this._UserToCreate = new UserToCreate();
+              this._router.navigate(['/admin-panel']);
             }
             else {
               this.showMessage(`${res.message} ya registrado`, 'Ocultar');

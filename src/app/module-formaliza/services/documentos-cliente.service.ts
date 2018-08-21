@@ -72,7 +72,6 @@ export class DocumentosClienteService {
             }
           });
           this.BTN_SELECTED.location = this.imageBTNS.INE.location;
-          console.log('this.imageBTNS', this.imageBTNS);
         },
         error => {
           console.log('error', error);
